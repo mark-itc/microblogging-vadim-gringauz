@@ -1,9 +1,9 @@
-## React.JS Project #2: :memo: Microblogging App
+## React.JS Project #2: ![Twitter-logo](./assets/twitter-logo.png) Microblogging App
 # Milestone :one: WIP
 
-![components](components.png) \
+
 **UI/UX Design**: 
-- Milestone 1: 
+- Milestone 1: WIP
 - Milestone 2: 
 - Milestone 3: 
 - Milestone 4: 
