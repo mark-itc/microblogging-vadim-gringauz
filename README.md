@@ -13,6 +13,9 @@
 - Milestone 8: 
 - Milestone 9: 
 - Milestone 10: 
+- Milestone 11: 
+- Milestone 12: 
+- Milestone 13: 
 
 
 ### :basketball: Vadim Gringauz :basketball:
