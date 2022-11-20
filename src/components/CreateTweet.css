@@ -1,0 +1,59 @@
+.stick-top {
+    width: 100%;
+    position: sticky;
+    top: 0;
+    background: rgb(21, 32, 43);
+}
+.text-container {
+    width: 100%;
+    border: 2px solid #CCCCCC;
+    border-radius: 6px;
+    padding: 3px;
+    display: flex;
+    position: relative;
+}
+
+textarea {
+    box-sizing: border-box;
+    width: calc(100% - 72px);
+    left: 367px;
+    top: 105px;
+    background: transparent;
+    color: white;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 19px;
+    border: 0;
+    outline: none;
+    border-radius: 6px;
+    resize: 'none';
+    overflow: 'hidden';
+}
+
+.controls {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+button {
+    width: 70px;
+    height: 34px;
+    left: 889px;
+    top: 231px;
+    color: white;
+    font-size: 18px;
+    background: #007BFF;
+    border-radius: 4px;
+    border: 0;
+    margin-bottom: 10px;
+}
+
+button:hover {
+    background: #064385dc;
+}
+button:disabled {
+    background-color: gray;
+}

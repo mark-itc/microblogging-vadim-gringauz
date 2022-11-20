@@ -1,0 +1,7 @@
+.CharsCounter {
+    font-size: 16px;
+}
+
+.invalid-length {
+    color: red;
+}
