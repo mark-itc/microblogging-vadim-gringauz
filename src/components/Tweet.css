@@ -1,17 +1,40 @@
 .Tweet {
+    box-sizing: border-box;
     background: #343A40;
     border-radius: 6px;
     margin-bottom: 20px;
     width: 100%;
     min-height: 100px;
-    transition: transform .2s;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    /* transition: transform .2s; */
 }
 
-.Tweet:hover {
+/* .Tweet:hover {
     transform: scale(1.1);
+} */
+
+.tweet-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
+.tweet-body {
+    display: flex;
+}
 .content {
     overflow-wrap: break-word;
     white-space: pre-wrap;
+}
+
+.user {
+    color: #6C757D;
+    font-size: 18px;
+}
+
+.date {
+    color: #6C757D;
+    font-size: 18px;
 }
