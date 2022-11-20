@@ -1,7 +1,7 @@
 import React from 'react'
 import './ErrorPage.css'
 
-export default function ErrorPage () {
+function ErrorPage () {
   return (
     <div className='ErrorPage'>
       <h1>404</h1>
@@ -10,3 +10,5 @@ export default function ErrorPage () {
     </div>
   )
 }
+
+export default ErrorPage

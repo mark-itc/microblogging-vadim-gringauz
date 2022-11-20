@@ -24,7 +24,15 @@
 .tweet-body {
     display: flex;
 }
+
+.content-wrap {
+    width: 100%;
+    /* display: inline-block; */
+    background-color: blue;
+}
 .content {
+    width: 100%;
+    text-align: left;
     overflow-wrap: break-word;
     white-space: pre-wrap;
 }

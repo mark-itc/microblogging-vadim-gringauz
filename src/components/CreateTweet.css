@@ -1,9 +1,16 @@
+.stick-top {
+    width: 100%;
+    position: sticky;
+    top: 0;
+    background: rgb(21, 32, 43);
+}
 .text-container {
     width: 100%;
     border: 2px solid #CCCCCC;
     border-radius: 6px;
     padding: 3px;
     display: flex;
+    position: relative;
 }
 
 textarea {
@@ -25,6 +32,12 @@ textarea {
     overflow: 'hidden';
 }
 
+.controls {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 button {
     width: 70px;
     height: 34px;
@@ -35,10 +48,12 @@ button {
     background: #007BFF;
     border-radius: 4px;
     border: 0;
-    align-self: flex-end;
     margin-bottom: 10px;
 }
 
 button:hover {
     background: #064385dc;
+}
+button:disabled {
+    background-color: gray;
 }

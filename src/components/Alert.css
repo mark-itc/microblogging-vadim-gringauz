@@ -1,0 +1,15 @@
+.Alert {
+    box-sizing: border-box;
+    background: #F8D7DA;
+    border: 1px solid #F5C6CB;
+    border-radius: 4px;
+    width: 340px;
+    height: 30px;
+    text-align: center;
+    color: #721C24;
+    font-size: 18px;
+    position: absolute;
+    top: calc(100% - 40px);
+    left: 15px;
+    padding: 3px;
+}

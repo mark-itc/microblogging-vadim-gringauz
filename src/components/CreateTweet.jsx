@@ -1,9 +1,13 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import CharsCounter from './CharsCounter'
+import { MAX_CHARS } from '../globals'
 import './CreateTweet.css'
+import Alert from './Alert'
 
 function CreateTweet ({ defaultContent, handleAddTweet }) {
   const [content, setContent] = useState(defaultContent)
+  const [isContentValid, setIsContentValid] = useState(false)
   const user = 'admin'
 
   const [height, setHeight] = useState('180px')
@@ -20,9 +24,21 @@ function CreateTweet ({ defaultContent, handleAddTweet }) {
 
   const handleContentChange = newValue => setContent(newValue)
 
+  useEffect(() => {
+    if (content.length > 0 && content.length <= MAX_CHARS) {
+      setIsContentValid(true)
+      return
+    }
+    setIsContentValid(false)
+  }, [content])
+
+  const handleSubmit = e => {
+    e.preventDefault()
+    handleAddTweet({ user: user, content: content })
+  }
   return (
-    <>
-      <div className='text-container'>
+    <div className='stick-top'>
+      <form className='text-container' action='submit' onSubmit={handleSubmit}>
         <textarea
           autoFocus
           name='content'
@@ -36,13 +52,15 @@ function CreateTweet ({ defaultContent, handleAddTweet }) {
           }}
           onInput={autoResize}
         />
-        <button
-          onClick={() => handleAddTweet({ user: user, content: content })}
-        >
-          Tweet
-        </button>
-      </div>
-    </>
+        <div className='controls'>
+          <CharsCounter length={content.length} />
+          <button type='submit' disabled={!isContentValid}>
+            Tweet
+          </button>
+        </div>
+        {content.length > MAX_CHARS && <Alert />}
+      </form>
+    </div>
   )
 }
 export default CreateTweet
