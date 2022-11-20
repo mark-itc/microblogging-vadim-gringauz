@@ -1,0 +1,17 @@
+.Tweet {
+    background: #343A40;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    width: 100%;
+    min-height: 100px;
+    transition: transform .2s;
+}
+
+.Tweet:hover {
+    transform: scale(1.1);
+}
+
+.content {
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+}
