@@ -1,4 +1,4 @@
-## React.JS Project #2: ![Twitter-logo](./assets/twitter-logo.png) Microblogging App
+## React.JS Project #2: ![VG-Tweets-logo](./assets/logo.png) Microblogging App
 # Milestone :one: WIP
 
 
