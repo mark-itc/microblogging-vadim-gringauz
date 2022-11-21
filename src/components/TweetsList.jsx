@@ -1,9 +1,13 @@
 import React from 'react'
+import { useContext } from 'react'
+import { sort } from 'fast-sort'
 import Tweet from './Tweet'
-import { sort } from 'fast-sort';
+import { TweetsContext } from '../contexts/TweetsContext'
 
-function TweetsList ({ tweets }) {
-const sortedTweets = sort(tweets).desc(tweet => tweet.date)
+function TweetsList ({}) {
+  const { tweets, setTweets } = useContext(TweetsContext)
+
+  const sortedTweets = sort(tweets).desc(tweet => new Date(tweet.date))
 
   return (
     <>

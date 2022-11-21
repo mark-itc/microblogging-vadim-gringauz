@@ -1,15 +1,35 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
-import CharsCounter from './CharsCounter'
+import { useState, useEffect, useContext } from 'react'
 import { MAX_CHARS } from '../globals'
-import './CreateTweet.css'
+import CharsCounter from './CharsCounter'
 import Alert from './Alert'
+import { TweetsContext } from '../contexts/TweetsContext'
+import './CreateTweet.css'
 
-function CreateTweet ({ defaultContent, handleAddTweet }) {
-  const [content, setContent] = useState(defaultContent)
+function CreateTweet () {
+  const { tweets, setTweets, clearStorage } = useContext(TweetsContext)
+  const [content, setContent] = useState('')
   const [isContentValid, setIsContentValid] = useState(false)
-  const user = 'admin'
+  const user = 'admin' /* TEMP */
 
+  const handleAddTweet = content => {
+    if (content === 'clr') {
+      clearStorage()
+      return
+    }
+
+    const currentTimeDate = new Date()
+    console.log('currentTimeDate=', currentTimeDate);
+    const newTweet = {
+      content: content,
+      user: user,
+      date: currentTimeDate.toISOString()
+    }
+    console.log('newTweet=', newTweet)
+    setTweets([...tweets, newTweet])
+  }
+
+  /* WANTED TO MAKE TEXTAREA AUTO-RESIZEABLE */
   const [height, setHeight] = useState('180px')
   const autoResize = e => {
     console.log('scrollHeight', e.target.scrollHeight)
@@ -34,7 +54,8 @@ function CreateTweet ({ defaultContent, handleAddTweet }) {
 
   const handleSubmit = e => {
     e.preventDefault()
-    handleAddTweet({ user: user, content: content })
+    handleAddTweet(content)
+    setContent('')
   }
   return (
     <div className='stick-top'>

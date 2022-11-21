@@ -1,6 +1,6 @@
 {
-  "short_name": "VG Tweeter",
-  "name": "Microblogging project - Mock Tweeter",
+  "short_name": "VG Tweets",
+  "name": "Microblogging project",
   "icons": [
     {
       "src": "favicon.ico",
