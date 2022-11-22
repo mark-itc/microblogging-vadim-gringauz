@@ -7,25 +7,21 @@ import ProfilePage from './views/ProfilePage'
 import HomePage from './views/HomePage'
 import ErrorPage from './views/ErrorPage'
 
-
 function App () {
-
-
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <HomePage />,
-    errorElement: <ErrorPage />
-  },
-  {
-    path: '/profile',
-    element: <ProfilePage />
-  }
-])
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      element: <HomePage />,
+      errorElement: <ErrorPage />
+    },
+    {
+      path: '/profile',
+      element: <ProfilePage />
+    }
+  ])
 
   return (
     <div className='App'>
-      {/* <Navbar/> */}
       <RouterProvider router={router} />
     </div>
   )

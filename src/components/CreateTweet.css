@@ -5,6 +5,7 @@
     background: rgb(21, 32, 43);
 }
 .text-container {
+    box-sizing: border-box;
     width: 100%;
     border: 2px solid #CCCCCC;
     border-radius: 6px;

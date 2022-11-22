@@ -3,9 +3,9 @@
 
 
 **UI/UX Design**: 
-- Milestone 1 - Mock up: WIP
-- Milestone 2 - Server connection: 
-- Milestone 3 - User page: 
+- Milestone 1 - Mock up: :heavy_check_mark:
+- Milestone 2 - Server connection: :heavy_check_mark:
+- Milestone 3 - User page: WIP
 - Milestone 4 - Context: 
 - Milestone 5 - Deployment: 
 - Milestone 6 - Firebase: 

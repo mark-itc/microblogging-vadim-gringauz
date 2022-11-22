@@ -8,6 +8,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <TweetsContextProvider>
     <React.StrictMode>
+      <h6>VG / ITC / React - Microblogging / Milestone-2 v0.9</h6>
       <div className='main-container'>
         <App />
       </div>
