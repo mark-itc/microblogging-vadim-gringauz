@@ -19,7 +19,7 @@ function CreateTweet () {
     }
 
     const currentTimeDate = new Date()
-    console.log('currentTimeDate=', currentTimeDate);
+    console.log('currentTimeDate=', currentTimeDate)
     const newTweet = {
       content: content,
       user: user,
@@ -57,6 +57,18 @@ function CreateTweet () {
     handleAddTweet(content)
     setContent('')
   }
+
+  /* 'ENTER' -> SEND TWEET, 'CTRL' + 'ENTER' -> BREAK LINE */
+  const handleKeyDown = (e) => {
+    if (e.shiftKey && e.key === 'Enter') {
+      setContent(content + '\n')
+    } else if (e.key === 'Enter' && isContentValid) {
+      e.preventDefault()
+      handleAddTweet(content)
+      setContent('')
+    }
+  }
+
   return (
     <div className='stick-top'>
       <form className='text-container' action='submit' onSubmit={handleSubmit}>
@@ -72,6 +84,7 @@ function CreateTweet () {
             overflow: 'hidden'
           }}
           onInput={autoResize}
+          onKeyDown={handleKeyDown}
         />
         <div className='controls'>
           <CharsCounter length={content.length} />
