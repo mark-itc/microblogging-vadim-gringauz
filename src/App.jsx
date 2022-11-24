@@ -5,6 +5,7 @@ import './App.css'
 import Navbar from './components/Navbar'
 import ProfilePage from './views/ProfilePage'
 import HomePage from './views/HomePage'
+import Settings from './views/Settings'
 import ErrorPage from './views/ErrorPage'
 
 function App () {
@@ -17,6 +18,10 @@ function App () {
     {
       path: '/profile',
       element: <ProfilePage />
+    },
+    {
+      path: '/settings',
+      element: <Settings />
     }
   ])
 

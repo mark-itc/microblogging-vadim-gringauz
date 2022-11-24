@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect, useContext, useRef } from 'react'
 import ClipLoader from 'react-spinners/ClipLoader'
 import { MAX_CHARS } from '../globals'
 import CharsCounter from './CharsCounter'
@@ -10,18 +10,17 @@ import { SERVER_URL } from '../globals'
 
 const USER = 'admin' /* TEMP */
 /* USED FOR DEBUGGING */
-const VERY_LONG_STRING =
-`  1111111111111111111111111111111111111111111111111111111111111111111111111
+const VERY_LONG_STRING = `  1111111111111111111111111111111111111111111111111111111111111111111111111
     11111111111111111111111111111111111111111111111111111111111111111111`
-    
-function CreateTweet () {
+
+function CreateTweet ({ textareaHeight }) {
   const { tweets, setTweets, clearStorage } = useContext(TweetsContext)
   const [content, setContent] = useState('')
   const [isContentValid, setIsContentValid] = useState(false)
   const [isPosting, setIsPosting] = useState(false)
   const [isAlertOn, setIsAlertOn] = useState(false)
   const [alertMessage, setAlertMessage] = useState('')
-  
+  const buttonRef = useRef(null)
 
   const addNewTweet = content => {
     const currentTimeDate = new Date()
@@ -65,17 +64,17 @@ function CreateTweet () {
   }
 
   /* WANTED TO MAKE TEXTAREA AUTO-RESIZEABLE */
-  const [height, setHeight] = useState('180px')
-  const autoResize = e => {
-    // console.log('scrollHeight', e.target.scrollHeight)
-    // console.log('height=', height)
-    if (e.target.scrollHeight > 180) {
-      setHeight('auto')
-      if (e.target.scrollHeight < 196) setHeight(e.target.scrollHeight + 'px')
-    } else {
-      setHeight('180px')
-    }
-  }
+  // const autoResize = e => {
+  //   // console.log('scrollHeight', e.target.scrollHeight)
+  //   // console.log('height=', height)
+  //   if (e.target.scrollHeight > 180) {
+  //     setTextareaHeight('auto')
+  //     if (e.target.scrollHeight < 196)
+  //       setTextareaHeight(e.target.scrollHeight + 'px')
+  //   } else {
+  //     setTextareaHeight('180px')
+  //   }
+  // }
 
   const handleContentChange = newValue => setContent(newValue)
 
@@ -89,8 +88,15 @@ function CreateTweet () {
     if (content.length > MAX_CHARS) {
       setAlertMessage(`The tweet can't contain more than ${MAX_CHARS} chars`)
       setIsAlertOn(true)
+      setIsContentValid(false)
+      return
     }
-    setIsContentValid(false)
+    if (content.length === 0) {
+      setAlertMessage('')
+      setIsAlertOn(false)
+      setIsContentValid(false)
+      return
+    }
   }, [content])
 
   const handleSubmit = e => {
@@ -101,14 +107,17 @@ function CreateTweet () {
 
   /* 'ENTER' -> SEND TWEET, 'CTRL' + 'ENTER' -> BREAK LINE */
   const handleKeyDown = e => {
-    if (e.shiftKey && e.key === 'Enter') {
-      setContent(content + '\n')
-    } else if (e.key === 'Enter' && isContentValid) {
+    /* EXCEPTION FOR NOT DESKTOP BROWSERS */
+    if (window.outerWidth < 900) return
+
+    if (!e.shiftKey && e.key === 'Enter' && isContentValid) {
       e.preventDefault()
-      addNewTweet(content)
-      setContent('')
+      buttonRef.current.click()
     }
   }
+
+  
+ 
 
   return (
     <div className='stick-top'>
@@ -118,24 +127,23 @@ function CreateTweet () {
           name='content'
           placeholder='What you have in mind...'
           onChange={e => handleContentChange(e.target.value)}
-          onCut={e => handleContentChange(e.target.value)}
           value={content}
           style={{
             resize: 'none',
-            height: height,
+            height: textareaHeight,
             overflow: 'hidden'
           }}
-          onInput={autoResize}
+          // onInput={autoResize}
           onKeyDown={handleKeyDown}
         />
         <div className='controls'>
           <CharsCounter length={content.length} />
-          <button type='submit' disabled={!isContentValid}>
+          <button ref={buttonRef} type='submit' disabled={!isContentValid}>
             <ClipLoader color={'white'} loading={isPosting} size={25} />
             {!isPosting && <>Tweet</>}
           </button>
         </div>
-        <Alert isOn={isAlertOn} message={alertMessage}/>
+        <Alert isOn={isAlertOn} message={alertMessage} />
       </form>
     </div>
   )

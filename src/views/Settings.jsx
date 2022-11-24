@@ -1,13 +1,13 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
 
-function ProfilePage () {
+function Settings() {
   return (
-    <>
+    <div>
       <Navbar />
-      Profile Page
-    </>
+      Settings Page
+    </div>
   )
 }
 
-export default ProfilePage
+export default Settings

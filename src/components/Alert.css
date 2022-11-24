@@ -3,7 +3,7 @@
     background: #F8D7DA;
     border: 1px solid #F5C6CB;
     border-radius: 4px;
-    width: 380px;
+    width: 65%;
     height: 30px;
     text-align: center;
     color: #721C24;
@@ -13,3 +13,9 @@
     left: 15px;
     padding: 3px;
 }
+
+@media screen and (max-width: 600px) {
+    .Alert {
+        font-size: 11px;
+    }
+  }
