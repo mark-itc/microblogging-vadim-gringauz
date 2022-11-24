@@ -1,21 +1,25 @@
 import React from 'react'
+import { useContext } from 'react'
+import ClipLoader from 'react-spinners/ClipLoader'
+import { sort } from 'fast-sort'
 import Tweet from './Tweet'
-import { sort } from 'fast-sort';
+import { TweetsContext } from '../contexts/TweetsContext'
 
-function TweetsList ({ tweets }) {
-const sortedTweets = sort(tweets).desc(tweet => tweet.date)
+function TweetsList ({}) {
+  const { tweets, isLoading } = useContext(TweetsContext)
+
+  const sortedTweets = sort(tweets).desc(tweet => new Date(tweet.date))
 
   return (
     <>
-      {sortedTweets.length === 0 ? (
-        <>No tweets yet </>
-      ) : (
-        <>
-          {sortedTweets.map((tweet, index) => (
-            <Tweet key={'tweet-' + index} tweet={tweet} />
-          ))}
-        </>
-      )}
+      <ClipLoader
+        color={'white'}
+        loading={isLoading}
+        size={100}
+      />
+      {sortedTweets?.map((tweet, index) => (
+        <Tweet key={'tweet-' + index} tweet={tweet} />
+      ))}
     </>
   )
 }

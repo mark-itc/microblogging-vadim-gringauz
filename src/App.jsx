@@ -5,27 +5,28 @@ import './App.css'
 import Navbar from './components/Navbar'
 import ProfilePage from './views/ProfilePage'
 import HomePage from './views/HomePage'
+import Settings from './views/Settings'
 import ErrorPage from './views/ErrorPage'
 
-
 function App () {
-
-
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <HomePage />,
-    errorElement: <ErrorPage />
-  },
-  {
-    path: '/profile',
-    element: <ProfilePage />
-  }
-])
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      element: <HomePage />,
+      errorElement: <ErrorPage />
+    },
+    {
+      path: '/profile',
+      element: <ProfilePage />
+    },
+    {
+      path: '/settings',
+      element: <Settings />
+    }
+  ])
 
   return (
     <div className='App'>
-      {/* <Navbar/> */}
       <RouterProvider router={router} />
     </div>
   )

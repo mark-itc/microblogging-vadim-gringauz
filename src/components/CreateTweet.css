@@ -1,16 +1,18 @@
 .stick-top {
     width: 100%;
     position: sticky;
-    top: 0;
+    top: 20px;
     background: rgb(21, 32, 43);
 }
 .text-container {
+    box-sizing: border-box;
     width: 100%;
     border: 2px solid #CCCCCC;
     border-radius: 6px;
     padding: 3px;
     display: flex;
     position: relative;
+    /* margin-top: 10px; */
 }
 
 textarea {
@@ -23,14 +25,17 @@ textarea {
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 400;
-    font-size: 24px;
-    line-height: 19px;
+    font-size: 22px;
+    line-height: 22px;
     border: 0;
     outline: none;
     border-radius: 6px;
     resize: 'none';
     overflow: 'hidden';
+    transition: 0.5s;
 }
+
+
 
 .controls {
     display: flex;

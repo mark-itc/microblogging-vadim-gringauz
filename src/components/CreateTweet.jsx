@@ -1,41 +1,124 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
-import CharsCounter from './CharsCounter'
+import { useState, useEffect, useContext, useRef } from 'react'
+import ClipLoader from 'react-spinners/ClipLoader'
 import { MAX_CHARS } from '../globals'
-import './CreateTweet.css'
+import CharsCounter from './CharsCounter'
 import Alert from './Alert'
+import { TweetsContext } from '../contexts/TweetsContext'
+import './CreateTweet.css'
+import { SERVER_URL } from '../globals'
 
-function CreateTweet ({ defaultContent, handleAddTweet }) {
-  const [content, setContent] = useState(defaultContent)
+const USER = 'admin' /* TEMP */
+/* USED FOR DEBUGGING */
+const VERY_LONG_STRING = `  1111111111111111111111111111111111111111111111111111111111111111111111111
+    11111111111111111111111111111111111111111111111111111111111111111111`
+
+function CreateTweet ({ textareaHeight }) {
+  const { tweets, setTweets, clearStorage } = useContext(TweetsContext)
+  const [content, setContent] = useState('')
   const [isContentValid, setIsContentValid] = useState(false)
-  const user = 'admin'
+  const [isPosting, setIsPosting] = useState(false)
+  const [isAlertOn, setIsAlertOn] = useState(false)
+  const [alertMessage, setAlertMessage] = useState('')
+  const buttonRef = useRef(null)
 
-  const [height, setHeight] = useState('180px')
-  const autoResize = e => {
-    console.log('scrollHeight', e.target.scrollHeight)
-    console.log('height=', height)
-    if (e.target.scrollHeight > 180) {
-      setHeight('auto')
-      if (e.target.scrollHeight < 196) setHeight(e.target.scrollHeight + 'px')
-    } else {
-      setHeight('180px')
+  const addNewTweet = content => {
+    const currentTimeDate = new Date()
+    console.log('currentTimeDate=', currentTimeDate)
+    const newTweet = {
+      content: content,
+      // content: VERY_LONG_STRING,
+      userName: USER,
+      date: currentTimeDate.toISOString()
+    }
+    // console.log('newTweet=', newTweet)
+    postNew(newTweet)
+  }
+
+  const postNew = async newTweet => {
+    try {
+      setIsPosting(true)
+      console.log('posting...')
+      const response = await fetch(SERVER_URL, {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify(newTweet)
+      })
+      if (response.status === 400) {
+        throw new Error('bad request')
+        return
+      }
+      const result = await response.json()
+      // console.log(result)
+      setTweets([...tweets, newTweet])
+    } catch (error) {
+      console.log('error:', error)
+      setAlertMessage('Error while posting to server!')
+      setIsAlertOn(true)
+    } finally {
+      console.log('Done posting')
+      setIsPosting(false)
     }
   }
+
+  /* WANTED TO MAKE TEXTAREA AUTO-RESIZEABLE */
+  // const autoResize = e => {
+  //   // console.log('scrollHeight', e.target.scrollHeight)
+  //   // console.log('height=', height)
+  //   if (e.target.scrollHeight > 180) {
+  //     setTextareaHeight('auto')
+  //     if (e.target.scrollHeight < 196)
+  //       setTextareaHeight(e.target.scrollHeight + 'px')
+  //   } else {
+  //     setTextareaHeight('180px')
+  //   }
+  // }
 
   const handleContentChange = newValue => setContent(newValue)
 
   useEffect(() => {
     if (content.length > 0 && content.length <= MAX_CHARS) {
       setIsContentValid(true)
+      setAlertMessage('')
+      setIsAlertOn(false)
       return
     }
-    setIsContentValid(false)
+    if (content.length > MAX_CHARS) {
+      setAlertMessage(`The tweet can't contain more than ${MAX_CHARS} chars`)
+      setIsAlertOn(true)
+      setIsContentValid(false)
+      return
+    }
+    if (content.length === 0) {
+      setAlertMessage('')
+      setIsAlertOn(false)
+      setIsContentValid(false)
+      return
+    }
   }, [content])
 
   const handleSubmit = e => {
     e.preventDefault()
-    handleAddTweet({ user: user, content: content })
+    addNewTweet(content)
+    setContent('')
   }
+
+  /* 'ENTER' -> SEND TWEET, 'CTRL' + 'ENTER' -> BREAK LINE */
+  const handleKeyDown = e => {
+    /* EXCEPTION FOR NOT DESKTOP BROWSERS */
+    if (window.outerWidth < 900) return
+
+    if (!e.shiftKey && e.key === 'Enter' && isContentValid) {
+      e.preventDefault()
+      buttonRef.current.click()
+    }
+  }
+
+  
+ 
+
   return (
     <div className='stick-top'>
       <form className='text-container' action='submit' onSubmit={handleSubmit}>
@@ -47,18 +130,20 @@ function CreateTweet ({ defaultContent, handleAddTweet }) {
           value={content}
           style={{
             resize: 'none',
-            height: height,
+            height: textareaHeight,
             overflow: 'hidden'
           }}
-          onInput={autoResize}
+          // onInput={autoResize}
+          onKeyDown={handleKeyDown}
         />
         <div className='controls'>
           <CharsCounter length={content.length} />
-          <button type='submit' disabled={!isContentValid}>
-            Tweet
+          <button ref={buttonRef} type='submit' disabled={!isContentValid}>
+            <ClipLoader color={'white'} loading={isPosting} size={25} />
+            {!isPosting && <>Tweet</>}
           </button>
         </div>
-        {content.length > MAX_CHARS && <Alert />}
+        <Alert isOn={isAlertOn} message={alertMessage} />
       </form>
     </div>
   )
