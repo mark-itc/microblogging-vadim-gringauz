@@ -1,5 +1,5 @@
 ## React.JS Project #2: <img src='./assets/logo.png' width=30px /> Microblogging App
-# Milestone :one: WIP
+# Milestone :four: WIP
 
 
 **UI/UX Design**: 
@@ -7,7 +7,7 @@
 ### *Progress:*
 - Milestone 1 - Mock up: :heavy_check_mark:
 - Milestone 2 - Server connection: :heavy_check_mark:
-- Milestone 3 - User page: WIP
+- Milestone 3 - User page: :heavy_check_mark:
 - Milestone 4 - Context: :heavy_check_mark:
 - Milestone 5 - Deployment: 
 - Milestone 6 - Firebase: 
@@ -24,6 +24,7 @@
 - Footer navbar on scroll: :heavy_check_mark:
 - CreateTweet is sticky to top + shrinks on scroll: :heavy_check_mark:
 - Setting screen: :heavy_check_mark:
+- Redirect to ProfilePage is no user name saved: :heavy_check_mark:
 
 ### :basketball: Vadim Gringauz :basketball:
 
