@@ -21,9 +21,9 @@
 
 ### *Improvments I have added:*
 - Char-counter: :heavy_check_mark:
-- Footer navbar on scroll: WIP
-- CreateTweet is sticky to top + shrinks on scroll: WIP
-- Setting screen: ?
+- Footer navbar on scroll: :heavy_check_mark:
+- CreateTweet is sticky to top + shrinks on scroll: :heavy_check_mark:
+- Setting screen: :heavy_check_mark:
 
 ### :basketball: Vadim Gringauz :basketball:
 
