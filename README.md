@@ -8,7 +8,7 @@
 - Milestone 1 - Mock up: :heavy_check_mark:
 - Milestone 2 - Server connection: :heavy_check_mark:
 - Milestone 3 - User page: WIP
-- Milestone 4 - Context: 
+- Milestone 4 - Context: :heavy_check_mark:
 - Milestone 5 - Deployment: 
 - Milestone 6 - Firebase: 
 - Milestone 7 - Your tweets: 
