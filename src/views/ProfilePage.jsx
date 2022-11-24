@@ -26,7 +26,7 @@ function ProfilePage () {
   }
 
   return (
-    <>
+    <div className='ProfilePage'>
       <Navbar />
       <form className='login-form' onSubmit={handleSubmit}>
         <h4>Profile</h4>
@@ -41,7 +41,7 @@ function ProfilePage () {
           <button type='submit' disabled={!newName.replaceAll(' ', '') != ''}>Save</button>
         </div>
       </form>
-    </>
+    </div>
   )
 }
 

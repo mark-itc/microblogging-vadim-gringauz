@@ -10,10 +10,10 @@ root.render(
   <AuthContextProvider>
     <TweetsContextProvider>
       <React.StrictMode>
+        <div className='main-container'>
         <h5 className='current-ver'>
           VG / ITC / React - Microblogging / Milestone-4 v1.0
         </h5>
-        <div className='main-container'>
           <App />
         </div>
       </React.StrictMode>

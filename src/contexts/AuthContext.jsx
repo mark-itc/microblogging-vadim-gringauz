@@ -16,8 +16,8 @@ function AuthContextProvider ({ children }) {
 
   const loadAuth = async () => {
     const userStored = await localforage.getItem('user-name')
-    console.log('creds=', userStored);
-    setUserName(userStored)
+    // console.log('creds=', userStored);
+    userStored && setUserName(userStored)
   }
 
   useEffect(() => {
