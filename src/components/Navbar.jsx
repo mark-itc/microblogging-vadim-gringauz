@@ -1,5 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import Search from './SearchBar'
 import './Navbar.css'
 
 function Navbar () {
@@ -19,7 +20,7 @@ function Navbar () {
           </NavLink>
         </li>
         <li>
-        <NavLink
+          <NavLink
             to='/profile'
             className={({ isActive }) =>
               isActive ? activeClassName : undefined
@@ -27,6 +28,19 @@ function Navbar () {
           >
             Profile
           </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to='/settings'
+            className={({ isActive }) =>
+              isActive ? activeClassName : undefined
+            }
+          >
+            Settings
+          </NavLink>
+        </li>
+        <li className='align-left'>
+          <Search />
         </li>
       </ul>
     </nav>

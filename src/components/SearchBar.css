@@ -1,0 +1,16 @@
+.SearchBar {
+    background-color: rgb(21, 32, 43);
+    border-radius: 10px;
+    height: 30px;
+    padding-left: 5px;
+    display: flex;
+    align-items: center;
+
+}
+
+.SearchBar>input {
+    margin-left: 5px;
+    background-color: transparent;
+    border: 0;
+    outline: 0;
+}

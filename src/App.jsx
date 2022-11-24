@@ -1,18 +1,19 @@
-import { useState } from 'react'
-import { createBrowserRouter, RouterProvider, Route } from 'react-router-dom'
-import { NavLink } from 'react-router-dom'
+import { useContext } from 'react'
+import { createBrowserRouter, RouterProvider} from 'react-router-dom'
 import './App.css'
-import Navbar from './components/Navbar'
+import { AuthContext } from './contexts/AuthContext'
 import ProfilePage from './views/ProfilePage'
 import HomePage from './views/HomePage'
 import Settings from './views/Settings'
 import ErrorPage from './views/ErrorPage'
 
 function App () {
+  const { userName } = useContext(AuthContext)
+
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <HomePage />,
+      element: userName === '' ? <ProfilePage /> : <HomePage />,
       errorElement: <ErrorPage />
     },
     {

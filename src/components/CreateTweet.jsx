@@ -4,6 +4,7 @@ import ClipLoader from 'react-spinners/ClipLoader'
 import { MAX_CHARS } from '../globals'
 import CharsCounter from './CharsCounter'
 import Alert from './Alert'
+import { AuthContext } from '../contexts/AuthContext'
 import { TweetsContext } from '../contexts/TweetsContext'
 import './CreateTweet.css'
 import { SERVER_URL } from '../globals'
@@ -14,12 +15,13 @@ const VERY_LONG_STRING = `  1111111111111111111111111111111111111111111111111111
     11111111111111111111111111111111111111111111111111111111111111111111`
 
 function CreateTweet ({ textareaHeight }) {
-  const { tweets, setTweets, clearStorage } = useContext(TweetsContext)
+  const { tweets, setTweets } = useContext(TweetsContext)
   const [content, setContent] = useState('')
   const [isContentValid, setIsContentValid] = useState(false)
   const [isPosting, setIsPosting] = useState(false)
   const [isAlertOn, setIsAlertOn] = useState(false)
   const [alertMessage, setAlertMessage] = useState('')
+  const { userName } = useContext(AuthContext)
   const buttonRef = useRef(null)
 
   const addNewTweet = content => {
@@ -28,7 +30,7 @@ function CreateTweet ({ textareaHeight }) {
     const newTweet = {
       content: content,
       // content: VERY_LONG_STRING,
-      userName: USER,
+      userName: userName,
       date: currentTimeDate.toISOString()
     }
     // console.log('newTweet=', newTweet)
@@ -76,10 +78,12 @@ function CreateTweet ({ textareaHeight }) {
   //   }
   // }
 
-  const handleContentChange = newValue => setContent(newValue)
+  const handleContentChange = newValue => {
+    setContent(newValue)    
+  }
 
   useEffect(() => {
-    if (content.length > 0 && content.length <= MAX_CHARS) {
+    if (content.replaceAll(' ', '').length > 0 && content.length <= MAX_CHARS) {
       setIsContentValid(true)
       setAlertMessage('')
       setIsAlertOn(false)

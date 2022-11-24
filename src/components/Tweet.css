@@ -1,6 +1,7 @@
 .Tweet {
     box-sizing: border-box;
     background: #343A40;
+    font-size: 18px;
     border-radius: 6px;
     margin-bottom: 20px;
     width: 100%;

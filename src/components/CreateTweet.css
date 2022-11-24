@@ -35,8 +35,6 @@ textarea {
     transition: 0.5s;
 }
 
-
-
 .controls {
     display: flex;
     flex-direction: column;
