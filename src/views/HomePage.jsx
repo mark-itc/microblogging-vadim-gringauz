@@ -24,7 +24,7 @@ function HomePage () {
     if (footerNavAppear === 'fixed') {
       setFooterNavAppear('')
     }
-    if (textareaHeight != 180) {
+    if (textareaHeight !== 180) {
       setTextareaHeight('180px')
     }
   }

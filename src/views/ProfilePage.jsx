@@ -35,7 +35,7 @@ function ProfilePage () {
           <div>
             <img
               className='profile-img'
-              alt='no user picture'
+              alt='user'
               src={userImg}
             />
           </div>

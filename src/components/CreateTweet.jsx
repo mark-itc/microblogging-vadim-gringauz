@@ -46,7 +46,6 @@ function CreateTweet ({ textareaHeight }) {
       if (response.status === 400) {
         throw new Error('bad request')
       }
-      const result = await response.json()
       setTweets([...tweets, newTweet])
     } catch (error) {
       console.log('error:', error)
