@@ -31,7 +31,7 @@ function TweetsList () {
     getFromServer() // eslint-disable-line
     const interval = setInterval(getFromServer, REFRESH_RATE)
     return () => clearInterval(interval);
-  }, [])
+  }, []) // eslint-disable-line
 
   return (
     <>
