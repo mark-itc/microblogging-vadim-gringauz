@@ -4,7 +4,8 @@
 ## [App Deployed to Firebase!](https://itc-microblogging-85128.web.app)
 
 **Code Design:**: 
-![components](components.png) \
+
+![components](components.png)
 
 
 **UI/UX Design**: Same as in the FIGMA, but with a few addons - bottom navbar, counter for tweet-chars, size of fonts
@@ -14,7 +15,7 @@
 - Milestone 2 - Server connection: :heavy_check_mark:
 - Milestone 3 - User page: :heavy_check_mark:
 - Milestone 4 - Context: :heavy_check_mark:
-- Milestone 5 - Deployment: 
+- Milestone 5 - Deployment: :heavy_check_mark:
 - Milestone 6 - Firebase: 
 - Milestone 7 - Your tweets: 
 - Milestone 8 - Navbar: 
