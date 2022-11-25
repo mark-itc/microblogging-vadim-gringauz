@@ -28,10 +28,10 @@ function TweetsList () {
   }
 
   useEffect(() => {
-    getFromServer() // eslint-disable-line
+    getFromServer() // eslint-disable-line 
     const interval = setInterval(getFromServer, REFRESH_RATE)
     return () => clearInterval(interval);
-  }, []) // eslint-disable-line
+  }, []) // eslint-disable-line 
 
   return (
     <>

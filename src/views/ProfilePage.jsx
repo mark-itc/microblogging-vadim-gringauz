@@ -16,7 +16,7 @@ function ProfilePage () {
   }, [userName])
 
   const isUserNameValid = value => {
-    if (value.replaceAll(' ', '') !== '') return true
+    if (value.replaceAll(' ', '') != '') return true // eslint-disable-line
     return false
   }
 
@@ -47,7 +47,7 @@ function ProfilePage () {
             onChange={e => setNewName(e.target.value)}
           />
           <div className='go-left'>
-            <button type='submit' disabled={!newName.replaceAll(' ', '') !== ''}>
+            <button type='submit' disabled={!newName.replaceAll(' ', '') != '' /* eslint-disable-line */}> 
               Save
             </button>
           </div>
