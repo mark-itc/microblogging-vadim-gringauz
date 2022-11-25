@@ -4,8 +4,10 @@ import './App.css'
 import { AuthContext } from './contexts/AuthContext'
 import ProfilePage from './views/ProfilePage'
 import HomePage from './views/HomePage'
-import Settings from './views/Settings'
+import SettingsPage from './views/SettingsPage'
 import ErrorPage from './views/ErrorPage'
+// import Navbar from './components/Navbar'
+
 
 function App () {
   const { userName } = useContext(AuthContext)
@@ -22,12 +24,13 @@ function App () {
     },
     {
       path: '/settings',
-      element: <Settings />
+      element: <SettingsPage />
     }
   ])
 
   return (
     <div className='App'>
+      {/* <Navbar /> */}
       <RouterProvider router={router} />
     </div>
   )

@@ -18,7 +18,6 @@ function HomePage () {
       document.body.scrollTop > 100 ||
       document.documentElement.scrollTop > 100
     ) {
-      console.log('scroll')
       setFooterNavAppear('fixed')
       setTextareaHeight('74px')
       return

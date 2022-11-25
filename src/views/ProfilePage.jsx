@@ -26,22 +26,32 @@ function ProfilePage () {
   }
 
   return (
-    <div className='ProfilePage'>
+    <>
       <Navbar />
-      <form className='login-form' onSubmit={handleSubmit}>
-        <h4>Profile</h4>
-        <div>{/* <img src='../images/no-profile.png' /> */}</div>
-        <label htmlFor=''>User Name</label>
-        <input
-          type='text'
-          value={newName}
-          onChange={e => setNewName(e.target.value)}
-        />
-        <div className='go-left'>
-          <button type='submit' disabled={!newName.replaceAll(' ', '') != ''}>Save</button>
-        </div>
-      </form>
-    </div>
+      <div className='ProfilePage'>
+        <form className='login-form' onSubmit={handleSubmit}>
+          <h4>Profile</h4>
+          <div>
+            <img
+              className='profile-img'
+              src='https://d32ogoqmya1dw8.cloudfront.net/images/serc/empty_user_icon_256.v2.png'
+            />
+          </div>
+          <label htmlFor=''>User Name</label>
+          <input
+            type='text'
+            placeholder=''
+            value={newName}
+            onChange={e => setNewName(e.target.value)}
+          />
+          <div className='go-left'>
+            <button type='submit' disabled={!newName.replaceAll(' ', '') != ''}>
+              Save
+            </button>
+          </div>
+        </form>
+      </div>
+    </>
   )
 }
 

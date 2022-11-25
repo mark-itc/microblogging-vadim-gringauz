@@ -11,6 +11,7 @@
 .SearchBar>input {
     margin-left: 5px;
     background-color: transparent;
+    color: white;
     border: 0;
     outline: 0;
 }
