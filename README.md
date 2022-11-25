@@ -3,7 +3,7 @@
 
 ## [App Deployed to Firebase!](https://itc-microblogging-85128.web.app)
 
-**Code Design:**: 
+**Code Design:** 
 
 ![components](components.png)
 

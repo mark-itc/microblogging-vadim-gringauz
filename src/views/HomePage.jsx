@@ -1,11 +1,10 @@
 import React from 'react'
 import { useState, useContext } from 'react'
-// import { v4 as uuidv4 } from 'uuid'
 import { AuthContext } from '../contexts/AuthContext'
-import Navbar from '../components/Navbar'
 import FooterNavbar from '../components/FooterNavbar'
 import CreateTweet from '../components/CreateTweet'
 import TweetsList from '../components/TweetsList'
+import Navbar from '../components/Navbar'
 import './HomePage.css'
 
 function HomePage () {

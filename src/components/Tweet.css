@@ -9,12 +9,7 @@
     padding: 15px;
     display: flex;
     flex-direction: column;
-    /* transition: transform .2s; */
 }
-
-/* .Tweet:hover {
-    transform: scale(1.1);
-} */
 
 .tweet-header {
     display: flex;
@@ -29,7 +24,6 @@
 
 .content-wrap {
     width: 100%;
-    /* display: inline-block; */
 }
 .content {
     width: 100%;

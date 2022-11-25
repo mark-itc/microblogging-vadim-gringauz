@@ -1,18 +1,13 @@
 import React from 'react'
 import { useState, useEffect, useContext, useRef } from 'react'
-import ClipLoader from 'react-spinners/ClipLoader'
-import { MAX_CHARS } from '../globals'
-import CharsCounter from './CharsCounter'
 import Alert from './Alert'
+import ClipLoader from 'react-spinners/ClipLoader'
+import CharsCounter from './CharsCounter'
 import { AuthContext } from '../contexts/AuthContext'
 import { TweetsContext } from '../contexts/TweetsContext'
-import './CreateTweet.css'
+import { MAX_CHARS } from '../globals'
 import { SERVER_URL } from '../globals'
-
-const USER = 'admin' /* TEMP */
-/* USED FOR DEBUGGING */
-const VERY_LONG_STRING = `  1111111111111111111111111111111111111111111111111111111111111111111111111
-    11111111111111111111111111111111111111111111111111111111111111111111`
+import './CreateTweet.css'
 
 function CreateTweet ({ textareaHeight }) {
   const { tweets, setTweets } = useContext(TweetsContext)
@@ -79,7 +74,7 @@ function CreateTweet ({ textareaHeight }) {
   // }
 
   const handleContentChange = newValue => {
-    setContent(newValue)    
+    setContent(newValue)
   }
 
   useEffect(() => {
@@ -119,9 +114,6 @@ function CreateTweet ({ textareaHeight }) {
       buttonRef.current.click()
     }
   }
-
-  
- 
 
   return (
     <div className='stick-top'>

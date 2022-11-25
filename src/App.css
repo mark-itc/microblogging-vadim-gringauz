@@ -1,7 +1,6 @@
 .App {
   width: 100vw;
   text-align: center;
-  /* background-color: aqua; */
   display: flex;
   flex-direction: column;
   align-items: center;

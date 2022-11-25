@@ -1,12 +1,12 @@
 import { useContext } from 'react'
 import { createBrowserRouter, RouterProvider} from 'react-router-dom'
-import './App.css'
 import { AuthContext } from './contexts/AuthContext'
 import ProfilePage from './views/ProfilePage'
-import HomePage from './views/HomePage'
 import SettingsPage from './views/SettingsPage'
+import HomePage from './views/HomePage'
 import ErrorPage from './views/ErrorPage'
-// import Navbar from './components/Navbar'
+import './App.css'
+
 
 
 function App () {
@@ -30,7 +30,6 @@ function App () {
 
   return (
     <div className='App'>
-      {/* <Navbar /> */}
       <RouterProvider router={router} />
     </div>
   )

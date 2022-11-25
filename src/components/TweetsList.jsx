@@ -6,24 +6,23 @@ import Tweet from './Tweet'
 import { TweetsContext } from '../contexts/TweetsContext'
 import { SERVER_URL, REFRESH_RATE } from '../globals'
 
-
-function TweetsList ({}) {
-  const { tweets, setTweets, isLoading, setIsLoading } = useContext(TweetsContext)
+function TweetsList () {
+  const { tweets, setTweets, isLoading, setIsLoading } = useContext(
+    TweetsContext
+  )
 
   const sortedTweets = sort(tweets).desc(tweet => new Date(tweet.date))
 
   const getFromServer = async () => {
     try {
       setIsLoading(true)
-      console.log('fetching data...');
       const response = await fetch(SERVER_URL)
       const data = await response.json()
       const fetchedTweets = data.tweets
       setTweets(fetchedTweets)
-    } catch(error) {
-      console.log('error loading tweets:', error);
+    } catch (error) {
+      console.log('error loading tweets:', error)
     } finally {
-      console.log('Done fetching');
       setIsLoading(false)
     }
   }
@@ -33,14 +32,9 @@ function TweetsList ({}) {
     const interval = setInterval(getFromServer, REFRESH_RATE)
   }, [])
 
-
   return (
     <>
-      <ClipLoader
-        color={'white'}
-        loading={isLoading}
-        size={100}
-      />
+      <ClipLoader color={'white'} loading={isLoading} size={100} />
       {sortedTweets?.map((tweet, index) => (
         <Tweet key={'tweet-' + index} tweet={tweet} />
       ))}
