@@ -45,10 +45,8 @@ function CreateTweet ({ textareaHeight }) {
       })
       if (response.status === 400) {
         throw new Error('bad request')
-        return
       }
       const result = await response.json()
-      // console.log(result)
       setTweets([...tweets, newTweet])
     } catch (error) {
       console.log('error:', error)
@@ -59,19 +57,6 @@ function CreateTweet ({ textareaHeight }) {
       setIsPosting(false)
     }
   }
-
-  /* WANTED TO MAKE TEXTAREA AUTO-RESIZEABLE */
-  // const autoResize = e => {
-  //   // console.log('scrollHeight', e.target.scrollHeight)
-  //   // console.log('height=', height)
-  //   if (e.target.scrollHeight > 180) {
-  //     setTextareaHeight('auto')
-  //     if (e.target.scrollHeight < 196)
-  //       setTextareaHeight(e.target.scrollHeight + 'px')
-  //   } else {
-  //     setTextareaHeight('180px')
-  //   }
-  // }
 
   const handleContentChange = newValue => {
     setContent(newValue)
@@ -129,7 +114,6 @@ function CreateTweet ({ textareaHeight }) {
             height: textareaHeight,
             overflow: 'hidden'
           }}
-          // onInput={autoResize}
           onKeyDown={handleKeyDown}
         />
         <div className='controls'>

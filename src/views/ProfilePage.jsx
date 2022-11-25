@@ -3,6 +3,7 @@ import { useContext, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import { AuthContext } from '../contexts/AuthContext'
+import userImg from '../images/empty-profile.png'
 import './ProfilePage.css'
 
 function ProfilePage () {
@@ -15,7 +16,7 @@ function ProfilePage () {
   }, [userName])
 
   const isUserNameValid = value => {
-    if (value.replaceAll(' ', '') != '') return true
+    if (value.replaceAll(' ', '') !== '') return true
     return false
   }
 
@@ -34,7 +35,8 @@ function ProfilePage () {
           <div>
             <img
               className='profile-img'
-              src='https://d32ogoqmya1dw8.cloudfront.net/images/serc/empty_user_icon_256.v2.png'
+              alt='no user picture'
+              src={userImg}
             />
           </div>
           <label htmlFor=''>User Name</label>
@@ -45,7 +47,7 @@ function ProfilePage () {
             onChange={e => setNewName(e.target.value)}
           />
           <div className='go-left'>
-            <button type='submit' disabled={!newName.replaceAll(' ', '') != ''}>
+            <button type='submit' disabled={!newName.replaceAll(' ', '') !== ''}>
               Save
             </button>
           </div>

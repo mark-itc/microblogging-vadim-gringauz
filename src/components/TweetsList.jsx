@@ -30,6 +30,7 @@ function TweetsList () {
   useEffect(() => {
     getFromServer()
     const interval = setInterval(getFromServer, REFRESH_RATE)
+    return () => clearInterval(interval);
   }, [])
 
   return (
