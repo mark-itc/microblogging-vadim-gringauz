@@ -1,5 +1,5 @@
 ## React.JS Project #2: <img src='./assets/logo.png' width=30px /> Microblogging App
-# Milestone :four: WIP
+# Milestone :five: Complete and ready for review
 
 ## [App Deployed to Firebase!](https://itc-microblogging-85128.web.app)
 
