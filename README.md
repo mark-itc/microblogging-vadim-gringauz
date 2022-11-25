@@ -3,8 +3,11 @@
 
 ## [App Deployed to Firebase!](https://itc-microblogging-85128.web.app)
 
+**Code Design:**: 
+![components](components.png) \
 
-**UI/UX Design**: 
+
+**UI/UX Design**: Same as in the FIGMA, but with a few addons - bottom navbar, counter for tweet-chars, size of fonts
 
 ### *Progress:*
 - Milestone 1 - Mock up: :heavy_check_mark:
