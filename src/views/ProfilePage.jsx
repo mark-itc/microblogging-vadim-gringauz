@@ -16,7 +16,7 @@ function ProfilePage () {
   useEffect(() => {
     setNewName(userName.value)
     if (newName) validateUserName(newName)
-  }, [userName])
+  }, [userName]) // eslint-disable-line 
 
   useEffect(() => {
     validateUserName(newName)

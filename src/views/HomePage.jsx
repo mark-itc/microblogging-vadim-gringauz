@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState, useContext, useEffect } from 'react'
+import { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../contexts/AuthContext'
 import FooterNavbar from '../components/FooterNavbar'
@@ -16,7 +16,7 @@ function HomePage () {
   /* IF NO USER SAVED YET, MUST LOGIN FIRST */
   const navigate = useNavigate()
   if (userName.loaded && userName.value === '') {
-    console.log("navigate...")
+    navigate('/profile')
   }
 
 

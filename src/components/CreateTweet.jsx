@@ -61,7 +61,11 @@ function CreateTweet ({ textareaHeight }) {
   }
 
   useEffect(() => {
-    if (content.replaceAll(' ', '').length > 0 && content.length <= MAX_CHARS) {
+    if (
+      content.replaceAll(' ', '').length > 0 &&
+      content.length <= MAX_CHARS &&
+      userName.value !== ''
+    ) {
       setIsContentValid(true)
       setAlertMessage('')
       setIsAlertOn(false)
@@ -79,7 +83,7 @@ function CreateTweet ({ textareaHeight }) {
       setIsContentValid(false)
       return
     }
-  }, [content])
+  }, [content]) // eslint-disable-line 
 
   const handleSubmit = e => {
     e.preventDefault()
