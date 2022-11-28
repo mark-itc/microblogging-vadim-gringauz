@@ -27,7 +27,6 @@ function CreateTweet ({ textareaHeight }) {
       userName: userName.value,
       date: currentTimeDate.toISOString()
     }
-    // console.log('newTweet=', newTweet)
     postNew(newTweet)
   }
 

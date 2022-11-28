@@ -23,7 +23,7 @@ function ProfilePage () {
   }, [newName])
 
   const validateUserName = value => {
-    if (value.replaceAll(' ', '') !== '' && value.length < MAX_USERNAME_LENGTH) {
+    if (value?.replaceAll(' ', '') !== '' && value.length < MAX_USERNAME_LENGTH) {
       setIsUserNameValid(true)
       return
     }
