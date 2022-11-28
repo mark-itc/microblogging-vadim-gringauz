@@ -31,11 +31,18 @@
     
 }
 
-.go-left {
+.notification {
+    background-color: rgb(65, 58, 58);
+    border-radius: 10px;
+    padding: 10px;
+    /* align-self: center; */
+}
+
+.go-right {
     display: flex;
     flex-direction: row;
     justify-content:flex-end;
-    width: 100%;
+    width: 600px;
 }
 
 .profile-img {
@@ -47,6 +54,10 @@
 
 @media screen and (max-width: 600px) {
     .login-form>input {
+        width: 300px;
+    }
+
+    .go-right {
         width: 300px;
     }
   }

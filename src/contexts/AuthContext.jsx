@@ -6,7 +6,7 @@ import localforage from 'localforage'
 const AuthContext = createContext()
 
 function AuthContextProvider ({ children }) {
-  const [userName, setUserName] = useState('')
+  const [userName, setUserName] = useState({value: '',loaded: false})
 
   useEffect(() => {
     localforage.setItem('user-name', userName)
@@ -16,7 +16,11 @@ function AuthContextProvider ({ children }) {
 
   const loadAuth = async () => {
     const userStored = await localforage.getItem('user-name')
-    userStored && setUserName(userStored)
+    if (userStored) {
+      setUserName({...userStored, loaded: true})
+      return
+    }
+    setUserName({value: '', loaded: true})
   }
 
   useEffect(() => {

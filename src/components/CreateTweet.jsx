@@ -24,8 +24,7 @@ function CreateTweet ({ textareaHeight }) {
     console.log('currentTimeDate=', currentTimeDate)
     const newTweet = {
       content: content,
-      // content: VERY_LONG_STRING,
-      userName: userName,
+      userName: userName.value,
       date: currentTimeDate.toISOString()
     }
     // console.log('newTweet=', newTweet)

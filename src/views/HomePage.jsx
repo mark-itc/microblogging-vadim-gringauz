@@ -1,5 +1,6 @@
 import React from 'react'
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../contexts/AuthContext'
 import FooterNavbar from '../components/FooterNavbar'
 import CreateTweet from '../components/CreateTweet'
@@ -11,6 +12,14 @@ function HomePage () {
   const [footerNavAppear, setFooterNavAppear] = useState('')
   const [textareaHeight, setTextareaHeight] = useState('180px')
   const { userName } = useContext(AuthContext)
+  
+  /* IF NO USER SAVED YET, MUST LOGIN FIRST */
+  const navigate = useNavigate()
+  if (userName.loaded && userName.value === '') {
+    console.log("navigate...")
+  }
+
+
 
   window.onscroll = () => {
     if (
@@ -33,7 +42,7 @@ function HomePage () {
     <>
       <Navbar />
       <div className='HomePage'>
-        <div className='user-name'>{userName === '' ? <>Please Login</> : <>Logged in as: {userName}</>}</div>
+        <div className='user-name'>{userName.value === '' ? <>Please Login</> : <>Logged in as: {userName.value}</>}</div>
         <CreateTweet textareaHeight={textareaHeight} />
         <br />
         <TweetsList />

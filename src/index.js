@@ -6,6 +6,7 @@ import { AuthContextProvider } from './contexts/AuthContext'
 import VersionInfo from './components/VersionInfo'
 import './index.css'
 
+
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <AuthContextProvider>

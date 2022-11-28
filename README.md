@@ -31,6 +31,7 @@
 - CreateTweet is sticky to top + shrinks on scroll: :heavy_check_mark:
 - Setting screen: :heavy_check_mark:
 - Redirect to ProfilePage is no user name saved: :heavy_check_mark:
+- Custom 404 error page: :heavy_check_mark:
 
 ### :basketball: Vadim Gringauz :basketball:
 
