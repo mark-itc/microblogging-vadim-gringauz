@@ -51,7 +51,7 @@ function ProfilePage () {
           <div>
             <img className='profile-img' alt='user' src={userImg} />
           </div>
-          <label htmlFor=''>User Name</label>
+          <label htmlFor=''>Guest Name</label>
           <input
             type='text'
             placeholder=''

@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState, useEffect, useContext, useRef } from 'react'
+import { useEffect, useContext, useRef, useReducer } from 'react'
 import Alert from './Alert'
 import ClipLoader from 'react-spinners/ClipLoader'
 import CharsCounter from './CharsCounter'
@@ -9,21 +9,46 @@ import { MAX_CHARS } from '../globals'
 import { SERVER_URL } from '../globals'
 import './CreateTweet.css'
 
+function reducer (state, action) {
+  switch (action.type) {
+    case 'update-content':
+      return { ...state, content: action.newValue }
+    case 'clear-content':
+      return { ...state, content: '' }
+    case 'content-is-valid':
+      return { ...state, isContentValid: true }
+    case 'content-not-valid':
+      return { ...state, isContentValid: false }
+    case 'posting-in-progress':
+      return { ...state, isPosting: true }
+    case 'posting-finished':
+      return { ...state, isPosting: false }
+    case 'alert-on':
+      return { ...state, isAlertOn: true, alertMessage: action.value }
+    case 'alert-off':
+      return { ...state, isAlertOn: false, alertMessage: '' }
+  }
+}
+
 function CreateTweet ({ textareaHeight }) {
   const { tweets, setTweets } = useContext(TweetsContext)
-  const [content, setContent] = useState('')
-  const [isContentValid, setIsContentValid] = useState(false)
-  const [isPosting, setIsPosting] = useState(false)
-  const [isAlertOn, setIsAlertOn] = useState(false)
-  const [alertMessage, setAlertMessage] = useState('')
   const { userName } = useContext(AuthContext)
   const buttonRef = useRef(null)
+
+  const initialState = {
+    content: '',
+    isContentValid: false,
+    isPosting: false,
+    isAlertOn: false,
+    alertMessage: ''
+  }
+  const [state, dispatch] = useReducer(reducer, initialState)
 
   const addNewTweet = content => {
     const currentTimeDate = new Date()
     console.log('currentTimeDate=', currentTimeDate)
     const newTweet = {
-      content: content,
+      content: state.content,
       userName: userName.value,
       date: currentTimeDate.toISOString()
     }
@@ -32,7 +57,7 @@ function CreateTweet ({ textareaHeight }) {
 
   const postNew = async newTweet => {
     try {
-      setIsPosting(true)
+      dispatch({ type: 'posting-in-progress' })
       console.log('posting...')
       const response = await fetch(SERVER_URL, {
         method: 'POST',
@@ -47,47 +72,46 @@ function CreateTweet ({ textareaHeight }) {
       setTweets([...tweets, newTweet])
     } catch (error) {
       console.log('error:', error)
-      setAlertMessage('Error while posting to server!')
-      setIsAlertOn(true)
+      dispatch({ type: 'alert-on', value: 'Error while posting to server!' })
     } finally {
       console.log('Done posting')
-      setIsPosting(false)
+      dispatch({ type: 'posting-finished' })
     }
   }
 
   const handleContentChange = newValue => {
-    setContent(newValue)
+    dispatch({ type: 'update-content', newValue: newValue })
   }
 
   useEffect(() => {
     if (
-      content.replaceAll(' ', '').length > 0 &&
-      content.length <= MAX_CHARS &&
+      state.content.replaceAll(' ', '').length > 0 &&
+      state.content.length <= MAX_CHARS &&
       userName.value !== ''
     ) {
-      setIsContentValid(true)
-      setAlertMessage('')
-      setIsAlertOn(false)
+      dispatch({ type: 'content-is-valid' })
+      dispatch({ type: 'alert-off' })
       return
     }
-    if (content.length > MAX_CHARS) {
-      setAlertMessage(`The tweet can't contain more than ${MAX_CHARS} chars`)
-      setIsAlertOn(true)
-      setIsContentValid(false)
+    if (state.content.length > MAX_CHARS) {
+      dispatch({
+        type: 'alert-on',
+        value: `The tweet can't contain more than ${MAX_CHARS} chars`
+      })
+      dispatch({ type: 'content-not-valid' })
       return
     }
-    if (content.length === 0) {
-      setAlertMessage('')
-      setIsAlertOn(false)
-      setIsContentValid(false)
+    if (state.content.length === 0) {
+      dispatch({ type: 'content-not-valid' })
+      dispatch({ type: 'alert-off' })
       return
     }
-  }, [content]) // eslint-disable-line 
+  }, [state.content]) // eslint-disable-line
 
   const handleSubmit = e => {
     e.preventDefault()
-    addNewTweet(content)
-    setContent('')
+    addNewTweet(state.content)
+    dispatch({ type: 'clear-content' })
   }
 
   /* 'ENTER' -> SEND TWEET, 'CTRL' + 'ENTER' -> BREAK LINE */
@@ -95,7 +119,7 @@ function CreateTweet ({ textareaHeight }) {
     /* EXCEPTION FOR NOT DESKTOP BROWSERS */
     if (window.outerWidth < 900) return
 
-    if (!e.shiftKey && e.key === 'Enter' && isContentValid) {
+    if (!e.shiftKey && e.key === 'Enter' && state.isContentValid) {
       e.preventDefault()
       buttonRef.current.click()
     }
@@ -109,7 +133,7 @@ function CreateTweet ({ textareaHeight }) {
           name='content'
           placeholder='What you have in mind...'
           onChange={e => handleContentChange(e.target.value)}
-          value={content}
+          value={state.content}
           style={{
             resize: 'none',
             height: textareaHeight,
@@ -118,13 +142,17 @@ function CreateTweet ({ textareaHeight }) {
           onKeyDown={handleKeyDown}
         />
         <div className='controls'>
-          <CharsCounter length={content.length} />
-          <button ref={buttonRef} type='submit' disabled={!isContentValid}>
-            <ClipLoader color={'white'} loading={isPosting} size={25} />
-            {!isPosting && <>Tweet</>}
+          <CharsCounter length={state.content.length} />
+          <button
+            ref={buttonRef}
+            type='submit'
+            disabled={!state.isContentValid}
+          >
+            <ClipLoader color={'white'} loading={state.isPosting} size={25} />
+            {!state.isPosting && <>Tweet</>}
           </button>
         </div>
-        <Alert isOn={isAlertOn} message={alertMessage} />
+        <Alert isOn={state.isAlertOn} message={state.alertMessage} />
       </form>
     </div>
   )

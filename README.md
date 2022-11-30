@@ -25,11 +25,11 @@
 - Milestone 12 - More firebase: 
 - Milestone 13 - Followers: 
 
-### *Improvments I have added:*
+### *Improvements I have added:*
 - Char-counter: :heavy_check_mark:
 - Footer navbar on scroll: :heavy_check_mark:
 - CreateTweet is sticky to top + shrinks on scroll: :heavy_check_mark:
-- Setting screen: :heavy_check_mark:
+- Settings screen: WIP
 - Redirect to ProfilePage is no user name saved: :heavy_check_mark:
 - Custom 404 error page: :heavy_check_mark:
 
