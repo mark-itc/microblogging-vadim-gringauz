@@ -53,20 +53,19 @@ function CreateTweet ({ textareaHeight }) {
       userName: userName.value,
       date: Timestamp.fromDate(new Date())
     }
-    await postNew(newTweet)
-    setTweets([...tweets, newTweet])
+    const isPosted = await postNew(newTweet)
+    if (isPosted) setTweets([...tweets, newTweet])
   }
 
   const postNew = async newTweet => {
     try {
       dispatch({ type: 'posting-in-progress' })
       const docRef = await addDoc(collectionRef, newTweet)
-      // if (response.status === 400) {
-      //   throw new Error('bad request')
-      // }
+      return true
     } catch (error) {
-      console.log('error:', error)
-      dispatch({ type: 'alert-on', value: 'Error while posting to server!' })
+      console.log(error)
+      dispatch({ type: 'alert-on', value: error.message })
+      return false
     } finally {
       dispatch({ type: 'posting-finished' })
     }

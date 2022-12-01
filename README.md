@@ -16,7 +16,7 @@
 - Milestone 3 - User page: :heavy_check_mark:
 - Milestone 4 - Context: :heavy_check_mark:
 - Milestone 5 - Deployment: :heavy_check_mark:
-- Milestone 6 - Firebase: 
+- Milestone 6 - Firebase: WIP
 - Milestone 7 - Your tweets: 
 - Milestone 8 - Navbar: 
 - Milestone 9 - Like button part 1: 
