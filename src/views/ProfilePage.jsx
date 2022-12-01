@@ -3,7 +3,7 @@ import { useContext, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import { AuthContext } from '../contexts/AuthContext'
-import { MAX_USERNAME_LENGTH } from '../globals'
+import { MAX_USERNAME_LENGTH } from '../utils/globals'
 import userImg from '../images/empty-profile.png'
 import './ProfilePage.css'
 

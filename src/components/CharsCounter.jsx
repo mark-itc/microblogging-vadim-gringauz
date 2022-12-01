@@ -1,5 +1,5 @@
 import React from 'react'
-import { MAX_CHARS } from '../globals'
+import { MAX_CHARS } from '../utils/globals'
 import './CharsCounter.css'
 
 export default function CharsCounter ({ length }) {

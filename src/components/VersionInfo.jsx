@@ -5,7 +5,7 @@ function VersionInfo () {
   return (
     <>
       <h5 className='VersionInfo'>
-        VG / ITC / React - Microblogging / Version 0.6.01
+        VG / ITC / React - Microblogging / Version 0.6.02
       </h5>
     </>
   )

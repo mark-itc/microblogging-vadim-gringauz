@@ -2,30 +2,29 @@ import React from 'react'
 import { useContext, useEffect } from 'react'
 import ClipLoader from 'react-spinners/ClipLoader'
 import { sort } from 'fast-sort'
+import { getDocs } from 'firebase/firestore'
 import Tweet from './Tweet'
 import { TweetsContext } from '../contexts/TweetsContext'
-import { SERVER_URL, REFRESH_RATE } from '../globals'
+import { REFRESH_RATE } from '../utils/globals'
+import { collectionRef } from '../utils/firestore'
 
 function TweetsList () {
-  const { tweets, setTweets, isLoading, setIsLoading } = useContext(
-    TweetsContext
-  )
+  const { tweets, setTweets, isLoading, setIsLoading } =
+    useContext(TweetsContext)
 
-  const sortedTweets = sort(tweets).desc(tweet => new Date(tweet.date))
+  const sortedTweets = sort(tweets).desc(tweet => tweet.date)
 
   const getFromServer = async () => {
     try {
       setIsLoading(true)
-      const response = await fetch(SERVER_URL)
-      const data = await response.json()
-      console.log('data', data)
+      const tweetsSnapshot = await getDocs(collectionRef)
       const fetchedTweets = []
-      data.documents.forEach((doc, index) => {
-        console.log('doc' + index + '=', doc)
-        const tweet = {...doc.fields}
-        fetchedTweets.push(tweet)
+      tweetsSnapshot.forEach(document => {
+        fetchedTweets.push({ id: document.id, ...document.data() })
       })
-      console.log('fetchedTweets', fetchedTweets)
+      // console.log('fetchedTweets', fetchedTweets)
+      // console.log('date of 0', fetchedTweets[0].date)
+      // console.log('date of 0', fetchedTweets[0].date.toDate())
       setTweets(fetchedTweets)
     } catch (error) {
       console.log('error loading tweets:', error)
@@ -35,16 +34,16 @@ function TweetsList () {
   }
 
   useEffect(() => {
-    getFromServer() // eslint-disable-line 
+    getFromServer() // eslint-disable-line
     const interval = setInterval(getFromServer, REFRESH_RATE)
-    return () => clearInterval(interval);
-  }, []) // eslint-disable-line 
+    return () => clearInterval(interval)
+  }, []) // eslint-disable-line
 
   return (
     <>
       <ClipLoader color={'white'} loading={isLoading} size={100} />
       {sortedTweets?.map((tweet, index) => (
-        <Tweet key={'tweet-' + index} tweet={tweet} />
+        <Tweet key={tweet.id} tweet={tweet} />
       ))}
     </>
   )

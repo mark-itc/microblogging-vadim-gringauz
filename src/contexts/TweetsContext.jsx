@@ -5,11 +5,12 @@ const TweetsContext = createContext()
 
 function TweetsContextProvider ({ children }) {
   const [tweets, setTweets] = useState([])
-  const [isLoading, setIsLoading] = useState(false);
-
+  const [isLoading, setIsLoading] = useState(false)
 
   return (
-    <TweetsContext.Provider value={{ tweets, setTweets, isLoading, setIsLoading }}>
+    <TweetsContext.Provider
+      value={{ tweets, setTweets, isLoading, setIsLoading }}
+    >
       {children}
     </TweetsContext.Provider>
   )

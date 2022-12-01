@@ -1,12 +1,14 @@
 import React from 'react'
 import { useEffect, useContext, useRef, useReducer } from 'react'
+import { addDoc, Timestamp } from 'firebase/firestore'
 import Alert from './Alert'
 import ClipLoader from 'react-spinners/ClipLoader'
 import CharsCounter from './CharsCounter'
 import { AuthContext } from '../contexts/AuthContext'
 import { TweetsContext } from '../contexts/TweetsContext'
-import { MAX_CHARS } from '../globals'
-import { SERVER_URL } from '../globals'
+import { MAX_CHARS } from '../utils/globals'
+import { SERVER_URL } from '../utils/globals'
+import { collectionRef } from '../utils/firestore'
 import './CreateTweet.css'
 
 function reducer (state, action) {
@@ -44,39 +46,28 @@ function CreateTweet ({ textareaHeight }) {
   }
   const [state, dispatch] = useReducer(reducer, initialState)
 
-  const addNewTweet = content => {
-    const currentTimeDate = new Date()
-    console.log('currentTimeDate=', currentTimeDate)
+  const addNewTweet = async content => {
+    // const currentTimeDate = new Date()
     const newTweet = {
       content: state.content,
       userName: userName.value,
-      date: currentTimeDate.toISOString()
+      date: Timestamp.fromDate(new Date())
     }
-    postNew(newTweet)
+    await postNew(newTweet)
+    setTweets([...tweets, newTweet])
   }
 
   const postNew = async newTweet => {
-    const body = ``
     try {
       dispatch({ type: 'posting-in-progress' })
-      console.log('posting...')
-      const response = await fetch(SERVER_URL, {
-        method: 'POST',
-        headers: {
-          'Content-type': 'application/json'
-        },
-        // body: JSON.stringify(newTweet)
-        body: body
-      })
-      if (response.status === 400) {
-        throw new Error('bad request')
-      }
-      setTweets([...tweets, newTweet])
+      const docRef = await addDoc(collectionRef, newTweet)
+      // if (response.status === 400) {
+      //   throw new Error('bad request')
+      // }
     } catch (error) {
       console.log('error:', error)
       dispatch({ type: 'alert-on', value: 'Error while posting to server!' })
     } finally {
-      console.log('Done posting')
       dispatch({ type: 'posting-finished' })
     }
   }

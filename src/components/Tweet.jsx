@@ -6,11 +6,11 @@ function Tweet ({ tweet }) {
   return (
     <div className='Tweet'>
       <div className='tweet-header'>
-        <span className='user'>{userName.stringValue}</span>
-        <span className='date'>{date.timestampValue}</span>
+        <span className='user'>{userName ? userName : <>empty user name</>}</span>
+        <span className='date'>{date ? date.toDate().toISOString() : <>empty date</>}</span>
       </div>
       <div className='tweet-body'>
-        <p className='content'>{content.stringValue}</p>
+        <p className='content'>{content ? content : <>empty content</>}</p>
       </div>
     </div>
   )
