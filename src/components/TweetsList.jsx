@@ -18,7 +18,14 @@ function TweetsList () {
       setIsLoading(true)
       const response = await fetch(SERVER_URL)
       const data = await response.json()
-      const fetchedTweets = data.tweets
+      console.log('data', data)
+      const fetchedTweets = []
+      data.documents.forEach((doc, index) => {
+        console.log('doc' + index + '=', doc)
+        const tweet = {...doc.fields}
+        fetchedTweets.push(tweet)
+      })
+      console.log('fetchedTweets', fetchedTweets)
       setTweets(fetchedTweets)
     } catch (error) {
       console.log('error loading tweets:', error)

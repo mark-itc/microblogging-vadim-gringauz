@@ -56,6 +56,7 @@ function CreateTweet ({ textareaHeight }) {
   }
 
   const postNew = async newTweet => {
+    const body = ``
     try {
       dispatch({ type: 'posting-in-progress' })
       console.log('posting...')
@@ -64,7 +65,8 @@ function CreateTweet ({ textareaHeight }) {
         headers: {
           'Content-type': 'application/json'
         },
-        body: JSON.stringify(newTweet)
+        // body: JSON.stringify(newTweet)
+        body: body
       })
       if (response.status === 400) {
         throw new Error('bad request')

@@ -6,11 +6,11 @@ function Tweet ({ tweet }) {
   return (
     <div className='Tweet'>
       <div className='tweet-header'>
-        <span className='user'>{userName}</span>
-        <span className='date'>{date}</span>
+        <span className='user'>{userName.stringValue}</span>
+        <span className='date'>{date.timestampValue}</span>
       </div>
       <div className='tweet-body'>
-        <p className='content'>{content}</p>
+        <p className='content'>{content.stringValue}</p>
       </div>
     </div>
   )
