@@ -1,14 +1,13 @@
 import React from 'react'
 import { useEffect, useContext, useRef, useReducer } from 'react'
-import { addDoc, Timestamp } from 'firebase/firestore'
+import { Timestamp } from 'firebase/firestore'
 import Alert from './Alert'
 import ClipLoader from 'react-spinners/ClipLoader'
 import CharsCounter from './CharsCounter'
 import { AuthContext } from '../contexts/AuthContext'
 import { TweetsContext } from '../contexts/TweetsContext'
 import { MAX_CHARS } from '../utils/globals'
-import { SERVER_URL } from '../utils/globals'
-import { collectionRef } from '../utils/firestore'
+import { postNewTweet, deleteAllTweets } from '../utils/firestore'
 import './CreateTweet.css'
 
 function reducer (state, action) {
@@ -47,7 +46,10 @@ function CreateTweet ({ textareaHeight }) {
   const [state, dispatch] = useReducer(reducer, initialState)
 
   const addNewTweet = async content => {
-    // const currentTimeDate = new Date()
+    if (content === 'clr') {
+      deleteAll()
+    }
+
     const newTweet = {
       content: state.content,
       userName: userName.value,
@@ -57,10 +59,17 @@ function CreateTweet ({ textareaHeight }) {
     if (isPosted) setTweets([...tweets, newTweet])
   }
 
+  const deleteAll = async () => {
+    dispatch({ type: 'posting-in-progress' })
+    await deleteAllTweets()
+    dispatch({ type: 'posting-finished' })
+    setTweets([])
+  }
+
   const postNew = async newTweet => {
     try {
       dispatch({ type: 'posting-in-progress' })
-      const docRef = await addDoc(collectionRef, newTweet)
+      postNewTweet(newTweet)
       return true
     } catch (error) {
       console.log(error)

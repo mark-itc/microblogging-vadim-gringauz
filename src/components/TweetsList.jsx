@@ -2,11 +2,10 @@ import React from 'react'
 import { useContext, useEffect } from 'react'
 import ClipLoader from 'react-spinners/ClipLoader'
 import { sort } from 'fast-sort'
-import { getDocs } from 'firebase/firestore'
 import Tweet from './Tweet'
 import { TweetsContext } from '../contexts/TweetsContext'
 import { REFRESH_RATE } from '../utils/globals'
-import { collectionRef } from '../utils/firestore'
+import { getAllTweets } from '../utils/firestore'
 
 function TweetsList () {
   const { tweets, setTweets, isLoading, setIsLoading } =
@@ -17,15 +16,7 @@ function TweetsList () {
   const getFromServer = async () => {
     try {
       setIsLoading(true)
-      const tweetsSnapshot = await getDocs(collectionRef)
-      const fetchedTweets = []
-      tweetsSnapshot.forEach(document => {
-        fetchedTweets.push({ id: document.id, ...document.data() })
-      })
-      // console.log('fetchedTweets', fetchedTweets)
-      // console.log('date of 0', fetchedTweets[0].date)
-      // console.log('date of 0', fetchedTweets[0].date.toDate())
-      setTweets(fetchedTweets)
+      setTweets(await getAllTweets())
     } catch (error) {
       console.log('error loading tweets:', error)
     } finally {

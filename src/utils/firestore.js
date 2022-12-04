@@ -1,5 +1,6 @@
 import { initializeApp } from 'firebase/app'
 import { getFirestore, collection, getDocs, doc } from 'firebase/firestore'
+import { addDoc, Timestamp, deleteDoc } from 'firebase/firestore'
 
 const firebaseConfig = {
   projectId: 'itc-microblogging-85128'
@@ -17,4 +18,35 @@ const firebaseConfig = {
 
 initializeApp(firebaseConfig)
 const db = getFirestore()
-export const collectionRef = collection(db, 'tweets')
+const collectionRef = collection(db, 'tweets')
+
+async function getAllTweets () {
+  console.log(' getting tweets collection from firestore...')
+  const tweetsSnapshot = await getDocs(collectionRef)
+  const { docs } = tweetsSnapshot
+  const fetchedTweets = docs.map(doc => doc.data())
+  return fetchedTweets
+}
+
+async function postNewTweet (tweet) {
+  console.log('posting to tweet document to tweets collection...')
+  const docRef = await addDoc(collectionRef, tweet)
+  // console.log('docRef=', docRef)
+}
+
+async function deleteAllTweets () {
+  console.log('Deleting all tweets for collection...')
+  const { docs } = await getDocs(collectionRef)
+  docs.map(async document => {
+    await deleteDoc(doc(collectionRef, document.id))
+  })
+}
+
+async function editTweet(id, newContect) {
+  console.log('Editing tweet...')
+}
+
+async function deleteTweet(id) {
+  console.log('Deleting tweet...')
+}
+export { getAllTweets, postNewTweet, deleteAllTweets, editTweet, deleteTweet }
