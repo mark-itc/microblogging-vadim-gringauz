@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import ProfilePage from './views/ProfilePage'
 import SettingsPage from './views/SettingsPage'
 import HomePage from './views/HomePage'
+import LoginPage from './views/LoginPage'
 import ErrorPage from './views/ErrorPage'
 import Temp from './views/Temp'
 import './App.css'
@@ -20,6 +21,10 @@ function App () {
     {
       path: '/temp',
       element: <Temp />
+    },
+    {
+      path: '/login',
+      element: <LoginPage />
     },
     {
       path: '/settings',

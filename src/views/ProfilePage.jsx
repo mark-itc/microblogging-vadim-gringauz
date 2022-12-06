@@ -6,6 +6,7 @@ import { AuthContext } from '../contexts/AuthContext'
 import { MAX_USERNAME_LENGTH } from '../utils/globals'
 import userImg from '../images/empty-profile.png'
 import './ProfilePage.css'
+// import { createNewUser } from '../utils/Auth'
 
 function ProfilePage () {
   const { userName, setUserName } = useContext(AuthContext)
@@ -64,6 +65,7 @@ function ProfilePage () {
             </button>
           </div>
         </form>
+        {/* <button onClick={createNewUser}>new user</button> */}
       </div>
     </>
   )

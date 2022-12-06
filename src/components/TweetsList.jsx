@@ -5,7 +5,7 @@ import { sort } from 'fast-sort'
 import Tweet from './Tweet'
 import { TweetsContext } from '../contexts/TweetsContext'
 import { REFRESH_RATE } from '../utils/globals'
-import { getAllTweets } from '../utils/firestore'
+import { tweetServer } from '../utils/TweetServer'
 
 function TweetsList () {
   const { tweets, setTweets, isLoading, setIsLoading } =
@@ -16,7 +16,7 @@ function TweetsList () {
   const getFromServer = async () => {
     try {
       setIsLoading(true)
-      setTweets(await getAllTweets())
+      setTweets(await tweetServer.getAll())
     } catch (error) {
       console.log('error loading tweets:', error)
     } finally {

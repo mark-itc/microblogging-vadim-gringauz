@@ -7,7 +7,7 @@ import CharsCounter from './CharsCounter'
 import { AuthContext } from '../contexts/AuthContext'
 import { TweetsContext } from '../contexts/TweetsContext'
 import { MAX_CHARS } from '../utils/globals'
-import { postNewTweet, deleteAllTweets } from '../utils/firestore'
+import { tweetServer } from '../utils/TweetServer'
 import './CreateTweet.css'
 
 function reducer (state, action) {
@@ -56,12 +56,13 @@ function CreateTweet ({ textareaHeight }) {
       date: Timestamp.fromDate(new Date())
     }
     const isPosted = await postNew(newTweet)
-    if (isPosted) setTweets([...tweets, newTweet])
+    if (isPosted) setTweets(await tweetServer.getAll())
+    // if (isPosted) setTweets([...tweets, newTweet])
   }
 
   const deleteAll = async () => {
     dispatch({ type: 'posting-in-progress' })
-    await deleteAllTweets()
+    await tweetServer.deleteAll()
     dispatch({ type: 'posting-finished' })
     setTweets([])
   }
@@ -69,7 +70,7 @@ function CreateTweet ({ textareaHeight }) {
   const postNew = async newTweet => {
     try {
       dispatch({ type: 'posting-in-progress' })
-      postNewTweet(newTweet)
+      tweetServer.postNew(newTweet)
       return true
     } catch (error) {
       console.log(error)
