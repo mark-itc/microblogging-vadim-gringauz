@@ -33,7 +33,7 @@ function reducer (state, action) {
 
 function CreateTweet ({ textareaHeight }) {
   const { tweets, setTweets } = useContext(TweetsContext)
-  const { userName } = useContext(AuthContext)
+  const { user } = useContext(AuthContext)
   const buttonRef = useRef(null)
 
   const initialState = {
@@ -52,7 +52,7 @@ function CreateTweet ({ textareaHeight }) {
 
     const newTweet = {
       content: state.content,
-      userName: userName.value,
+      userName: user.displayName,
       date: Timestamp.fromDate(new Date())
     }
     const isPosted = await postNew(newTweet)
@@ -89,7 +89,7 @@ function CreateTweet ({ textareaHeight }) {
     if (
       state.content.replaceAll(' ', '').length > 0 &&
       state.content.length <= MAX_CHARS &&
-      userName.value !== ''
+      user.displayName !== ''
     ) {
       dispatch({ type: 'content-is-valid' })
       dispatch({ type: 'alert-off' })
