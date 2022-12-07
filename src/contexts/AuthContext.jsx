@@ -1,34 +1,29 @@
 import React from 'react'
 import { useEffect } from 'react'
 import { createContext, useState } from 'react'
-import localforage from 'localforage'
+import { onAuthStateChanged, displayName } from 'firebase/auth'
+import authenticator from '../utils/Authenticator'
 
 const AuthContext = createContext()
 
 function AuthContextProvider ({ children }) {
-  const [userName, setUserName] = useState({value: '',loaded: false})
+  const [user, setUser] = useState()
 
-  useEffect(() => {
-    localforage.setItem('user-name', userName)
-  }, [userName])
-  
-
-
-  const loadAuth = async () => {
-    const userStored = await localforage.getItem('user-name')
-    if (userStored) {
-      setUserName({...userStored, loaded: true})
-      return
+  onAuthStateChanged(authenticator.auth, user => {
+    if (user) {
+      const uid = user.uid
+      console.log('user', user.displayName)
+      setUser(user)
+    } else {
+      setUser(null)
     }
-    setUserName({value: '', loaded: true})
-  }
+  })
+  // useEffect(() => {
+  // }, [])
 
-  useEffect(() => {
-    loadAuth()
-  }, [])
 
   return (
-    <AuthContext.Provider value={{ userName, setUserName }}>
+    <AuthContext.Provider value={{ user, setUser }}>
       {children}
     </AuthContext.Provider>
   )

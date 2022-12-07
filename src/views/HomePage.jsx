@@ -11,12 +11,12 @@ import './HomePage.css'
 function HomePage () {
   const [footerNavAppear, setFooterNavAppear] = useState('')
   const [textareaHeight, setTextareaHeight] = useState('180px')
-  const { userName } = useContext(AuthContext)
+  const { user } = useContext(AuthContext)
   
-  /* IF NO USER SAVED YET, MUST LOGIN FIRST */
+  /* IF NO USER LOGGED IN, MUST LOGIN FIRST */
   const navigate = useNavigate()
-  if (userName.loaded && userName.value === '') {
-    navigate('/profile')
+  if (!user) {
+    navigate('/login')
   }
 
 
@@ -42,7 +42,7 @@ function HomePage () {
     <>
       <Navbar />
       <div className='HomePage'>
-        <div className='user-name'>{userName.value === '' ? <>Please Login</> : <>Logged in as: {userName.value}</>}</div>
+        <div className='user-name'>{user ? <>Logged in as: {user.displayName}</> : <>Please Login</>}</div>
         <CreateTweet textareaHeight={textareaHeight} />
         <br />
         <TweetsList />

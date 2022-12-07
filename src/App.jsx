@@ -15,6 +15,11 @@ function App () {
       errorElement: <ErrorPage />
     },
     {
+      path: '/home',
+      element: <HomePage />,
+      errorElement: <ErrorPage />
+    },
+    {
       path: '/profile',
       element: <ProfilePage />
     },

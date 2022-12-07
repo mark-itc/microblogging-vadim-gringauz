@@ -1,4 +1,4 @@
-import { firebaseApp } from './firebase-init'
+import firebaseApp from './firebase-init'
 import { getFirestore, collection, getDocs, doc } from 'firebase/firestore'
 import { addDoc, deleteDoc } from 'firebase/firestore'
 
@@ -45,4 +45,5 @@ class TweetServer {
   }
 }
 
-export const tweetServer = new TweetServer()
+const tweetServer = new TweetServer()
+export default tweetServer

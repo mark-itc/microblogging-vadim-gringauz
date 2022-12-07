@@ -7,7 +7,7 @@ import CharsCounter from './CharsCounter'
 import { AuthContext } from '../contexts/AuthContext'
 import { TweetsContext } from '../contexts/TweetsContext'
 import { MAX_CHARS } from '../utils/globals'
-import { tweetServer } from '../utils/TweetServer'
+import tweetServer from '../utils/TweetServer'
 import './CreateTweet.css'
 
 function reducer (state, action) {

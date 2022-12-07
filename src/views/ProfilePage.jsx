@@ -6,36 +6,39 @@ import { AuthContext } from '../contexts/AuthContext'
 import { MAX_USERNAME_LENGTH } from '../utils/globals'
 import userImg from '../images/empty-profile.png'
 import './ProfilePage.css'
-// import { createNewUser } from '../utils/Auth'
 
 function ProfilePage () {
-  const { userName, setUserName } = useContext(AuthContext)
-  const [newName, setNewName] = useState(userName.value)
-  const [isUserNameValid, setIsUserNameValid] = useState(true)
-  const navigate = useNavigate()
+  const { user } = useContext(AuthContext)
+  const [email, setEmail] = useState(user.email)
+  const [displayName, setDisplayName] = useState(user.displayName)
+  const [pic, setPic] = useState(user.photoURL)
+  const [isNameValid, setIsNameValid] = useState(true)
 
   useEffect(() => {
-    setNewName(userName.value)
-    if (newName) validateUserName(newName)
-  }, [userName]) // eslint-disable-line 
+    setDisplayName(user.displayName)
+    if (displayName) validateName(displayName)
+  }, [user]) // eslint-disable-line
 
   useEffect(() => {
-    validateUserName(newName)
-  }, [newName])
+    validateName(displayName)
+  }, [displayName])
 
-  const validateUserName = value => {
-    if (value?.replaceAll(' ', '') !== '' && value.length < MAX_USERNAME_LENGTH) {
-      setIsUserNameValid(true)
+  const validateName = value => {
+    if (
+      value?.replaceAll(' ', '') !== '' &&
+      value.length < MAX_USERNAME_LENGTH
+    ) {
+      setIsNameValid(true)
       return
     }
 
-    setIsUserNameValid(false)
+    setIsNameValid(false)
   }
 
   const handleSubmit = e => {
     e.preventDefault()
-    isUserNameValid && setUserName({ ...userName, value: newName })
-    navigate('/')
+    // isUserNameValid && setUserName({ ...userName, value: newName })
+    // navigate('/')
   }
 
   return (
@@ -43,29 +46,32 @@ function ProfilePage () {
       <Navbar />
       <div className='ProfilePage'>
         <form className='login-form' onSubmit={handleSubmit}>
-          {userName.value === '' && (
+          {user?.displayName === '' && (
             <div className='notification'>
               Please choose a user name to login
             </div>
           )}
           <h4>Profile</h4>
           <div>
-            <img className='profile-img' alt='user' src={userImg} />
+            <img className='profile-img' alt='user' src={pic} />
           </div>
-          <label htmlFor=''>Guest Name</label>
+          <div>
+            <span>Email: </span>
+            {email && <span>{email}</span>}
+          </div>
+          <label htmlFor=''>Display Name</label>
           <input
             type='text'
             placeholder=''
-            value={newName}
-            onChange={e => setNewName(e.target.value)}
+            value={displayName}
+            onChange={e => setDisplayName(e.target.value)}
           />
           <div className='go-right'>
-            <button type='submit' disabled={!isUserNameValid}>
+            <button type='submit' disabled={!isNameValid}>
               Save
             </button>
           </div>
         </form>
-        {/* <button onClick={createNewUser}>new user</button> */}
       </div>
     </>
   )
