@@ -33,7 +33,7 @@ function TweetsList () {
   return (
     <>
       <ClipLoader color={'white'} loading={isLoading} size={100} />
-      {sortedTweets?.map((tweet, index) => (
+      {sortedTweets?.map((tweet) => (
         <Tweet key={tweet.id} tweet={tweet} />
       ))}
     </>

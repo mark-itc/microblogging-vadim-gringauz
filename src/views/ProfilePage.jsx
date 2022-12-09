@@ -8,16 +8,16 @@ import userImg from '../images/empty-profile.png'
 import './ProfilePage.css'
 
 function ProfilePage () {
-  const { user } = useContext(AuthContext)
-  const [email, setEmail] = useState(user.email)
-  const [displayName, setDisplayName] = useState(user.displayName)
-  const [pic, setPic] = useState(user.photoURL)
+  const { currentUser } = useContext(AuthContext)
+  const [email, setEmail] = useState(currentUser.email)
+  const [displayName, setDisplayName] = useState(currentUser.displayName)
+  const [pic, setPic] = useState(currentUser.photoURL)
   const [isNameValid, setIsNameValid] = useState(true)
 
   useEffect(() => {
-    setDisplayName(user.displayName)
+    setDisplayName(currentUser.displayName)
     if (displayName) validateName(displayName)
-  }, [user]) // eslint-disable-line
+  }, [currentUser]) // eslint-disable-line
 
   useEffect(() => {
     validateName(displayName)
@@ -45,10 +45,10 @@ function ProfilePage () {
     <>
       <Navbar />
       <div className='ProfilePage'>
-        <form className='login-form' onSubmit={handleSubmit}>
-          {user?.displayName === '' && (
+        <form className='signIn-form' onSubmit={handleSubmit}>
+          {currentUser?.displayName === '' && (
             <div className='notification'>
-              Please choose a user name to login
+              Please choose a user name to signIn
             </div>
           )}
           <h4>Profile</h4>

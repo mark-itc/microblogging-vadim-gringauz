@@ -1,0 +1,44 @@
+.AuthFrame {
+    margin-top: 30px;
+    width: 100%;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.AuthFrame .title {
+    display: flex;
+    justify-content: space-between;
+    width: 500px;
+    height: 50px;
+    padding: 5px;
+    font-size: 1.3rem;
+}
+
+.AuthFrame .title img {
+    width: 40px;
+    height: 40px;
+    margin: 0;
+}
+
+.AuthFrame .current-form {
+    border: 1px white solid;
+    border-radius: 10px;
+    width: 500px;
+    height: 600px;
+    padding: 20px 0;
+}
+
+
+@media screen and (width <= 600px) {
+    .AuthFrame .title {
+        width: 100%;
+    }
+
+    .AuthFrame .current-form {
+        width: 100%;
+        border: 0; 
+    }
+}

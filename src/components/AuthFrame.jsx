@@ -1,19 +1,18 @@
 import React from 'react'
-import LoginForm from '../components/LoginForm'
 import logo from '../images/logo.png'
-import './LoginPage.css'
+import './AuthFrame.css'
 
-function LoginPage () {
+function AuthFrame ({ children }) {
   return (
-    <div className='LoginPage'>
-      <div className='header'>
+    <div className='AuthFrame'>
+      <div className='title'>
         <span>Welcome to VG-Tweets</span>
         <img src={logo} alt='logo' />
         <span>Microblogging web-app</span>
       </div>
-      <LoginForm />
+      <div className='current-form'>{children}</div>
     </div>
   )
 }
 
-export default LoginPage
+export default AuthFrame

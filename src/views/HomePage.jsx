@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../contexts/AuthContext'
 import FooterNavbar from '../components/FooterNavbar'
@@ -11,13 +11,15 @@ import './HomePage.css'
 function HomePage () {
   const [footerNavAppear, setFooterNavAppear] = useState('')
   const [textareaHeight, setTextareaHeight] = useState('180px')
-  const { user } = useContext(AuthContext)
+  const { currentUser } = useContext(AuthContext)
   
   /* IF NO USER LOGGED IN, MUST LOGIN FIRST */
   const navigate = useNavigate()
-  if (!user) {
-    navigate('/login')
-  }
+  // useEffect(() => {
+  //   if (!currentUser) {
+  //     navigate('/signIn')
+  //   }
+  // }, [])
 
 
 
@@ -42,7 +44,7 @@ function HomePage () {
     <>
       <Navbar />
       <div className='HomePage'>
-        <div className='user-name'>{user ? <>Logged in as: {user.displayName}</> : <>Please Login</>}</div>
+        <div className='user-name'>{currentUser ? <>Logged in as: {currentUser.displayName}</> : <>Please SignIn</>}</div>
         <CreateTweet textareaHeight={textareaHeight} />
         <br />
         <TweetsList />

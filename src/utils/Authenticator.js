@@ -3,7 +3,8 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   updateProfile,
-  signOut
+  signOut,
+  onAuthStateChanged
 } from 'firebase/auth'
 import { getStorage, ref } from 'firebase/storage'
 import firebaseApp from './firebase-init'
@@ -21,6 +22,19 @@ class Authenticator {
     )
     this.storageRef = ref(this.storage)
   }
+
+  updateCurrentUser (setCurrentUser) {
+    onAuthStateChanged(this.auth, user => {
+        console.log('updating user signIn status')
+      if (user) {
+        console.log('getting current user to context - user:', user.displayName)
+        setCurrentUser(user)
+      } else {
+        setCurrentUser(null)
+      }
+    })
+  }
+
   async createNewUser ({ email, password }) {
     try {
       const cred = await createUserWithEmailAndPassword(
@@ -39,10 +53,10 @@ class Authenticator {
     }
   }
 
-  async login ({ email, password }) {
+  async signIn ({ email, password }) {
     try {
       const cred = await signInWithEmailAndPassword(this.auth, email, password)
-      console.log('logged in!')
+      console.log('signed in!')
       console.log('user cred=', cred)
       console.log('user =', cred.user)
     } catch (error) {
@@ -50,7 +64,7 @@ class Authenticator {
     }
   }
 
-  async logout () {
+  async signOut () {
     try {
       await signOut(this.auth)
     } catch (error) {

@@ -7,8 +7,8 @@ import './Navbar.css'
 function Navbar () {
   const activeClassName = 'viewed'
 
-  const logout = () => {
-    authenticator.logout()
+  const signOut = () => {
+    authenticator.signOut()
   }
   
   return (
@@ -48,7 +48,7 @@ function Navbar () {
           <Search />
         </li>
       </ul>
-      <button onClick={logout}>Logout</button>
+      <button onClick={signOut}>SignOut</button>
     </nav>
   )
 }

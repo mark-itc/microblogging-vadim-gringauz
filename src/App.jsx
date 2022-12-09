@@ -2,44 +2,53 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import ProfilePage from './views/ProfilePage'
 import SettingsPage from './views/SettingsPage'
 import HomePage from './views/HomePage'
-import LoginPage from './views/LoginPage'
+import SignInPage from './views/SignInPage'
+import SignUpPage from './views/SignUpPage'
 import ErrorPage from './views/ErrorPage'
-import Temp from './views/Temp'
+import PrivateRoute from './utils/PrivateRoute'
 import './App.css'
 
 function App () {
   const router = createBrowserRouter([
     {
-      path: '/',
-      element: <HomePage />,
-      errorElement: <ErrorPage />
+      // path: '/',
+      element: <PrivateRoute />,
+      errorElement: <ErrorPage />,
+      children: [
+        {
+          path: '/',
+          element: <HomePage />,
+          errorElement: <ErrorPage />
+        },
+        {
+          path: '/home',
+          element: <HomePage />
+        },
+        {
+          path: '/profile',
+          element: <ProfilePage />
+        },
+        {
+          path: '/settings',
+          element: <SettingsPage />
+        }
+      ]
     },
     {
-      path: '/home',
-      element: <HomePage />,
-      errorElement: <ErrorPage />
+      path: '/sign-in',
+      element: <SignInPage />
     },
     {
-      path: '/profile',
-      element: <ProfilePage />
+      path: '/sign-up',
+      element: <SignUpPage />
     },
-    {
-      path: '/temp',
-      element: <Temp />
-    },
-    {
-      path: '/login',
-      element: <LoginPage />
-    },
-    {
-      path: '/settings',
-      element: <SettingsPage />
-    }
   ])
 
   return (
     <div className='App'>
-      <RouterProvider router={router} />
+        <RouterProvider router={router} />
+      {/* <PrivateRoute>
+      </PrivateRoute> */}
     </div>
   )
 }
