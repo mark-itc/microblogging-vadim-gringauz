@@ -11,14 +11,12 @@ import './App.css'
 function App () {
   const router = createBrowserRouter([
     {
-      // path: '/',
       element: <PrivateRoute />,
       errorElement: <ErrorPage />,
       children: [
         {
           path: '/',
           element: <HomePage />,
-          errorElement: <ErrorPage />
         },
         {
           path: '/home',
@@ -47,8 +45,6 @@ function App () {
   return (
     <div className='App'>
         <RouterProvider router={router} />
-      {/* <PrivateRoute>
-      </PrivateRoute> */}
     </div>
   )
 }

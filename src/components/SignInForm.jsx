@@ -1,15 +1,9 @@
 import React from 'react'
-import { useContext, useEffect } from 'react'
-import { AuthContext } from '../contexts/AuthContext'
-import { useNavigate } from 'react-router-dom'
 import authenticator from '../utils/Authenticator'
 import googleLogo from '../images/google.svg'
 import './SignInForm.css'
 
 function SignInForm () {
-  const { currentUser } = useContext(AuthContext)
-  const navigate = useNavigate()
-
   const testUser = {
     email: 'vadim2@gmail.com',
     password: '1234567'
@@ -20,12 +14,6 @@ function SignInForm () {
     console.log('sign in!')
     authenticator.signIn(testUser)
   }
-
-  useEffect(() => {
-    if (currentUser) {
-      navigate('/home')
-    }
-  }, [currentUser])
 
   return (
     <div className='SignInForm'>

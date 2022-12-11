@@ -1,30 +1,32 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { Navigate, Outlet } from 'react-router-dom'
 import { useContext } from 'react'
 import { AuthContext } from '../contexts/AuthContext'
 
-function PrivateRoute ({ children }) {
-  const [isLoading, setIsLoading] = useState(true)
+function PrivateRoute () {
   const { currentUser } = useContext(AuthContext)
-
-  /* GIVES 0.5 SEC FOR GETTING currentUser FROM SERVER BEFORE RENDER
-     OTHERWISE currentUser=NULL AND IT NAVIGATES TO SIGN-IN EACH TIME */
+  const { userData, isUserRetrieved } = currentUser
+  console.log('currentUser from route= ', currentUser)
+ 
   useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 500)
+    console.log('new currentUser', currentUser)
   }, [currentUser])
 
   return (
     <>
-      {!isLoading &&
-        (currentUser ? (
+      {isUserRetrieved &&
+        (userData ? (
           <>
+            <div>Outlet</div>
             <Outlet />
           </>
         ) : (
-          <Navigate to={'sign-in'} />
+          <>
+            <div>navigate</div>
+
+            <Navigate to={'/sign-in'} />
+          </>
         ))}
     </>
   )

@@ -25,12 +25,16 @@ class Authenticator {
 
   updateCurrentUser (setCurrentUser) {
     onAuthStateChanged(this.auth, user => {
-        console.log('updating user signIn status')
+      console.log('updating user signIn status')
       if (user) {
+        const currentUser = {
+          userData: user,
+          isUserRetrieved: true
+        }
         console.log('getting current user to context - user:', user.displayName)
-        setCurrentUser(user)
+        setCurrentUser(currentUser)
       } else {
-        setCurrentUser(null)
+        setCurrentUser({ userData: null, isUserRetrieved: true })
       }
     })
   }

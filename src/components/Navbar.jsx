@@ -1,16 +1,23 @@
 import React from 'react'
+import { useState, useContext } from 'react'
 import { NavLink } from 'react-router-dom'
+import { AuthContext } from '../contexts/AuthContext'
 import authenticator from '../utils/Authenticator'
 import Search from './SearchBar'
+import UserMenu from './UserMenu'
 import './Navbar.css'
 
 function Navbar () {
   const activeClassName = 'viewed'
+  const { currentUser } = useContext(AuthContext)
+  const { userData } = currentUser
+  const avatar = userData.photoURL
+  const [showMenu, setShowMenu] = useState(false)
 
   const signOut = () => {
     authenticator.signOut()
   }
-  
+
   return (
     <nav className='Navbar'>
       <ul>
@@ -48,7 +55,15 @@ function Navbar () {
           <Search />
         </li>
       </ul>
-      <button onClick={signOut}>SignOut</button>
+      <div className='user'>
+        <img
+          onClick={() => setShowMenu(!showMenu)}
+          className='profile-img-sm'
+          alt={userData.displayName}
+          src={avatar}
+        />
+        <UserMenu isVisible={showMenu} signOut={signOut} setShowMenu={setShowMenu} />
+      </div>
     </nav>
   )
 }

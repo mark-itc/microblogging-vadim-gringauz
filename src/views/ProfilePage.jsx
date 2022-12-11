@@ -1,21 +1,19 @@
 import React from 'react'
 import { useContext, useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import { AuthContext } from '../contexts/AuthContext'
 import { MAX_USERNAME_LENGTH } from '../utils/globals'
-import userImg from '../images/empty-profile.png'
 import './ProfilePage.css'
 
 function ProfilePage () {
   const { currentUser } = useContext(AuthContext)
-  const [email, setEmail] = useState(currentUser.email)
-  const [displayName, setDisplayName] = useState(currentUser.displayName)
-  const [pic, setPic] = useState(currentUser.photoURL)
+  const [email, setEmail] = useState(currentUser.userData.email)
+  const [displayName, setDisplayName] = useState(currentUser.userData.displayName)
+  const [pic, setPic] = useState(currentUser.userData.photoURL)
   const [isNameValid, setIsNameValid] = useState(true)
 
   useEffect(() => {
-    setDisplayName(currentUser.displayName)
+    setDisplayName(currentUser.userData.displayName)
     if (displayName) validateName(displayName)
   }, [currentUser]) // eslint-disable-line
 
@@ -46,7 +44,7 @@ function ProfilePage () {
       <Navbar />
       <div className='ProfilePage'>
         <form className='signIn-form' onSubmit={handleSubmit}>
-          {currentUser?.displayName === '' && (
+          {currentUser.userData?.displayName === '' && (
             <div className='notification'>
               Please choose a user name to signIn
             </div>

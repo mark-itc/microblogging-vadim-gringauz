@@ -1,0 +1,32 @@
+.UserMenu {
+    width: 200px;
+    background-color: white;
+    border: 1px black solid;
+    border-radius: 5px;
+    color: black;
+    font-size: 1rem;
+    position: absolute;
+    top: 35px;
+    left: -180px;
+    text-align: left;
+    z-index: 99;
+}
+
+.UserMenu .header {
+    width: 100%;
+}
+
+.UserMenu .header button {
+    width: 100%;
+    border-radius: 0;
+}
+
+.outside-of-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: transparent;
+    z-index: -1;
+}

@@ -44,7 +44,7 @@ function HomePage () {
     <>
       <Navbar />
       <div className='HomePage'>
-        <div className='user-name'>{currentUser ? <>Logged in as: {currentUser.displayName}</> : <>Please SignIn</>}</div>
+        <div className='user-name'>{currentUser.userData ? <>Logged in as: {currentUser.userData.displayName}</> : <>Please SignIn</>}</div>
         <CreateTweet textareaHeight={textareaHeight} />
         <br />
         <TweetsList />

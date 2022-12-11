@@ -15,11 +15,11 @@
     gap: 20px;
     padding: 5px;
 }
-.signIn-form>label {
+.signIn-form label {
     font-size: 22px;
 }
 
-.signIn-form>input {
+.signIn-form input {
     width: 600px;
     height: 60px;
     background-color: transparent;
@@ -52,8 +52,8 @@
     width: 200px;
 }
 
-@media screen and (max-width: 600px) {
-    .signIn-form>input {
+@media screen and (width <= 600px) {
+    .signIn-form input {
         width: 300px;
     }
 

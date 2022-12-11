@@ -6,9 +6,10 @@ import authenticator from '../utils/Authenticator'
 const AuthContext = createContext()
 
 function AuthContextProvider ({ children }) {
-  const [currentUser, setCurrentUser] = useState(null)
+  const [currentUser, setCurrentUser] = useState({ userData: null, isUserRetrieved: false })
 
   useEffect(() => {
+    console.log('authContext init')
     /* ACTIVATE OBSERVER THAT UPDATES currentUser ON USER LOGIN/LOGOUT */
     authenticator.updateCurrentUser(setCurrentUser)
   }, [])

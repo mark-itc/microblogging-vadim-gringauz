@@ -11,7 +11,7 @@
     padding-left: 30px;
 }
 
-.Navbar>ul {
+.Navbar ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -20,7 +20,7 @@
     width: 100%;
 }
 
-.Navbar>li {
+.Navbar li {
     margin-right: 30px;
 }
 
@@ -28,7 +28,7 @@
     margin-left: auto;
 }
 
-.Navbar>a {
+.Navbar a {
     text-decoration: none;
     color: rgba(255, 255, 255, 0.5);
 }
@@ -37,7 +37,20 @@
     color: white;
 }
 
-.Navbar>a:hover {
+.Navbar a:hover {
     color: brown;
     text-decoration: underline;
+}
+
+.Navbar .user {
+    position: relative;
+}
+
+.Navbar .profile-img-sm {
+    width: 30px; 
+    aspect-ratio: 1/1;
+    border-radius: 100%;
+}
+.Navbar .profile-img-sm:hover {
+    outline: 3px white solid;
 }
