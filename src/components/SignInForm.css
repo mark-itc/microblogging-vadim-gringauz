@@ -12,7 +12,17 @@
     gap: 20px;
     width: 65%;
     align-items: center;
+}
+.SignInForm form .password-input {
+    position: relative;
+    width: 100%;
+}
 
+.SignInForm form .password-input span {
+    position: absolute;
+    top: 5px;
+    left: 90%;
+    color: rgb(21, 32, 43);
 }
 
 .SignInForm .google {

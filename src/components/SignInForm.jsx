@@ -1,5 +1,7 @@
 import React from 'react'
 import { useRef, useState } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEye } from '@fortawesome/free-solid-svg-icons'
 import authenticator from '../utils/Authenticator'
 import Alert from './Alert'
 import googleLogo from '../images/google.svg'
@@ -11,6 +13,7 @@ function SignInForm () {
   const [authAlertMsg, setAuthAlertMsg] = useState('')
   const [isAlertOn, setIsAlertOn] = useState(false)
   const [isSubmitEnabled, setIsSubmitEnabled] = useState(false)
+  const [passwordType, setPasswordType] = useState('password')
   // const email = emailInputBox.current.value
   // const password = passwordInputBox.current.value
 
@@ -47,6 +50,11 @@ function SignInForm () {
     )
   }
 
+  const togglePasswordType = () => {
+    if (passwordType === 'password') setPasswordType('text')
+    if (passwordType === 'text') setPasswordType('password')
+  }
+
   return (
     <div className='SignInForm'>
       <form action='' onSubmit={handleSubmit}>
@@ -64,12 +72,18 @@ function SignInForm () {
           autoFocus
         />
         <label htmlFor='password'>Password</label>
-        <input
-          id='password'
-          type='password'
-          onChange={checkIfInputsNotEmpty}
-          ref={passwordInputBox}
-        />
+        <div className='password-input'>
+          <input
+            id='password'
+            type={passwordType}
+            onChange={checkIfInputsNotEmpty}
+            autocomplete='current-password'
+            ref={passwordInputBox}
+          />
+          <span onClick={togglePasswordType}>
+            <FontAwesomeIcon icon={faEye} />
+          </span>
+        </div>
         <button type='submit' disabled={!isSubmitEnabled}>
           Sign in
         </button>
