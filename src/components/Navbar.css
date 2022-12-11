@@ -20,11 +20,11 @@
     width: 100%;
 }
 
-.Navbar li {
+.Navbar ul li {
     margin-right: 30px;
 }
 
-.align-left {
+.Navbar ul li .align-left {
     margin-left: auto;
 }
 
@@ -34,7 +34,8 @@
 }
 
 .viewed {
-    color: white;
+    /* background-color: beige; */
+    color: white !important;
 }
 
 .Navbar a:hover {
@@ -46,12 +47,16 @@
     position: relative;
 }
 
-.Navbar .profile-img-sm {
+.Navbar .avatar-sm {
     width: 30px; 
     aspect-ratio: 1/1;
     border-radius: 100%;
     cursor: pointer;
 }
-.Navbar .profile-img-sm:hover {
+.Navbar .avatar-sm:hover {
     outline: 3px white solid;
+}
+.Navbar .clicked {
+    outline: 3px lightskyblue solid;
+
 }

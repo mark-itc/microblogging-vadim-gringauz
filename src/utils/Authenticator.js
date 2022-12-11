@@ -61,10 +61,9 @@ class Authenticator {
     try {
       const cred = await signInWithEmailAndPassword(this.auth, email, password)
       console.log('signed in!')
-      console.log('user cred=', cred)
-      console.log('user =', cred.user)
+      return cred.user
     } catch (error) {
-      console.log(error.message)
+      return error.message
     }
   }
 

@@ -14,6 +14,7 @@
     align-items: center;
 
 }
+
 .SignInForm .google {
     width: 100%;
     height: 40px;
@@ -25,9 +26,11 @@
     border: 1px rgb(18, 74, 194) solid;
     cursor: pointer;
 }
+
 .SignInForm .google:hover {
     text-decoration: underline;
 }
+
 .SignInForm .google img {
     width: 20px;
 }
@@ -38,6 +41,7 @@
     text-align: left;
     /* background-color: aqua; */
 }
+
 .SignInForm form input {
     width: 100%;
     font-size: 1.2rem;
@@ -51,4 +55,10 @@
     display: flex;
     gap: 10px;
     font-size: 1.5rem;
+}
+
+.SignInForm .Alert {
+    position: relative;
+    left: 0;
+    width: 65%;
 }

@@ -1,5 +1,6 @@
 import React from 'react'
-import { useState } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons'
 import './UserMenu.css'
 
 function UserMenu ({ isVisible, signOut, setShowMenu, userData }) {
@@ -12,7 +13,10 @@ function UserMenu ({ isVisible, signOut, setShowMenu, userData }) {
             onClick={() => setShowMenu(false)}
           ></div>
           <div className='header'>
-            <button onClick={signOut}>Sign out</button>
+            <button onClick={signOut}>
+              <span>Sign out</span>
+              <FontAwesomeIcon icon={faArrowRightFromBracket} />
+            </button>
           </div>
           <div className='body'>
             <img
@@ -21,13 +25,13 @@ function UserMenu ({ isVisible, signOut, setShowMenu, userData }) {
               src={userData.photoURL}
             />
             <div className='user-info'>
-              <div className='email'>{userData.email}</div>
-              <div className='display-name'>{userData.displayName}</div>
-              <a href=''>View Profile</a>
+              <div className='display-name'>Hello, {userData.displayName}</div>
+              <a href='/profile'>View Profile</a>
             </div>
           </div>
           <div className='footer'>
-            <button> Sign in with a different account</button>
+            <div className='email'>{userData.email}</div>
+            {/* <button> Sign in with a different account</button> */}
           </div>
         </>
       )}

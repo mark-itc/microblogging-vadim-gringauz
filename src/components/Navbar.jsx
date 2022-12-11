@@ -58,7 +58,7 @@ function Navbar () {
       <div className='user'>
         <img
           onClick={() => setShowMenu(!showMenu)}
-          className='profile-img-sm'
+          className={'avatar-sm ' + (showMenu ? 'clicked' : '')}
           alt={userData.displayName}
           src={avatar}
         />

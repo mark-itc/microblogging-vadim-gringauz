@@ -25,22 +25,14 @@
     height: 50px;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
-}
-
-.UserMenu .footer {
-    height: auto;
-}
-.UserMenu .footer button {
     background-color: darkslategrey;
-    padding: 0;
-    margin: 0;
-    width: 100%;
-    height: 30px;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
+    font-size: 1.5rem;
 }
-.UserMenu .footer button:hover {
+.UserMenu .header button:hover {
     background-color: rgb(22, 51, 51);
+}
+.UserMenu .header button span {
+    margin-right: 20px;
 }
 
 .UserMenu .body {
@@ -59,9 +51,38 @@
 }
 
 .UserMenu .body .user-info {
+    display: flex;
     padding: 10px;
     display: flex;
     flex-direction: column;
+    gap: 10px;
+}
+
+.UserMenu .body .user-info .display-name {
+    font-size: 1.2rem;
+}
+
+.UserMenu .footer {
+    width: 100%;
+    height: auto;
+    text-align: center;
+    padding: 10px 0;
+}
+.UserMenu .footer button {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 30px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    background-color: darkslategrey;
+}
+.UserMenu .footer button:hover {
+    background-color: rgb(22, 51, 51);
+}
+
+.UserMenu .footer .email {
+    font-size: 1rem;
 }
 
 .outside-of-menu {
