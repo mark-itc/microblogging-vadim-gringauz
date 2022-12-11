@@ -50,6 +50,7 @@
     width: 30px; 
     aspect-ratio: 1/1;
     border-radius: 100%;
+    cursor: pointer;
 }
 .Navbar .profile-img-sm:hover {
     outline: 3px white solid;

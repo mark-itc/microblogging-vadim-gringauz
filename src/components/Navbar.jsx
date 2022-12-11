@@ -62,7 +62,12 @@ function Navbar () {
           alt={userData.displayName}
           src={avatar}
         />
-        <UserMenu isVisible={showMenu} signOut={signOut} setShowMenu={setShowMenu} />
+        <UserMenu
+          isVisible={showMenu}
+          signOut={signOut}
+          setShowMenu={setShowMenu}
+          userData={userData}
+        />
       </div>
     </nav>
   )

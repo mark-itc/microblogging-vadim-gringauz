@@ -8,7 +8,7 @@ function PrivateRoute () {
   const { currentUser } = useContext(AuthContext)
   const { userData, isUserRetrieved } = currentUser
   console.log('currentUser from route= ', currentUser)
- 
+
   useEffect(() => {
     console.log('new currentUser', currentUser)
   }, [currentUser])
@@ -18,13 +18,10 @@ function PrivateRoute () {
       {isUserRetrieved &&
         (userData ? (
           <>
-            <div>Outlet</div>
             <Outlet />
           </>
         ) : (
           <>
-            <div>navigate</div>
-
             <Navigate to={'/sign-in'} />
           </>
         ))}

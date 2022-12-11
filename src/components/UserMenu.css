@@ -1,24 +1,67 @@
 .UserMenu {
-    width: 200px;
-    background-color: white;
-    border: 1px black solid;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 300px;
+    background: rgb(60, 82, 105);
     border-radius: 5px;
-    color: black;
+    color: white;
     font-size: 1rem;
     position: absolute;
     top: 35px;
-    left: -180px;
+    left: -280px;
     text-align: left;
     z-index: 99;
 }
-
+.UserMenu button {
+    cursor: pointer;
+}
 .UserMenu .header {
     width: 100%;
 }
 
 .UserMenu .header button {
     width: 100%;
-    border-radius: 0;
+    height: 50px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.UserMenu .footer {
+    height: auto;
+}
+.UserMenu .footer button {
+    background-color: darkslategrey;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 30px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+.UserMenu .footer button:hover {
+    background-color: rgb(22, 51, 51);
+}
+
+.UserMenu .body {
+    padding: 0 10px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+}
+
+.UserMenu .body .avatar {
+    width: 50%; 
+    aspect-ratio: 1/1;
+    border-radius: 100%;
+}
+
+.UserMenu .body .user-info {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
 }
 
 .outside-of-menu {
