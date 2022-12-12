@@ -2,6 +2,7 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons'
 import './UserMenu.css'
+import defaultAvatar from '../images/empty-profile.png'
 
 function UserMenu ({ isVisible, signOut, setShowMenu, userData }) {
   return (
@@ -22,7 +23,7 @@ function UserMenu ({ isVisible, signOut, setShowMenu, userData }) {
             <img
               className='avatar'
               alt={userData.displayName}
-              src={userData.photoURL}
+              src={userData.photoURL ? userData.photoURL : defaultAvatar}
             />
             <div className='user-info'>
               <div className='display-name'>Hello, {userData.displayName}</div>

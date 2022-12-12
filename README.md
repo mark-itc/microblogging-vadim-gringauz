@@ -16,14 +16,22 @@
 - Milestone 3 - User page: :heavy_check_mark:
 - Milestone 4 - Context: :heavy_check_mark:
 - Milestone 5 - Deployment: :heavy_check_mark:
-- Milestone 6 - Firebase: WIP
-- Milestone 7 - Your tweets: 
-- Milestone 8 - Navbar: 
-- Milestone 9 - Like button part 1: 
-- Milestone 10 - Like button part 2: 
-- Milestone 11 - Other users profiles: 
-- Milestone 12 - More firebase: 
-- Milestone 13 - Followers: 
+- **Milestone 6 - Firebase:**
+   - 6-1 - Configure Firebase/Firestore :heavy_check_mark:
+   - 6-2 - Send / Get data :heavy_check_mark:
+   - 6-3 - Authentication WIP
+   - 6-4 - Using User-ID (Users collection)
+   - 6-5 - Profile picture (Avatar)
+   - 6-6 - Live update
+   - 6-7 - Infinite scrolling
+----------------------------------------------------------------------------
+- Milestone 7 - Your tweets
+- Milestone 8 - Navbar
+- Milestone 9 - Like button part 1
+- Milestone 10 - Like button part 2
+- Milestone 11 - Other users profiles
+- Milestone 12 - More firebase
+- Milestone 13 - Followers
 
 ### *Improvements I have added:*
 - Char-counter: :heavy_check_mark:

@@ -3,17 +3,27 @@ import { useContext, useState, useEffect } from 'react'
 import Navbar from '../components/Navbar'
 import { AuthContext } from '../contexts/AuthContext'
 import { MAX_USERNAME_LENGTH } from '../utils/globals'
+import authenticator from '../utils/Authenticator'
 import './ProfilePage.css'
+import defaultAvatar from '../images/empty-profile.png'
 
 function ProfilePage () {
   const { currentUser } = useContext(AuthContext)
   const [email, setEmail] = useState(currentUser.userData.email)
-  const [displayName, setDisplayName] = useState(currentUser.userData.displayName)
-  const [pic, setPic] = useState(currentUser.userData.photoURL)
+  const [displayName, setDisplayName] = useState(
+    currentUser.userData.displayName ? currentUser.userData.displayName : ''
+  )
+  const [avatar, setAvatar] = useState(
+    currentUser.userData.photoURL
+      ? currentUser.userData.photoURL
+      : defaultAvatar
+  )
   const [isNameValid, setIsNameValid] = useState(true)
 
   useEffect(() => {
-    setDisplayName(currentUser.userData.displayName)
+    setDisplayName(
+      currentUser.userData.displayName ? currentUser.userData.displayName : ''
+    )
     if (displayName) validateName(displayName)
   }, [currentUser]) // eslint-disable-line
 
@@ -35,15 +45,14 @@ function ProfilePage () {
 
   const handleSubmit = e => {
     e.preventDefault()
-    // isUserNameValid && setUserName({ ...userName, value: newName })
-    // navigate('/')
+    isNameValid && authenticator.updateUserProfile({ displayName })
   }
 
   return (
     <>
       <Navbar />
       <div className='ProfilePage'>
-        <form className='signIn-form' onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
           {currentUser.userData?.displayName === '' && (
             <div className='notification'>
               Please choose a user name to signIn
@@ -51,14 +60,15 @@ function ProfilePage () {
           )}
           <h4>Profile</h4>
           <div>
-            <img className='profile-img' alt='user' src={pic} />
+            <img className='avatar-lg' alt='user' src={avatar} />
           </div>
           <div>
             <span>Email: </span>
             {email && <span>{email}</span>}
           </div>
-          <label htmlFor=''>Display Name</label>
+          <label htmlFor='display-name'>Display Name</label>
           <input
+            id='display-name'
             type='text'
             placeholder=''
             value={displayName}

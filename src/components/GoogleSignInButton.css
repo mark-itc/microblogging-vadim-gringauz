@@ -1,0 +1,19 @@
+.GoogleSignInButton {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    background-color: transparent;
+    border: 1px rgb(18, 74, 194) solid;
+    cursor: pointer;
+}
+
+.GoogleSignInButton:hover {
+    text-decoration: underline;
+}
+
+.GoogleSignInButton img {
+    width: 20px;
+}

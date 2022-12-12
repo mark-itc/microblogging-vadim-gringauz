@@ -6,12 +6,13 @@ import authenticator from '../utils/Authenticator'
 import Search from './SearchBar'
 import UserMenu from './UserMenu'
 import './Navbar.css'
+import defaultAvatar from '../images/empty-profile.png'
 
 function Navbar () {
   const activeClassName = 'viewed'
   const { currentUser } = useContext(AuthContext)
   const { userData } = currentUser
-  const avatar = userData.photoURL
+  const avatar = userData.photoURL ? userData.photoURL : defaultAvatar
   const [showMenu, setShowMenu] = useState(false)
 
   const signOut = () => {

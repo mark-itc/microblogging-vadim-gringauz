@@ -1,0 +1,22 @@
+.DisplayNameInput {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.DisplayNameInput label {
+    width: 100%;
+    font-size: 1.5rem;
+    text-align: left;
+    padding: 5px 20px;
+}
+
+.DisplayNameInput input {
+    width: 100%;
+    font-size: 1.5rem;
+    height: 2.5rem;
+    border-radius: 20px;
+    border: 0;
+    padding-left: 10px;
+    padding-right: 40px;
+}

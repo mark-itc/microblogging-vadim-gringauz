@@ -4,7 +4,10 @@ import {
   signInWithEmailAndPassword,
   updateProfile,
   signOut,
-  onAuthStateChanged
+  onAuthStateChanged,
+  signInWithPopup,
+  signInWithRedirect,
+  GoogleAuthProvider,
 } from 'firebase/auth'
 import { getStorage, ref } from 'firebase/storage'
 import firebaseApp from './firebase-init'
@@ -12,6 +15,7 @@ import firebaseApp from './firebase-init'
 class Authenticator {
   constructor () {
     this.auth = getAuth(firebaseApp)
+    this.provider = new GoogleAuthProvider();
     this.defualtDisplayName = 'Luka'
     this.defaultPic =
       'https://s3media.247sports.com/Uploads/Assets/322/792/8792322.jpg'
@@ -39,7 +43,7 @@ class Authenticator {
     })
   }
 
-  async createNewUser ({ email, password }) {
+  async createNewUser ({ email, password, displayName = this.defualtDisplayName }) {
     try {
       const cred = await createUserWithEmailAndPassword(
         this.auth,
@@ -47,13 +51,13 @@ class Authenticator {
         password
       )
       updateProfile(this.auth.currentUser, {
-        displayName: this.defualtDisplayName,
-        photoURL: this.defaultPic
+        displayName: displayName,
+        photoURL: null
       })
-      console.log('signed in')
+      console.log('user created + signed in!')
       console.log('new user cred=', cred.user)
     } catch (error) {
-      console.log(error.message)
+      return error.message
     }
   }
 
@@ -72,6 +76,33 @@ class Authenticator {
       await signOut(this.auth)
     } catch (error) {
       console.log(error.message)
+    }
+  }
+
+  isUserDetailsValid(details) {
+    console.log("validating...")
+    return true
+  }
+
+  async updateUserProfile({ newDisplayName=null }) {
+    console.log('updating profile')
+    const result = await updateProfile(this.auth.currentUser, {
+      displayName: newDisplayName,
+    })
+    console.log('result', result)
+  }
+
+  async signInWithGoogle () {
+    try {
+      const result = await signInWithRedirect(this.auth, this.provider)
+      const credential = GoogleAuthProvider.credentialFromResult(result)
+      const token = credential.accessToken
+      const user = result.user
+      console.log('signing in with google...')
+      console.log('user', user)
+      return user
+    } catch (error) {
+      return error.message
     }
   }
 }

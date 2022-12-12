@@ -7,7 +7,7 @@
     justify-content: center;
 }
 
-.signIn-form {
+.ProfilePage form {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -15,11 +15,11 @@
     gap: 20px;
     padding: 5px;
 }
-.signIn-form label {
+.ProfilePage form label {
     font-size: 22px;
 }
 
-.signIn-form input {
+.ProfilePage form input {
     width: 600px;
     height: 60px;
     background-color: transparent;
@@ -45,7 +45,7 @@
     width: 600px;
 }
 
-.profile-img {
+.avatar-lg {
     background-color: #CCCCCC;
     /* border: 1px black solid; */
     border-radius: 30px;
@@ -53,7 +53,7 @@
 }
 
 @media screen and (width <= 600px) {
-    .signIn-form input {
+    .ProfilePage form input {
         width: 300px;
     }
 
