@@ -19,7 +19,7 @@
 - **Milestone 6 - Firebase:**
    - 6-1 - Configure Firebase/Firestore :heavy_check_mark:
    - 6-2 - Send / Get data :heavy_check_mark:
-   - 6-3 - Authentication WIP
+   - 6-3 - Authentication :heavy_check_mark:
    - 6-4 - Using User-ID (Users collection)
    - 6-5 - Profile picture (Avatar)
    - 6-6 - Live update
