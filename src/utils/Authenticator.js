@@ -5,7 +5,7 @@ import {
   updateProfile,
   signOut,
   onAuthStateChanged,
-  signInWithPopup,
+  // signInWithPopup,
   signInWithRedirect,
   GoogleAuthProvider,
 } from 'firebase/auth'
@@ -96,7 +96,7 @@ class Authenticator {
     try {
       const result = await signInWithRedirect(this.auth, this.provider)
       const credential = GoogleAuthProvider.credentialFromResult(result)
-      const token = credential.accessToken
+      // const token = credential.accessToken
       const user = result.user
       console.log('signing in with google...')
       console.log('user', user)

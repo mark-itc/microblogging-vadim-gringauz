@@ -1,11 +1,10 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import authenticator from '../utils/Authenticator'
 import EmailInput from './EmailInput'
 import PasswordInput from './PasswordInput'
 import DisplayNameInput from './DisplayNameInput'
 import Alert from './Alert'
-import GoogleSignInButton from './GoogleSignInButton'
 import './SignUpForm.css'
 
 function SignUpForm () {

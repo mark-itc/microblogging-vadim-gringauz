@@ -9,15 +9,14 @@ import defaultAvatar from '../images/empty-profile.png'
 
 function ProfilePage () {
   const { currentUser } = useContext(AuthContext)
-  const [email, setEmail] = useState(currentUser.userData.email)
+  const email = currentUser.userData.email
   const [displayName, setDisplayName] = useState(
     currentUser.userData.displayName ? currentUser.userData.displayName : ''
   )
-  const [avatar, setAvatar] = useState(
-    currentUser.userData.photoURL
-      ? currentUser.userData.photoURL
-      : defaultAvatar
-  )
+  const avatar = currentUser.userData.photoURL
+    ? currentUser.userData.photoURL
+    : defaultAvatar
+
   const [isNameValid, setIsNameValid] = useState(true)
 
   useEffect(() => {

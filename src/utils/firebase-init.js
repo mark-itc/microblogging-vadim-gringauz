@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app'
-import { API_KEY } from './globals'
+// import { API_KEY } from './globals'
 
 const firebaseConfig = {
   apiKey: 'AIzaSyCalxdge7pIu6j7J0kCdmyZY17sMXzvoXs',

@@ -28,6 +28,7 @@ function reducer (state, action) {
       return { ...state, isAlertOn: true, alertMessage: action.value }
     case 'alert-off':
       return { ...state, isAlertOn: false, alertMessage: '' }
+    default: return {...state}
   }
 }
 
