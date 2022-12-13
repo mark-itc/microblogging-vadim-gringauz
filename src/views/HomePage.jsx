@@ -9,7 +9,6 @@ import './HomePage.css'
 function HomePage () {
   const [footerNavAppear, setFooterNavAppear] = useState('')
   const [textareaHeight, setTextareaHeight] = useState('180px')
-  const { currentUser } = useContext(AuthContext)
 
   window.onscroll = () => {
     if (
