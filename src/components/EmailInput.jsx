@@ -15,6 +15,10 @@ function EmailInput ({ customLabel = 'Email address', email, setEmail }) {
         placeholder='Example@domain.com'
         autoFocus
         autoComplete="email"
+        maxLength={25}
+        pattern='^\S+@\S+$'
+        title='Must be an e-mail'
+        required
       />
     </div>
   )

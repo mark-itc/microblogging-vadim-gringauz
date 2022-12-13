@@ -1,6 +1,5 @@
 import React from 'react'
 import { useContext, useState, useEffect } from 'react'
-import Navbar from '../components/Navbar'
 import { AuthContext } from '../contexts/AuthContext'
 import { MAX_USERNAME_LENGTH } from '../utils/globals'
 import authenticator from '../utils/Authenticator'
@@ -49,7 +48,6 @@ function ProfilePage () {
 
   return (
     <>
-      <Navbar />
       <div className='ProfilePage'>
         <form onSubmit={handleSubmit}>
           {currentUser.userData?.displayName === '' && (

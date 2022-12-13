@@ -13,27 +13,33 @@ function SignInForm () {
   const [authAlertMsg, setAuthAlertMsg] = useState('')
   const [isAlertOn, setIsAlertOn] = useState(false)
 
-  // const testUser = {
-  //   email: 'vadim2@gmail.com',
-  //   password: '1234567'
-  // }
-
   const handleSubmit = async e => {
     e.preventDefault()
     const result = await authenticator.signIn({
       email: email,
       password: password
     })
-
     if (typeof result !== Object) {
       setIsAlertOn(true)
-      setAuthAlertMsg(result)
+      switch (result) {
+        case 'auth/user-not-found': {
+          setAuthAlertMsg('User with this email not found')
+          break
+        }
+        case 'auth/wrong-password': {
+          setAuthAlertMsg('Wrong password!')
+          break
+        }
+        default:
+          setAuthAlertMsg('Error signing in')
+      }
       setEmail('')
       setPassword('')
     }
   }
 
   useEffect(() => {
+    if (email === '' && password === '') return
     setIsAlertOn(false)
     setAuthAlertMsg('')
   }, [email, password])

@@ -13,6 +13,7 @@ function DisplayNameInput ({ customLabel = 'Choose Display name', displayName, s
         onChange={e => setDisplayName(e.target.value)}
         value={displayName}
         autoComplete="username"
+        maxLength={20}
       />
     </div>
   )

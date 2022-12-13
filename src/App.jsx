@@ -1,11 +1,11 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import ProfilePage from './views/ProfilePage'
 import SettingsPage from './views/SettingsPage'
-import HomePage from './views/HomePage'
+import PrivateRoute from './utils/PrivateRoute'
+import ProfilePage from './views/ProfilePage'
 import SignInPage from './views/SignInPage'
 import SignUpPage from './views/SignUpPage'
 import ErrorPage from './views/ErrorPage'
-import PrivateRoute from './utils/PrivateRoute'
+import HomePage from './views/HomePage'
 import './App.css'
 
 function App () {

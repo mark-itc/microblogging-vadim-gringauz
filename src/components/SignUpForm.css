@@ -29,3 +29,9 @@
 .SignUpForm button {
     width: 100px;
 }
+
+@media screen and (width <=600px) {
+    .SignUpForm form {
+        width: 100%;
+    }
+}

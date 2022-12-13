@@ -4,7 +4,6 @@ import { AuthContext } from '../contexts/AuthContext'
 import FooterNavbar from '../components/FooterNavbar'
 import CreateTweet from '../components/CreateTweet'
 import TweetsList from '../components/TweetsList'
-import Navbar from '../components/Navbar'
 import './HomePage.css'
 
 function HomePage () {
@@ -31,17 +30,8 @@ function HomePage () {
 
   return (
     <>
-      <Navbar />
       <div className='HomePage'>
-        <div className='user-name'>
-          {currentUser.userData ? (
-            <>Logged in as: {currentUser.userData.displayName}</>
-          ) : (
-            <>Please SignIn</>
-          )}
-        </div>
         <CreateTweet textareaHeight={textareaHeight} />
-        <br />
         <TweetsList />
       </div>
       <FooterNavbar footerNavAppear={footerNavAppear} />

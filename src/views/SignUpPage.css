@@ -1,9 +1,9 @@
-.SignInPage {
+.SignUpPage {
     width: 100%;
 }
 
 @media screen and (width <= 600px) {
-    .SignInPage {
+    .SignUpPage {
         width: 90%;
     }
   }

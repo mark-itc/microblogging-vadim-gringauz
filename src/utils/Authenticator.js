@@ -67,7 +67,8 @@ class Authenticator {
       console.log('signed in!')
       return cred.user
     } catch (error) {
-      return error.message
+      console.table('error code', error.code)
+      return error.code
     }
   }
 

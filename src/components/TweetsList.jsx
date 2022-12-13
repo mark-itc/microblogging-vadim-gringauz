@@ -6,6 +6,7 @@ import Tweet from './Tweet'
 import { TweetsContext } from '../contexts/TweetsContext'
 import { REFRESH_RATE } from '../utils/globals'
 import tweetServer from '../utils/TweetServer'
+import './TweetsList.css'
 
 function TweetsList () {
   const { tweets, setTweets, isLoading, setIsLoading } =
@@ -31,12 +32,12 @@ function TweetsList () {
   }, []) // eslint-disable-line
 
   return (
-    <>
+    <div className='TweetsList'>
       <ClipLoader color={'white'} loading={isLoading} size={100} />
-      {sortedTweets?.map((tweet) => (
+      {sortedTweets?.map(tweet => (
         <Tweet key={tweet.id} tweet={tweet} />
       ))}
-    </>
+    </div>
   )
 }
 
