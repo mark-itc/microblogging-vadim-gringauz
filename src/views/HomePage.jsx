@@ -1,6 +1,5 @@
 import React from 'react'
-import { useState, useContext } from 'react'
-import { AuthContext } from '../contexts/AuthContext'
+import { useState } from 'react'
 import FooterNavbar from '../components/FooterNavbar'
 import CreateTweet from '../components/CreateTweet'
 import TweetsList from '../components/TweetsList'
