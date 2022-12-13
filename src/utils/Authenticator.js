@@ -96,8 +96,9 @@ class Authenticator {
     try {
       const result = await signInWithRedirect(this.auth, this.provider)
       const credential = GoogleAuthProvider.credentialFromResult(result)
-      // const token = credential.accessToken
+      const token = credential.accessToken
       const user = result.user
+      console.log('token', token)
       console.log('signing in with google...')
       console.log('user', user)
       return user
