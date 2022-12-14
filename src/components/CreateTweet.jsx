@@ -48,12 +48,13 @@ function CreateTweet ({ textareaHeight }) {
 
   const addNewTweet = async content => {
     if (content === 'clr') {
-      deleteAll()
+      await deleteAll()
+      return
     }
 
     const newTweet = {
       content: state.content,
-      userName: currentUser.userData.displayName,
+      userUid: currentUser.userData.uid,
       date: Timestamp.fromDate(new Date())
     }
     const isPosted = await postNew(newTweet)

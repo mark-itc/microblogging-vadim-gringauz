@@ -11,6 +11,7 @@ import {
 } from 'firebase/auth'
 import { getStorage, ref } from 'firebase/storage'
 import firebaseApp from './firebase-init'
+import userStore from './userStore'
 
 class Authenticator {
   constructor () {
@@ -25,6 +26,8 @@ class Authenticator {
       'gs://itc-microblogging-85128.appspot.com/'
     )
     this.storageRef = ref(this.storage)
+
+    userStore.getAll()
   }
 
   updateCurrentUser (setCurrentUser) {

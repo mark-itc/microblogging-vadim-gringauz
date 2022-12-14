@@ -7,8 +7,10 @@ import { TweetsContext } from '../contexts/TweetsContext'
 import { REFRESH_RATE } from '../utils/globals'
 import tweetServer from '../utils/TweetServer'
 import './TweetsList.css'
+import { AuthContext } from '../contexts/AuthContext'
 
 function TweetsList () {
+  const { getUserNameFromUid } = useContext(AuthContext)
   const { tweets, setTweets, isLoading, setIsLoading } =
     useContext(TweetsContext)
 
@@ -35,7 +37,7 @@ function TweetsList () {
     <div className='TweetsList'>
       <ClipLoader color={'white'} loading={isLoading} size={100} />
       {sortedTweets?.map(tweet => (
-        <Tweet key={tweet.id} tweet={tweet} />
+        <Tweet key={tweet.id} tweet={tweet} displayName={getUserNameFromUid(tweet.userUid)} />
       ))}
     </div>
   )
