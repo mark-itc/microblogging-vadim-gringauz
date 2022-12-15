@@ -11,28 +11,14 @@
     flex-direction: column;
 }
 
-.tweet-header {
+.Tweet .tweet-header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
 }
 
-.tweet-body {
-    display: flex;
-}
-
-.content-wrap {
-    width: 100%;
-}
-.content {
-    width: 100%;
-    text-align: left;
-    overflow-wrap: break-word;
-    white-space: pre-wrap;
-}
-
-.user {
+.Tweet .tweet-header .user {
     color: #6C757D;
     font-size: 18px;
     overflow-wrap: break-word;
@@ -40,11 +26,39 @@
     max-width: 50%;
 }
 
-.date {
+.Tweet .tweet-header .date {
     color: #6C757D;
     font-size: 18px;
     overflow-wrap: break-word;
     text-align: right;
+}
+
+.Tweet .tweet-body {
+    display: flex;
+}
+
+.Tweet .tweet-body .avatar {
+    padding-top: 10px;
+    margin-right: 10px;
+}
+
+.Tweet .tweet-body .avatar img {
+    width: 50px;
+    aspect-ratio: 1/1;
+    background-color: white;
+    border-radius: 100%;
+    object-fit: contain;
+    cursor: pointer;
+}
+
+.Tweet .content-wrap {
+    width: 100%;
+}
+.Tweet .tweet-body .content {
+    width: 100%;
+    text-align: left;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
 }
 
 @media screen and (max-width: 600px) {

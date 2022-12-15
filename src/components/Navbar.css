@@ -50,6 +50,8 @@
 .Navbar .avatar-sm {
     width: 30px; 
     aspect-ratio: 1/1;
+    object-fit: contain;
+    background-color: #CCCCCC;
     border-radius: 100%;
     cursor: pointer;
 }

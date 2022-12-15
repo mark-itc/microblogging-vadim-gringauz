@@ -27,6 +27,10 @@ function App () {
           element: <ProfilePage />
         },
         {
+          path: '/profile/:uid',
+          element: <ProfilePage />
+        },
+        {
           path: '/settings',
           element: <SettingsPage />
         }

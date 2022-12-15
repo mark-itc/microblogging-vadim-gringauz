@@ -4,10 +4,12 @@ import FooterNavbar from '../components/FooterNavbar'
 import CreateTweet from '../components/CreateTweet'
 import TweetsList from '../components/TweetsList'
 import './HomePage.css'
+import userStore from '../utils/UserStore'
 
 function HomePage () {
   const [footerNavAppear, setFooterNavAppear] = useState('')
   const [textareaHeight, setTextareaHeight] = useState('180px')
+  const [isChecked, setIsChecked] = useState(false)
 
   window.onscroll = () => {
     if (
@@ -29,6 +31,7 @@ function HomePage () {
   return (
     <>
       <div className='HomePage'>
+        <button onClick={() => {userStore.createNewUser({uid: 'asd'})}}>test</button>
         <CreateTweet textareaHeight={textareaHeight} />
         <TweetsList />
       </div>

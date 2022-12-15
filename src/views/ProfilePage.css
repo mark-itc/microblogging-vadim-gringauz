@@ -5,59 +5,34 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-}
-
-.ProfilePage form {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
     gap: 20px;
-    padding: 5px;
-}
-.ProfilePage form label {
-    font-size: 22px;
 }
 
-.ProfilePage form input {
-    width: 600px;
-    height: 60px;
-    background-color: transparent;
-    border: 2px solid #CCCCCC;
-    border-radius: 6px;
-    font-size: 22px;
-    color: white;
-    padding: 5px;
-    
+.ProfilePage .email {
+    font-size: 2rem;
+    color: cadetblue;
+    text-decoration: underline;
 }
 
-.notification {
-    background-color: rgb(65, 58, 58);
-    border-radius: 10px;
-    padding: 10px;
-    /* align-self: center; */
+.ProfilePage .signed-in {
+    font-size: 1.2rem;
+    color:gray;
 }
 
-.go-right {
-    display: flex;
-    flex-direction: row;
-    justify-content:flex-end;
-    width: 600px;
+.ProfilePage .created-in {
+    font-size: 1.2rem;
+    color:gray;
 }
 
-.avatar-lg {
+.ProfilePage .avatar-lg img {
     background-color: #CCCCCC;
-    /* border: 1px black solid; */
     border-radius: 30px;
     width: 200px;
+    aspect-ratio: 1/1;
+    /* object-fit: contain; */
+    object-fit: cover;
 }
 
-@media screen and (width <= 600px) {
-    .ProfilePage form input {
-        width: 300px;
-    }
+/* @media screen and (width <=600px) {
 
-    .go-right {
-        width: 300px;
-    }
-  }
+} */

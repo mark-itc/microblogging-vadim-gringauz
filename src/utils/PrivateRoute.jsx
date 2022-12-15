@@ -2,6 +2,8 @@ import React from 'react'
 import { useEffect } from 'react'
 import { Navigate, Outlet } from 'react-router-dom'
 import { useContext } from 'react'
+import { TweetsContextProvider } from '../contexts/TweetsContext'
+import { UsersContextProvider } from '../contexts/UsersContext'
 import { AuthContext } from '../contexts/AuthContext'
 import Navbar from '../components/Navbar'
 
@@ -19,8 +21,12 @@ function PrivateRoute () {
       {isUserRetrieved &&
         (userData ? (
           <>
-            <Navbar />
-            <Outlet />
+            <UsersContextProvider>
+              <TweetsContextProvider>
+                <Navbar />
+                <Outlet />
+              </TweetsContextProvider>
+            </UsersContextProvider>
           </>
         ) : (
           <>

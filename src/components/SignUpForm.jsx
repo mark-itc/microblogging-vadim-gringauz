@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import authenticator from '../utils/Authenticator'
+import userStore from '../utils/UserStore'
 import EmailInput from './EmailInput'
 import PasswordInput from './PasswordInput'
 import DisplayNameInput from './DisplayNameInput'

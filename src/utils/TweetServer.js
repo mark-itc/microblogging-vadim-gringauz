@@ -17,9 +17,7 @@ class TweetServer {
   }
 
   async postNew (tweet) {
-    console.log('posting to tweet document to tweets collection...')
     const docRef = await addDoc(this.tweetsCollection, tweet)
-    // console.log('docRef=', docRef)
     return docRef
   }
 

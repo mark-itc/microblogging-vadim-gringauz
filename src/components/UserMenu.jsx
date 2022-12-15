@@ -4,7 +4,7 @@ import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons'
 import './UserMenu.css'
 import defaultAvatar from '../images/empty-profile.png'
 
-function UserMenu ({ isVisible, signOut, setShowMenu, userData }) {
+function UserMenu ({ isVisible, signOut, setShowMenu, signedUser }) {
   return (
     <div className='UserMenu'>
       {isVisible && (
@@ -22,16 +22,16 @@ function UserMenu ({ isVisible, signOut, setShowMenu, userData }) {
           <div className='body'>
             <img
               className='avatar'
-              alt={userData.displayName}
-              src={userData.photoURL ? userData.photoURL : defaultAvatar}
+              alt={signedUser.displayName}
+              src={signedUser.avatar ? signedUser.avatar : defaultAvatar}
             />
             <div className='user-info'>
-              <div className='display-name'>Hello, {userData.displayName}</div>
+              <div className='display-name'>Hello, {signedUser.displayName}</div>
               <a href='/profile'>View Profile</a>
             </div>
           </div>
           <div className='footer'>
-            <div className='email'>{userData.email}</div>
+            <div className='email'>{signedUser.email}</div>
             {/* <button> Sign in with a different account</button> */}
           </div>
         </>

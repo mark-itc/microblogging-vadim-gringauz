@@ -1,18 +1,18 @@
 import React from 'react'
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import { AuthContext } from '../contexts/AuthContext'
+import { UsersContext } from '../contexts/UsersContext'
 import authenticator from '../utils/Authenticator'
 import Search from './SearchBar'
 import UserMenu from './UserMenu'
 import './Navbar.css'
-import defaultAvatar from '../images/empty-profile.png'
+import emptyAvatar from '../images/empty-profile.png'
 
 function Navbar () {
   const activeClassName = 'viewed'
   const { currentUser } = useContext(AuthContext)
-  const { userData } = currentUser
-  const avatar = userData.photoURL ? userData.photoURL : defaultAvatar
+  const { signedUser } = useContext(UsersContext)
   const [showMenu, setShowMenu] = useState(false)
 
   const signOut = () => {
@@ -60,14 +60,14 @@ function Navbar () {
         <img
           onClick={() => setShowMenu(!showMenu)}
           className={'avatar-sm ' + (showMenu ? 'clicked' : '')}
-          alt={userData.displayName}
-          src={avatar}
+          alt={signedUser?.displayName}
+          src={signedUser?.avatar !== null ? signedUser?.avatar : emptyAvatar}
         />
         <UserMenu
           isVisible={showMenu}
           signOut={signOut}
           setShowMenu={setShowMenu}
-          userData={userData}
+          signedUser={signedUser}
         />
       </div>
     </nav>

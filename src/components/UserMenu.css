@@ -48,6 +48,9 @@
     width: 50%; 
     aspect-ratio: 1/1;
     border-radius: 100%;
+    /* object-fit: contain; */
+    object-fit: cover;
+    background-color: white;
 }
 
 .UserMenu .body .user-info {

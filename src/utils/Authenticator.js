@@ -11,7 +11,8 @@ import {
 } from 'firebase/auth'
 import { getStorage, ref } from 'firebase/storage'
 import firebaseApp from './firebase-init'
-import userStore from './userStore'
+import { Timestamp } from '@firebase/firestore'
+import userStore from './UserStore'
 
 class Authenticator {
   constructor () {
@@ -46,7 +47,7 @@ class Authenticator {
     })
   }
 
-  async createNewUser ({ email, password, displayName = this.defualtDisplayName }) {
+  async createNewUser ({ email, password, displayName = email }) {
     try {
       const cred = await createUserWithEmailAndPassword(
         this.auth,
@@ -59,6 +60,16 @@ class Authenticator {
       })
       console.log('user created + signed in!')
       console.log('new user cred=', cred.user)
+      userStore.createNewUser({ 
+        uid: cred.user.uid,
+        displayName: displayName,
+        email: cred.user.email,
+        lastSignedIn: Timestamp.fromDate(new Date()),
+        createdIn: Timestamp.fromDate(new Date()),
+        avatar: null,
+        isAdmin: false,
+        isVerified: false,
+       })
     } catch (error) {
       return error.message
     }
@@ -105,6 +116,17 @@ class Authenticator {
       console.log('token', token)
       console.log('signing in with google...')
       console.log('user', user)
+      await userStore.createNewUser({uid: '0000'})
+      // await userStore.createNewUser({
+      //   uid: 'eeeee',
+      //   // displayName: user.userData.displayName,
+      //   // email: user.userData.email,
+      //   // lastSignedIn: Timestamp.fromDate(new Date()),
+      //   // createdIn: Timestamp.fromDate(new Date())
+      //   // avatar: user.userData.photoURL
+      // })
+      // if (true) {
+      // }
       return user
     } catch (error) {
       return error.message

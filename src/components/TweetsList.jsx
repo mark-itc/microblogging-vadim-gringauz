@@ -4,17 +4,18 @@ import ClipLoader from 'react-spinners/ClipLoader'
 import { sort } from 'fast-sort'
 import Tweet from './Tweet'
 import { TweetsContext } from '../contexts/TweetsContext'
+import { UsersContext } from '../contexts/UsersContext'
 import { REFRESH_RATE } from '../utils/globals'
 import tweetServer from '../utils/TweetServer'
 import './TweetsList.css'
 import { AuthContext } from '../contexts/AuthContext'
 
 function TweetsList () {
-  const { getUserNameFromUid } = useContext(AuthContext)
   const { tweets, setTweets, isLoading, setIsLoading } =
     useContext(TweetsContext)
-
   const sortedTweets = sort(tweets).desc(tweet => tweet.date)
+
+  const { getUserFromUid } = useContext(UsersContext)
 
   const getFromServer = async () => {
     try {
@@ -36,9 +37,19 @@ function TweetsList () {
   return (
     <div className='TweetsList'>
       <ClipLoader color={'white'} loading={isLoading} size={100} />
-      {sortedTweets?.map(tweet => (
-        <Tweet key={tweet.id} tweet={tweet} displayName={getUserNameFromUid(tweet.userUid)} />
-      ))}
+      {sortedTweets?.map(tweet => {
+        const { displayName, avatar } = getUserFromUid(
+          tweet.userUid
+        )
+        return (
+          <Tweet
+            key={tweet.id}
+            tweet={tweet}
+            displayName={displayName}
+            avatar={avatar}
+          />
+        )
+      })}
     </div>
   )
 }

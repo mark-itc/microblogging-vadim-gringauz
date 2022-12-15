@@ -2,7 +2,7 @@ import React from 'react'
 import { useEffect } from 'react'
 import { createContext, useState } from 'react'
 import authenticator from '../utils/Authenticator'
-import userStore from '../utils/userStore'
+import userStore from '../utils/UserStore'
 
 const AuthContext = createContext()
 
@@ -31,15 +31,15 @@ function AuthContextProvider ({ children }) {
     loadUsers()
   }, [])
 
-  const getUserNameFromUid = (userUid) => {
+  const getUserFromUid = (userUid) => {
     const matchingUser = users.find(user => user.uid === userUid)
-    // console.log('matchingUser=', matchingUser)
-    return matchingUser.displayName
+    console.log('matchingUser=', matchingUser)
+    if (matchingUser) return matchingUser
+    return null
   }
 
-
   return (
-    <AuthContext.Provider value={{ currentUser, users, getUserNameFromUid }}>
+    <AuthContext.Provider value={{ currentUser, users, getUserFromUid }}>
       {children}
     </AuthContext.Provider>
   )
