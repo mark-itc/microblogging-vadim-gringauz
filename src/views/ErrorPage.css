@@ -4,8 +4,10 @@
     background-image: url('../images/err-bg.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;  
-    background-size: cover;
+    background-size: contain;
     background-position:center;
+    background-color:blanchedalmond;
+    background-blend-mode:multiply;
     color: black;
 }
 

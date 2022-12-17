@@ -7,7 +7,7 @@ import CharsCounter from './CharsCounter'
 import { AuthContext } from '../contexts/AuthContext'
 import { TweetsContext } from '../contexts/TweetsContext'
 import { MAX_CHARS } from '../utils/globals'
-import tweetServer from '../utils/TweetServer'
+import tweetStore from '../utils/TweetStore'
 import './CreateTweet.css'
 
 function reducer (state, action) {
@@ -28,7 +28,8 @@ function reducer (state, action) {
       return { ...state, isAlertOn: true, alertMessage: action.value }
     case 'alert-off':
       return { ...state, isAlertOn: false, alertMessage: '' }
-    default: return {...state}
+    default:
+      return { ...state }
   }
 }
 
@@ -58,13 +59,12 @@ function CreateTweet ({ textareaHeight }) {
       date: Timestamp.fromDate(new Date())
     }
     const isPosted = await postNew(newTweet)
-    if (isPosted) setTweets(await tweetServer.getAll())
-    // if (isPosted) setTweets([...tweets, newTweet])
+    if (isPosted) setTweets(await tweetStore.getAll())
   }
 
   const deleteAll = async () => {
     dispatch({ type: 'posting-in-progress' })
-    await tweetServer.deleteAll()
+    await tweetStore.deleteAll()
     dispatch({ type: 'posting-finished' })
     setTweets([])
   }
@@ -72,7 +72,7 @@ function CreateTweet ({ textareaHeight }) {
   const postNew = async newTweet => {
     try {
       dispatch({ type: 'posting-in-progress' })
-      tweetServer.postNew(newTweet)
+      tweetStore.postNew(newTweet)
       return true
     } catch (error) {
       console.log(error)
@@ -118,9 +118,9 @@ function CreateTweet ({ textareaHeight }) {
     dispatch({ type: 'clear-content' })
   }
 
-  /* 'ENTER' -> SEND TWEET, 'CTRL' + 'ENTER' -> BREAK LINE */
+  //* 'ENTER' -> SEND TWEET, 'CTRL' + 'ENTER' -> BREAK LINE
   const handleKeyDown = e => {
-    /* EXCEPTION FOR NOT DESKTOP BROWSERS */
+    //* EXCEPTION FOR NOT DESKTOP BROWSERS
     if (window.outerWidth < 900) return
 
     if (!e.shiftKey && e.key === 'Enter' && state.isContentValid) {

@@ -3,9 +3,9 @@ import { useContext, useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { AuthContext } from '../contexts/AuthContext'
 import { UsersContext } from '../contexts/UsersContext'
-import './ProfilePage.css'
 import ProfileOnlyView from '../components/ProfileOnlyView'
 import ProfileEdit from '../components/ProfileEdit'
+import './ProfilePage.css'
 
 function ProfilePage () {
   const [isEditMode, setIsEditMode] = useState(false)
@@ -22,7 +22,7 @@ function ProfilePage () {
       return
     }
     setProfile(getUserFromUid(uid))
-  }, [users])
+  }, [users]) // eslint-disable-line
 
   return (
     <div className='ProfilePage'>
@@ -32,7 +32,11 @@ function ProfilePage () {
         ) : (
           <>
             <ProfileOnlyView profile={profile} />
-            {!uid || uid === signedInUserUid ? <button className='edit-mode' onClick={() => setIsEditMode(true)}>Edit Profile</button> : null}
+            {!uid || uid === signedInUserUid ? (
+              <button className='edit-mode' onClick={() => setIsEditMode(true)}>
+                Edit Profile
+              </button>
+            ) : null}
           </>
         )
       ) : (

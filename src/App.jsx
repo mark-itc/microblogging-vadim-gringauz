@@ -22,10 +22,10 @@ function App () {
           path: '/home',
           element: <HomePage />
         },
-        {
-          path: '/profile',
-          element: <ProfilePage />
-        },
+        // {
+        //   path: '/profile',
+        //   element: <ProfilePage />
+        // },
         {
           path: '/profile/:uid',
           element: <ProfilePage />

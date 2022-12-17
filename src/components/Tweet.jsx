@@ -27,7 +27,7 @@ function Tweet ({ tweet, displayName, avatar = emptyAvatar }) {
       <div className='tweet-body'>
         <div className='avatar'>
           <img
-            src={(avatar !== null && avatar !== '') ? avatar : emptyAvatar}
+            src={avatar !== null && avatar !== '' ? avatar : emptyAvatar}
             alt={displayName}
             onClick={() => navigate(`/profile/${tweet.userUid}`)}
           />

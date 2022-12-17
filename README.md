@@ -20,10 +20,10 @@
    - 6-1 - Configure Firebase/Firestore :heavy_check_mark:
    - 6-2 - Send / Get data :heavy_check_mark:
    - 6-3 - Authentication :heavy_check_mark:
-   - 6-4 - Using User-ID (Users collection)
-   - 6-5 - Profile picture (Avatar)
-   - 6-6 - Live update
-   - 6-7 - Infinite scrolling
+   - 6-4 - Using User-ID (Users collection) :heavy_check_mark:
+   - 6-5 - Profile picture (Avatar) :heavy_check_mark:
+   - 6-6 - Live update :heavy_check_mark:
+   - 6-7 - Infinite scrolling :red_circle:  WIP
 ----------------------------------------------------------------------------
 - Milestone 7 - Your tweets
 - Milestone 8 - Navbar

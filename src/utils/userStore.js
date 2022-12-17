@@ -1,12 +1,30 @@
 import firebaseApp from './firebase-init'
-import { getFirestore, collection, getDocs, doc, query, where } from 'firebase/firestore'
-import { addDoc, updateDoc } from 'firebase/firestore'
-// import { Timestamp } from 'firebase/firestore'
+import {
+  addDoc,
+  updateDoc,
+  getFirestore,
+  collection,
+  getDocs,
+  doc,
+  query,
+  where,
+  onSnapshot
+} from 'firebase/firestore'
 
 class UserStore {
   constructor () {
     this.db = getFirestore(firebaseApp)
     this.usersCollection = collection(this.db, 'users')
+  }
+
+  getUsersRealTime (setUsers) {
+    console.log(' starting real time users subscription ...')
+    const unsubscribe = onSnapshot(this.usersCollection, usersSnapshot => {
+      const { docs } = usersSnapshot
+      const loadedUsers = docs.map(doc => doc.data())
+      setUsers(loadedUsers)
+    })
+    return unsubscribe
   }
 
   async loadUsers () {
@@ -21,17 +39,14 @@ class UserStore {
   }
 
   async getAll () {
-    console.log(' getting users collection from firestore...')
     const usersSnapshot = await getDocs(this.usersCollection)
     const { docs } = usersSnapshot
     const fetchedUsers = docs.map(doc => doc.data())
-    // console.log('fetchedUsers=', fetchedUsers)
     return { users: fetchedUsers, isFinishedLoading: true }
   }
 
   async createNewUser (user) {
     try {
-      console.log('creating new user...')
       const docRef = await addDoc(this.usersCollection, user)
       return docRef
     } catch (error) {
@@ -39,8 +54,7 @@ class UserStore {
     }
   }
 
-  async editDispalyName (docId ,newDisplayName) {
-    console.log('editing user displayName...')
+  async editDispalyName (docId, newDisplayName) {
     const docRef = doc(this.db, 'users', docId)
 
     await updateDoc(docRef, {
@@ -48,8 +62,8 @@ class UserStore {
     })
   }
 
-  async editAvatarURL (docId ,newAvatarURL) {
-    console.log('editing user avatar url...')
+  async editAvatarURL (docId, newAvatarURL) {
+    // console.log('editing user avatar url...')
     const docRef = doc(this.db, 'users', docId)
 
     await updateDoc(docRef, {
@@ -57,19 +71,9 @@ class UserStore {
     })
   }
 
-  async isNewUser (uid) {
-    // const usersSnapshot = await getDocs(this.usersCollection)
-    // const { docs } = usersSnapshot
-    // const fetchedUsers = docs.map(doc => doc.data())
-
-    return true
-  }
-
-  async isEmailExists(email) {
+  async isEmailExists (email) {
     const emailQuery = query(this.usersCollection, where('email', '==', email))
-    // console.log(emailQuery)
-    const querySnapshot = await getDocs(emailQuery);
-    console.log('querySnapshot', querySnapshot)
+    const querySnapshot = await getDocs(emailQuery)
     if (querySnapshot.docs.length > 0) return true
     return false
   }

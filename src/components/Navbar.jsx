@@ -1,7 +1,6 @@
 import React from 'react'
-import { useState, useContext, useEffect } from 'react'
+import { useState, useContext } from 'react'
 import { NavLink } from 'react-router-dom'
-import { AuthContext } from '../contexts/AuthContext'
 import { UsersContext } from '../contexts/UsersContext'
 import authenticator from '../utils/Authenticator'
 import Search from './SearchBar'
@@ -11,7 +10,6 @@ import emptyAvatar from '../images/empty-profile.png'
 
 function Navbar () {
   const activeClassName = 'viewed'
-  const { currentUser } = useContext(AuthContext)
   const { signedUser } = useContext(UsersContext)
   const [showMenu, setShowMenu] = useState(false)
 
@@ -34,7 +32,7 @@ function Navbar () {
         </li>
         <li>
           <NavLink
-            to='/profile'
+            to={`/profile/${signedUser?.uid}`}
             className={({ isActive }) =>
               isActive ? activeClassName : undefined
             }
@@ -61,7 +59,11 @@ function Navbar () {
           onClick={() => setShowMenu(!showMenu)}
           className={'avatar-sm ' + (showMenu ? 'clicked' : '')}
           alt={signedUser?.displayName}
-          src={(signedUser?.avatar !== null  && signedUser?.avatar !== '') ? signedUser?.avatar : emptyAvatar}
+          src={
+            signedUser?.avatar !== null && signedUser?.avatar !== ''
+              ? signedUser?.avatar
+              : emptyAvatar
+          }
         />
         <UserMenu
           isVisible={showMenu}

@@ -1,46 +1,57 @@
 import React from 'react'
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import ClipLoader from 'react-spinners/ClipLoader'
-import { sort } from 'fast-sort'
 import Tweet from './Tweet'
 import { TweetsContext } from '../contexts/TweetsContext'
 import { UsersContext } from '../contexts/UsersContext'
-import { REFRESH_RATE } from '../utils/globals'
-import tweetServer from '../utils/TweetServer'
+import tweetStore from '../utils/TweetStore'
 import './TweetsList.css'
-import { AuthContext } from '../contexts/AuthContext'
 
 function TweetsList () {
-  const { tweets, setTweets, isLoading, setIsLoading } =
+  const { tweets, setTweets, isLoading } =
     useContext(TweetsContext)
-  const sortedTweets = sort(tweets).desc(tweet => tweet.date)
+  const [currentLimit, setCurrentLimit] = useState(10)
 
   const { getUserFromUid } = useContext(UsersContext)
 
-  const getFromServer = async () => {
-    try {
-      setIsLoading(true)
-      setTweets(await tweetServer.getAll())
-    } catch (error) {
-      console.log('error loading tweets:', error)
-    } finally {
-      setIsLoading(false)
-    }
+const onScroll = () => {
+  console.log('scrolling??')
+  if (
+    document.body.scrollTop > 100 ||
+    document.documentElement.scrollTop > 100
+  ) {
+    console.log('bottom of page?')
+    // loadMoreTweets()
   }
+}
 
   useEffect(() => {
-    getFromServer() // eslint-disable-line
-    const interval = setInterval(getFromServer, REFRESH_RATE)
-    return () => clearInterval(interval)
+    window.addEventListener('scroll', onScroll)
+
+    return window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  useEffect(() => {
+    //* SUBSCRIBING FOR REAL-TIME UPDATE WHEN NEW TWEET ADDED TO COLLECTION
+    const unsubscribeTweets = tweetStore.getTweetsRealTime(
+      setTweets,
+      currentLimit
+    )
+
+    //* UNSUBSCRIBING
+    // return unsubscribeTweets()
+    console.log(unsubscribeTweets) 
   }, []) // eslint-disable-line
 
+  const loadMoreTweets = () => {
+    setCurrentLimit(currentLimit + 10)
+  }
+
   return (
-    <div className='TweetsList'>
+    <div className='TweetsList' onScroll={loadMoreTweets}>
       <ClipLoader color={'white'} loading={isLoading} size={100} />
-      {sortedTweets?.map(tweet => {
-        const { displayName, avatar } = getUserFromUid(
-          tweet.userUid
-        )
+      {tweets?.map(tweet => {
+        const { displayName, avatar } = getUserFromUid(tweet.userUid)
         return (
           <Tweet
             key={tweet.id}
@@ -50,6 +61,7 @@ function TweetsList () {
           />
         )
       })}
+      <button onClick={loadMoreTweets}>more</button>
     </div>
   )
 }

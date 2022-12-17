@@ -8,7 +8,6 @@ import './HomePage.css'
 function HomePage () {
   const [footerNavAppear, setFooterNavAppear] = useState('')
   const [textareaHeight, setTextareaHeight] = useState('180px')
-  const [isChecked, setIsChecked] = useState(false)
 
   window.onscroll = () => {
     if (

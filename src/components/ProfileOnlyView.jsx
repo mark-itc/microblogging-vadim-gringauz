@@ -8,7 +8,7 @@ function ProfileOnlyView ({ profile }) {
       <div className='avatar-lg'>
         <img
           alt='user'
-          src={profile.avatar !== null ? profile?.avatar : emptyAvatar}
+          src={(profile?.avatar !== null && profile.avatar !== '') ? profile?.avatar : emptyAvatar}
         />
       </div>
       <div className='email'>{profile.email}</div>

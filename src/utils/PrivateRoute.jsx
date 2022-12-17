@@ -10,10 +10,8 @@ import Navbar from '../components/Navbar'
 function PrivateRoute () {
   const { currentUser } = useContext(AuthContext)
   const { userData, isUserRetrieved } = currentUser
-  console.log('currentUser from route= ', currentUser)
 
   useEffect(() => {
-    console.log('new currentUser', currentUser)
   }, [currentUser])
 
   return (

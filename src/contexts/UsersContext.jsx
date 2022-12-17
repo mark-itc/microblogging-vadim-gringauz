@@ -1,6 +1,5 @@
 import React from 'react'
-import { useContext } from 'react'
-import { createContext, useState, useEffect } from 'react'
+import { useContext, createContext, useState, useEffect } from 'react'
 import userStore from '../utils/UserStore'
 import { AuthContext } from './AuthContext'
 
@@ -11,25 +10,18 @@ function UsersContextProvider ({ children }) {
   const [signedUser, setSignedUser] = useState()
   const { currentUser } = useContext(AuthContext)
 
-  const getAllUsersFromServer = async () => {
-    setUsers(await userStore.loadUsers())
-  }
-
-  const loadDataFromServer = async () => {
-    await getAllUsersFromServer()
-    // if (currentUser.isUserRetrieved) {
-    //   setSignedUser(getUserFromUid(currentUser.userData.uid))
-    // }
-  }
-
   useEffect(() => {
-    loadDataFromServer()
-  }, [currentUser])
+    //* SUBSCRIBING FOR REAL-TIME UPDATE WHEN NEW USER ADDED TO COLLECTION
+    const unsubscribeUsers = userStore.getUsersRealTime(setUsers)
+
+    //* UNSUBSCRIBING
+    return unsubscribeUsers
+  }, [])
 
   useEffect(() => {
     if (users === 'before-loading') return
     setSignedUser(getUserFromUid(currentUser.userData.uid))
-  }, [users])
+  }, [users]) // eslint-disable-line
 
   useEffect(() => {
     console.log('signedUser', signedUser)
@@ -37,15 +29,19 @@ function UsersContextProvider ({ children }) {
 
   const getUserFromUid = userUid => {
     const matchingUser = users.find(user => user.uid === userUid)
-    console.log('userUid', userUid)
-    console.log('users', users)
-    console.log('matchingUser', matchingUser)
     if (matchingUser) return matchingUser
     return null
   }
 
   return (
-    <UsersContext.Provider value={{ users, setUsers, getUserFromUid, signedUser, loadDataFromServer }}>
+    <UsersContext.Provider
+      value={{
+        users,
+        setUsers,
+        getUserFromUid,
+        signedUser
+      }}
+    >
       {children}
     </UsersContext.Provider>
   )

@@ -6,7 +6,6 @@ import PasswordInput from './PasswordInput'
 import Alert from './Alert'
 import GoogleSignInButton from './GoogleSignInButton'
 import './SignInForm.css'
-import cloudStorage from '../utils/CloudStorage'
 
 function SignInForm () {
   const [email, setEmail] = useState('')
