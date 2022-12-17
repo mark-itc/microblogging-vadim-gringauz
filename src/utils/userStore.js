@@ -1,18 +1,22 @@
 import firebaseApp from './firebase-init'
-import { getFirestore, collection, getDocs, doc } from 'firebase/firestore'
-import { addDoc, deleteDoc } from 'firebase/firestore'
-import { Timestamp } from 'firebase/firestore'
+import { getFirestore, collection, getDocs, doc, query, where } from 'firebase/firestore'
+import { addDoc, updateDoc } from 'firebase/firestore'
+// import { Timestamp } from 'firebase/firestore'
 
 class UserStore {
   constructor () {
-    const db = getFirestore(firebaseApp)
-    this.usersCollection = collection(db, 'users')
+    this.db = getFirestore(firebaseApp)
+    this.usersCollection = collection(this.db, 'users')
   }
 
   async loadUsers () {
     const usersSnapshot = await getDocs(this.usersCollection)
     const { docs } = usersSnapshot
-    const loadedUsers = docs.map(doc => doc.data())
+    const loadedUsers = docs.map(doc => {
+      const user = doc.data()
+      user.docId = doc.id
+      return user
+    })
     return loadedUsers
   }
 
@@ -26,27 +30,31 @@ class UserStore {
   }
 
   async createNewUser (user) {
-    const tempUser = {
-      uid: 'qqqq'
-      // displayName: 'test123',
-      // email: 'a@b',
-      // lastSignedIn: Timestamp.fromDate(new Date()),
-      // createdIn: Timestamp.fromDate(new Date()),
-      // avatar: user.photoURL,
-      // group: 'admin'
-    }
     try {
       console.log('creating new user...')
       const docRef = await addDoc(this.usersCollection, user)
-      // console.log('docRef=', docRef)
       return docRef
     } catch (error) {
       console.log('error', error)
     }
   }
 
-  async editUser () {
-    console.log('editing user...')
+  async editDispalyName (docId ,newDisplayName) {
+    console.log('editing user displayName...')
+    const docRef = doc(this.db, 'users', docId)
+
+    await updateDoc(docRef, {
+      displayName: newDisplayName
+    })
+  }
+
+  async editAvatarURL (docId ,newAvatarURL) {
+    console.log('editing user avatar url...')
+    const docRef = doc(this.db, 'users', docId)
+
+    await updateDoc(docRef, {
+      avatar: newAvatarURL
+    })
   }
 
   async isNewUser (uid) {
@@ -56,18 +64,15 @@ class UserStore {
 
     return true
   }
-  //   async deleteUser () {
-  //     try {
-  //       console.log('Deleting all tweets for collection...')
-  //       const { docs } = await getDocs(this.tweetsCollection)
-  //       docs.map(async document => {
-  //         await deleteDoc(doc(this.tweetsCollection, document.id))
-  //       })
-  //       return null
-  //     } catch (error) {
-  //       return error.message
-  //     }
-  //   }
+
+  async isEmailExists(email) {
+    const emailQuery = query(this.usersCollection, where('email', '==', email))
+    // console.log(emailQuery)
+    const querySnapshot = await getDocs(emailQuery);
+    console.log('querySnapshot', querySnapshot)
+    if (querySnapshot.docs.length > 0) return true
+    return false
+  }
 }
 
 const userStore = new UserStore()

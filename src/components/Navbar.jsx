@@ -61,7 +61,7 @@ function Navbar () {
           onClick={() => setShowMenu(!showMenu)}
           className={'avatar-sm ' + (showMenu ? 'clicked' : '')}
           alt={signedUser?.displayName}
-          src={signedUser?.avatar !== null ? signedUser?.avatar : emptyAvatar}
+          src={(signedUser?.avatar !== null  && signedUser?.avatar !== '') ? signedUser?.avatar : emptyAvatar}
         />
         <UserMenu
           isVisible={showMenu}

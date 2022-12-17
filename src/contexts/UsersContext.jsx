@@ -37,12 +37,15 @@ function UsersContextProvider ({ children }) {
 
   const getUserFromUid = userUid => {
     const matchingUser = users.find(user => user.uid === userUid)
+    console.log('userUid', userUid)
+    console.log('users', users)
+    console.log('matchingUser', matchingUser)
     if (matchingUser) return matchingUser
     return null
   }
 
   return (
-    <UsersContext.Provider value={{ users, setUsers, getUserFromUid, signedUser }}>
+    <UsersContext.Provider value={{ users, setUsers, getUserFromUid, signedUser, loadDataFromServer }}>
       {children}
     </UsersContext.Provider>
   )

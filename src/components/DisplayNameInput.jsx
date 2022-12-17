@@ -1,7 +1,7 @@
 import React from 'react'
 import './DisplayNameInput.css'
 
-function DisplayNameInput ({ customLabel = 'Choose Display name', displayName, setDisplayName }) {
+function DisplayNameInput ({ customLabel = 'Choose Display name', displayName, setDisplayName, required = false }) {
   return (
     <div className='DisplayNameInput'>
       <label htmlFor='displayName'>
@@ -14,6 +14,7 @@ function DisplayNameInput ({ customLabel = 'Choose Display name', displayName, s
         value={displayName}
         autoComplete="username"
         maxLength={20}
+        required={required}
       />
     </div>
   )

@@ -8,6 +8,12 @@
     gap: 20px;
 }
 
+.ProfilePage form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
 .ProfilePage .email {
     font-size: 2rem;
     color: cadetblue;
@@ -24,6 +30,18 @@
     color:gray;
 }
 
+.ProfilePage .avatar-lg {
+    position: relative;
+}
+
+/* .ProfilePage .avatar-lg input {
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    background-color: transparent;
+    cursor: pointer;
+} */
+
 .ProfilePage .avatar-lg img {
     background-color: #CCCCCC;
     border-radius: 30px;
@@ -31,6 +49,10 @@
     aspect-ratio: 1/1;
     /* object-fit: contain; */
     object-fit: cover;
+}
+
+.ProfilePage .edit-mode {
+    width: 300px;
 }
 
 /* @media screen and (width <=600px) {

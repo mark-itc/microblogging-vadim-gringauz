@@ -3,13 +3,12 @@ import { useContext, useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { AuthContext } from '../contexts/AuthContext'
 import { UsersContext } from '../contexts/UsersContext'
-import emptyAvatar from '../images/empty-profile.png'
 import './ProfilePage.css'
-
-// const PARAM = 'hHYw4INahUTk9PFM3axjcfdVPrg2'
-const PARAM = 'NlrHXp7dI7MmWJCzDaIXJApQGOx1'
+import ProfileOnlyView from '../components/ProfileOnlyView'
+import ProfileEdit from '../components/ProfileEdit'
 
 function ProfilePage () {
+  const [isEditMode, setIsEditMode] = useState(false)
   const { uid } = useParams()
   const { users, getUserFromUid } = useContext(UsersContext)
   const { currentUser } = useContext(AuthContext)
@@ -26,28 +25,20 @@ function ProfilePage () {
   }, [users])
 
   return (
-    <>
+    <div className='ProfilePage'>
       {profile ? (
-        <div className='ProfilePage'>
-          <h2>Profile of {profile.displayName}</h2>
-          <div className='avatar-lg'>
-            <img
-              alt='user'
-              src={profile.avatar !== null ? profile?.avatar : emptyAvatar}
-            />
-          </div>
-          <div className='email'>{profile.email}</div>
-          <div className='signed-in'>
-            Last signed in: {profile.lastSignedIn.toDate().toDateString()}
-          </div>
-          <div className='created-in'>
-            Joined: {profile.createdIn.toDate().toDateString()}
-          </div>
-        </div>
+        isEditMode ? (
+          <ProfileEdit profile={profile} setIsEditMode={setIsEditMode} />
+        ) : (
+          <>
+            <ProfileOnlyView profile={profile} />
+            {!uid || uid === signedInUserUid ? <button className='edit-mode' onClick={() => setIsEditMode(true)}>Edit Profile</button> : null}
+          </>
+        )
       ) : (
         <>Profile not found</>
       )}
-    </>
+    </div>
   )
 }
 

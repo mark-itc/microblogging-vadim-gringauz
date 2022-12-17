@@ -1,4 +1,5 @@
 import { initializeApp } from 'firebase/app'
+import { getStorage } from 'firebase/storage'
 import { initializeAppCheck, ReCaptchaV3Provider } from 'firebase/app-check'
 // import { API_KEY } from './globals'
 
@@ -18,5 +19,7 @@ const appCheck = initializeAppCheck(firebaseApp, {
   provider: new ReCaptchaV3Provider('6Lfv03kjAAAAAJ3UeGywNG2S0DlY6JfHAQwhwN_P')
 })
 
+const storage = getStorage(firebaseApp)
+
 export default firebaseApp
-export { appCheck }
+export { appCheck, storage }
