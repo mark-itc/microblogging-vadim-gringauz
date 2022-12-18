@@ -3,4 +3,17 @@
     flex-direction: column;
     width: 100%;
     margin-bottom: 30px;
+    /* position: relative; */
 }
+
+.loader {
+    position: fixed;
+    top: 50%;
+    left: calc(50% - 50px);
+    z-index: 99;
+}
+
+/* body::-webkit-scrollbar { 
+    display: none;
+} */
+

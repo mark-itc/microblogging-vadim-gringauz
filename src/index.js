@@ -1,8 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
-import { TweetsContextProvider } from './contexts/TweetsContext'
-import { UsersContextProvider } from './contexts/UsersContext'
 import { AuthContextProvider } from './contexts/AuthContext'
 import VersionInfo from './components/VersionInfo'
 import './index.css'

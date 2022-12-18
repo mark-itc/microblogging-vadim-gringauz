@@ -9,22 +9,24 @@ import {
   onSnapshot,
   query,
   orderBy,
-  limit
+  limit,
+  getCountFromServer,
+  startAt,
 } from 'firebase/firestore'
 
 class TweetStore {
   constructor () {
     const db = getFirestore(firebaseApp)
     this.tweetsCollection = collection(db, 'tweets')
-    this.startingLimit = 10
   }
 
-  async getTweetsRealTime (setTweets, currentLimit) {
+  async getTweetsRealTime (setTweets, getCurrentLimit, setIsReachedLimit) {
     console.log(' starting real time tweets subscription ...')
+    setIsReachedLimit(false)
     const q = query(
       this.tweetsCollection,
       orderBy('date', 'desc'),
-      limit(currentLimit)
+      limit(getCurrentLimit())
     )
     const unsubscribe = onSnapshot(q, querySnapshot => {
       const { docs } = querySnapshot
@@ -34,8 +36,28 @@ class TweetStore {
     return unsubscribe
   }
 
-  async getAll () {
-    const tweetsSnapshot = await getDocs(this.tweetsCollection)
+  async countTweets () {
+    const snapshot = await getCountFromServer(this.tweetsCollection)
+    return snapshot.data().count
+  }
+
+  async getTweets (startIndex, paginateBy) {
+    const first = query(
+      this.tweetsCollection,
+      orderBy('date', 'desc'),
+      limit(startIndex)
+    )
+    const tempSnapshot = await getDocs(first)
+
+    const lastVisible = tempSnapshot.docs[tempSnapshot.docs.length - 1]
+
+    const next = query(
+      this.tweetsCollection,
+      orderBy('date', 'desc'),
+      startAt(lastVisible),
+      limit(paginateBy)
+    )
+    const tweetsSnapshot = await getDocs(next)
     const { docs } = tweetsSnapshot
     const fetchedTweets = docs.map(doc => doc.data())
     return fetchedTweets

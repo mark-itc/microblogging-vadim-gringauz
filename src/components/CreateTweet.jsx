@@ -4,7 +4,7 @@ import { Timestamp } from 'firebase/firestore'
 import Alert from './Alert'
 import ClipLoader from 'react-spinners/ClipLoader'
 import CharsCounter from './CharsCounter'
-import { AuthContext } from '../contexts/AuthContext'
+import { UsersContext } from '../contexts/UsersContext'
 import { TweetsContext } from '../contexts/TweetsContext'
 import { MAX_CHARS } from '../utils/globals'
 import tweetStore from '../utils/TweetStore'
@@ -35,7 +35,8 @@ function reducer (state, action) {
 
 function CreateTweet ({ textareaHeight }) {
   const { setTweets } = useContext(TweetsContext)
-  const { currentUser } = useContext(AuthContext)
+  // const { currentUser } = useContext(AuthContext)  //! DEL?
+  const { signedUser } = useContext(UsersContext)
   const buttonRef = useRef(null)
 
   const initialState = {
@@ -48,6 +49,7 @@ function CreateTweet ({ textareaHeight }) {
   const [state, dispatch] = useReducer(reducer, initialState)
 
   const addNewTweet = async content => {
+    //* USED TO CLEAR ALL TWEETS FOR DEBUGGING PURPOSES
     if (content === 'clr') {
       await deleteAll()
       return
@@ -55,11 +57,14 @@ function CreateTweet ({ textareaHeight }) {
 
     const newTweet = {
       content: state.content,
-      userUid: currentUser.userData.uid,
+      userUid: signedUser.uid,
       date: Timestamp.fromDate(new Date())
     }
-    const isPosted = await postNew(newTweet)
-    if (isPosted) setTweets(await tweetStore.getAll())
+    
+    await postNew(newTweet)
+    //? NOT NEEDED WITH REAL-TIME UPDATE?
+    // const isPosted = await postNew(newTweet)
+    // if (isPosted) setTweets(await tweetStore.getAll())
   }
 
   const deleteAll = async () => {
@@ -91,7 +96,7 @@ function CreateTweet ({ textareaHeight }) {
     if (
       state.content.replaceAll(' ', '').length > 0 &&
       state.content.length <= MAX_CHARS &&
-      currentUser.userData.displayName !== ''
+      signedUser.displayName !== ''
     ) {
       dispatch({ type: 'content-is-valid' })
       dispatch({ type: 'alert-off' })
