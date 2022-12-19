@@ -1,6 +1,10 @@
 import React from 'react'
 import { useContext, createContext, useState, useEffect } from 'react'
+<<<<<<< Updated upstream
 import userStore from '../utils/UserStore'
+=======
+import userStore from '../utils/UserStore.js'
+>>>>>>> Stashed changes
 import { AuthContext } from './AuthContext'
 
 const UsersContext = createContext()
