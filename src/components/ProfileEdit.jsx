@@ -14,15 +14,21 @@ function ProfileEdit ({ profile, setIsEditMode }) {
   const saveChanges = async e => {
     e.preventDefault()
     // console.log('saving changes...')
-    await userStore.editDispalyName(profile.docId, displayName)
-    if (avatar) {
-      const url = await cloudStorage.uploadAvatar(profile.uid, avatar)
-      await userStore.editAvatarURL(profile.docId, url)
-    } else {
-      console.log('empty avatar - can not upload')
+    try {
+      console.log('docId', profile.docId)
+      await userStore.editDispalyName(profile.docId, displayName)
+      
+      if (avatar) {
+        const url = await cloudStorage.uploadAvatar(profile.uid, avatar)
+        await userStore.editAvatarURL(profile.docId, url)
+      } else {
+        console.log('empty avatar - can not upload')
+      }
+      setIsEditMode(false)
+      loadDataFromServer()
+    } catch (error) {
+      console.log('error', error.message)
     }
-    setIsEditMode(false)
-    loadDataFromServer()
   }
 
   const handleAvatarChange = e => {

@@ -8,41 +8,15 @@
     min-height: 100px;
     padding: 15px;
     display: flex;
-    flex-direction: column;
-}
-
-.Tweet .tweet-header {
-    display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    width: 100%;
 }
 
-.Tweet .tweet-header .user {
-    color: #6C757D;
-    font-size: 18px;
-    overflow-wrap: break-word;
-    text-align: right;
-    max-width: 50%;
-}
-
-.Tweet .tweet-header .date {
-    color: #6C757D;
-    font-size: 18px;
-    overflow-wrap: break-word;
-    text-align: right;
-}
-
-.Tweet .tweet-body {
-    display: flex;
-}
-
-.Tweet .tweet-body .avatar {
+.Tweet .avatar {
     padding-top: 10px;
     margin-right: 10px;
 }
 
-.Tweet .tweet-body .avatar img {
+.Tweet .avatar img {
     width: 50px;
     aspect-ratio: 1/1;
     background-color: white;
@@ -51,9 +25,38 @@
     cursor: pointer;
 }
 
+.Tweet .tweet-body {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.Tweet .tweet-body .tweet-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.Tweet .tweet-body .tweet-header .user {
+    color: #6C757D;
+    font-size: 18px;
+    overflow-wrap: break-word;
+    text-align: right;
+    max-width: 50%;
+}
+
+.Tweet .tweet-body .tweet-header .date {
+    color: #6C757D;
+    font-size: 18px;
+    overflow-wrap: break-word;
+    text-align: right;
+}
+
 .Tweet .content-wrap {
     width: 100%;
 }
+
 .Tweet .tweet-body .content {
     width: 100%;
     text-align: left;
@@ -61,7 +64,12 @@
     white-space: pre-wrap;
 }
 
-@media screen and (max-width: 600px) {
-    .date, .user {
-        font-size: 14px;    }
-  }
+@media screen and (width <= 600px) {
+
+    .Tweet .tweet-body .tweet-header .user {
+        font-size: 14px;
+    }
+    .Tweet .tweet-body .tweet-header .date {
+        font-size: 14px;
+    }
+}

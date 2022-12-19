@@ -10,27 +10,27 @@ function Tweet ({ tweet, displayName, avatar = emptyAvatar }) {
 
   return (
     <div className='Tweet'>
-      <div className='tweet-header'>
-        <a href={`/profile/${tweet.userUid}`}>
-          <span className='user'>
-            {displayName ? displayName : <>empty display name</>}
-          </span>
-        </a>
-        <span className='date'>
-          {date ? (
-            <DateTimeDisplay timeStamp={date.toDate()} />
-          ) : (
-            <>empty date</>
-          )}
-        </span>
+      <div className='avatar'>
+        <img
+          src={avatar !== null && avatar !== '' ? avatar : emptyAvatar}
+          alt={displayName}
+          onClick={() => navigate(`/profile/${tweet.userUid}`)}
+        />
       </div>
       <div className='tweet-body'>
-        <div className='avatar'>
-          <img
-            src={avatar !== null && avatar !== '' ? avatar : emptyAvatar}
-            alt={displayName}
-            onClick={() => navigate(`/profile/${tweet.userUid}`)}
-          />
+        <div className='tweet-header'>
+          {/* <a href={`/profile/${tweet.userUid}`}>
+          </a> */}
+            <span className='user'>
+              {displayName ? displayName : <>empty display name</>}
+            </span>
+          <span className='date'>
+            {date ? (
+              <DateTimeDisplay timeStamp={date.toDate()} />
+            ) : (
+              <>empty date</>
+            )}
+          </span>
         </div>
         <p className='content'>{content ? content : <>empty content</>}</p>
       </div>

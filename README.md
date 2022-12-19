@@ -1,7 +1,7 @@
 ## React.JS Project #2: <img src='./assets/logo.png' width=30px /> Microblogging App
-# Milestone :six: WIP
+# Milestone :six: WIP - Ready for Review 18/12!
 
-## [App Deployed to Firebase!](https://itc-microblogging-85128.web.app)
+## [App Deployed to Firebase!](https://itc-microblogging-85128.web.app) -> Best to view on mobile!
 
 **Code Design:** 
 
@@ -23,7 +23,7 @@
    - 6-4 - Using User-ID (Users collection) :heavy_check_mark:
    - 6-5 - Profile picture (Avatar) :heavy_check_mark:
    - 6-6 - Live update :heavy_check_mark:
-   - 6-7 - Infinite scrolling :red_circle:  WIP
+   - 6-7 - Infinite scrolling :heavy_check_mark:
 ----------------------------------------------------------------------------
 - Milestone 7 - Your tweets
 - Milestone 8 - Navbar
