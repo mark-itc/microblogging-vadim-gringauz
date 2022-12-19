@@ -74,7 +74,6 @@ class Authenticator {
   async signIn ({ email, password }) {
     try {
       const cred = await signInWithEmailAndPassword(this.auth, email, password)
-      console.log('signed in!')
       return cred.user
     } catch (error) {
       console.table('error code', error.code)
@@ -91,7 +90,6 @@ class Authenticator {
   }
 
   isUserDetailsValid (details) {
-    console.log('validating...')
     return true
   }
 
@@ -99,7 +97,6 @@ class Authenticator {
     const result = await updateProfile(this.auth.currentUser, {
       displayName: newDisplayName
     })
-    console.log('result', result)
   }
 
   async signInWithGoogle () {

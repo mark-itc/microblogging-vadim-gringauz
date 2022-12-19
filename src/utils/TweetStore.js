@@ -21,7 +21,6 @@ class TweetStore {
   }
 
   async getTweetsRealTime (setTweets, getCurrentLimit, setIsReachedLimit) {
-    console.log(' starting real time tweets subscription ...')
     setIsReachedLimit(false)
     const q = query(
       this.tweetsCollection,
@@ -70,7 +69,6 @@ class TweetStore {
 
   async deleteAll () {
     try {
-      console.log('Deleting all tweets for collection...')
       const { docs } = await getDocs(this.tweetsCollection)
       docs.map(async document => {
         await deleteDoc(doc(this.tweetsCollection, document.id))
@@ -81,13 +79,11 @@ class TweetStore {
     }
   }
 
-  async edit (id, newContect) {
-    console.log('Editing tweet...')
-  }
+  // async edit (id, newContect) {
+  // }
 
-  async delete (id) {
-    console.log('Deleting tweet...')
-  }
+  // async delete (id) {
+  // }
 }
 
 const tweetStore = new TweetStore()

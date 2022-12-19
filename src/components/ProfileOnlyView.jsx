@@ -1,10 +1,11 @@
 import React from 'react'
 import emptyAvatar from '../images/empty-profile.png'
+import './ProfileOnlyView.css'
 
 function ProfileOnlyView ({ profile }) {
   return (
-    <div className='ProfilePage'>
-      <h2>Profile of {profile.displayName}</h2>
+    <div className='ProfileOnlyView'>
+      <div className='display-name'>{profile.displayName}</div>
       <div className='avatar-lg'>
         <img
           alt='user'

@@ -8,53 +8,18 @@
     gap: 20px;
 }
 
-.ProfilePage form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+.ProfilePage h2 {
+    text-align: center;
+    background-color: aqua;
 }
 
-.ProfilePage .email {
-    font-size: 2rem;
-    color: cadetblue;
-    text-decoration: underline;
-}
-
-.ProfilePage .signed-in {
-    font-size: 1.2rem;
-    color:gray;
-}
-
-.ProfilePage .created-in {
-    font-size: 1.2rem;
-    color:gray;
-}
-
-.ProfilePage .avatar-lg {
-    position: relative;
-}
-
-/* .ProfilePage .avatar-lg input {
-    position: absolute;
-    top: -10px;
-    left: -10px;
-    background-color: transparent;
-    cursor: pointer;
-} */
-
-.ProfilePage .avatar-lg img {
-    background-color: #CCCCCC;
-    border-radius: 30px;
-    width: 200px;
-    aspect-ratio: 1/1;
-    /* object-fit: contain; */
-    object-fit: cover;
-}
-
-.ProfilePage .edit-mode {
+.ProfilePage button {
     width: 300px;
 }
 
-/* @media screen and (width <=600px) {
-
-} */
+@media screen and (width <=600px) {
+    .ProfilePage button {
+        width: 90%;
+        height: 50px;
+    }
+}

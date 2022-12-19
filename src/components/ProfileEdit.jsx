@@ -5,27 +5,23 @@ import userStore from '../utils/UsersStore'
 import cloudStorage from '../utils/CloudStorage'
 import emptyAvatar from '../images/empty-profile.png'
 import DisplayNameInput from './DisplayNameInput'
+import './ProfileEdit.css'
 
 function ProfileEdit ({ profile, setIsEditMode }) {
   const [displayName, setDisplayName] = useState(profile?.displayName)
   const [avatar, setAvatar] = useState()
-  const { loadDataFromServer } = useContext(UsersContext)
 
   const saveChanges = async e => {
     e.preventDefault()
-    // console.log('saving changes...')
     try {
-      console.log('docId', profile.docId)
       await userStore.editDispalyName(profile.docId, displayName)
       
       if (avatar) {
         const url = await cloudStorage.uploadAvatar(profile.uid, avatar)
         await userStore.editAvatarURL(profile.docId, url)
       } else {
-        console.log('empty avatar - can not upload')
       }
       setIsEditMode(false)
-      loadDataFromServer()
     } catch (error) {
       console.log('error', error.message)
     }
@@ -38,8 +34,8 @@ function ProfileEdit ({ profile, setIsEditMode }) {
   }
 
   return (
-    <div className='ProfilePage'>
-      <h2>Edit Profile</h2>
+    <div className='ProfileEdit'>
+      <div className='title'>Edit Your Profile</div>
       <form action='' onSubmit={saveChanges}>
         <div className='edit-mode'>
           <DisplayNameInput
@@ -61,14 +57,13 @@ function ProfileEdit ({ profile, setIsEditMode }) {
           <img
             alt='user'
             src={avatar ? URL.createObjectURL(avatar) : emptyAvatar}
-            // src={avatar}
           />
         </div>
         <div className='email'>{profile.email}</div>
-        <button type='submit' className='edit-mode'>
+        <button type='submit'>
           Save Changes
         </button>
-        <button className='edit-mode' onClick={() => setIsEditMode(false)}>
+        <button onClick={() => setIsEditMode(false)}>
           Cancel
         </button>
       </form>

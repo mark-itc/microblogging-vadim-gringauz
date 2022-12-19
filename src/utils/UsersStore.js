@@ -13,22 +13,25 @@ import {
 } from 'firebase/firestore'
 
 class UserStore {
-  constructor () {
+  constructor() {
     this.db = getFirestore(firebaseApp)
     this.usersCollection = collection(this.db, 'users')
   }
 
-  getUsersRealTime (setUsers) {
-    console.log(' starting real time users subscription ...')
+  getUsersRealTime(setUsers) {
     const unsubscribe = onSnapshot(this.usersCollection, usersSnapshot => {
       const { docs } = usersSnapshot
-      const loadedUsers = docs.map(doc => doc.data())
+      const loadedUsers = docs.map(doc => {
+        const user = doc.data()
+        user.docId = doc.id
+        return user
+      })
       setUsers(loadedUsers)
     })
     return unsubscribe
   }
 
-  async loadUsers () {
+  async loadUsers() {
     const usersSnapshot = await getDocs(this.usersCollection)
     const { docs } = usersSnapshot
     const loadedUsers = docs.map(doc => {
@@ -39,14 +42,14 @@ class UserStore {
     return loadedUsers
   }
 
-  async getAll () {
+  async getAll() {
     const usersSnapshot = await getDocs(this.usersCollection)
     const { docs } = usersSnapshot
     const fetchedUsers = docs.map(doc => doc.data())
     return { users: fetchedUsers, isFinishedLoading: true }
   }
 
-  async createNewUser (user) {
+  async createNewUser(user) {
     try {
       const docRef = await addDoc(this.usersCollection, user)
       return docRef
@@ -55,16 +58,15 @@ class UserStore {
     }
   }
 
-  async editDispalyName (docId, newDisplayName) {
-    const docRef = doc(this.db, 'users', docId)
+  async editDispalyName(docId, newDisplayName) {
+    const docRef = doc(this.db, 'users', 'fFjxjgogAH14cTQO1V9C')
 
     await updateDoc(docRef, {
       displayName: newDisplayName
     })
   }
 
-  async editAvatarURL (docId, newAvatarURL) {
-    // console.log('editing user avatar url...')
+  async editAvatarURL(docId, newAvatarURL) {
     const docRef = doc(this.db, 'users', docId)
 
     await updateDoc(docRef, {
@@ -72,7 +74,7 @@ class UserStore {
     })
   }
 
-  async isEmailExists (email) {
+  async isEmailExists(email) {
     const emailQuery = query(this.usersCollection, where('email', '==', email))
     const querySnapshot = await getDocs(emailQuery)
     if (querySnapshot.docs.length > 0) return true

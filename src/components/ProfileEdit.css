@@ -1,0 +1,49 @@
+.ProfileEdit {
+    margin-top: 30px;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.ProfileEdit .title {
+    font-size: 2.5rem;
+}
+
+.ProfileEdit form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.ProfileEdit .edit-mode {
+    width: 300px;
+}
+
+.ProfileEdit .avatar-lg {
+    position: relative;
+}
+
+.ProfileEdit .avatar-lg img {
+    background-color: #CCCCCC;
+    border-radius: 30px;
+    width: 200px;
+    aspect-ratio: 1/1;
+    /* object-fit: contain; */
+    object-fit: cover;
+}
+
+.ProfileEdit .email {
+    font-size: 2rem;
+    color: cadetblue;
+    text-decoration: underline;
+}
+
+
+@media screen and (width <=600px) {
+ 
+}

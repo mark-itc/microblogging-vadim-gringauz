@@ -33,7 +33,7 @@ function ProfilePage () {
           <>
             <ProfileOnlyView profile={profile} />
             {!uid || uid === signedInUserUid ? (
-              <button className='edit-mode' onClick={() => setIsEditMode(true)}>
+              <button onClick={() => setIsEditMode(true)}>
                 Edit Profile
               </button>
             ) : null}

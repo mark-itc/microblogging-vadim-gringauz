@@ -36,8 +36,6 @@ function TweetsList () {
   const { getUserFromUid } = useContext(UsersContext)
 
   useEffect(() => {
-    console.log('load more!')
-    console.log('currentLimit is now:', currentLimit)
     loadMoreTweets()
   }, [currentLimit]) // eslint-disable-line
 
@@ -70,7 +68,6 @@ function TweetsList () {
   }, [tweets])
 
   const loadMoreTweets = async () => {
-    console.log('currentLimit to set tweets for', currentLimit)
     //* NO NEED TO GET TWEETS AGAIN
     if (isReachedLimit) return
 

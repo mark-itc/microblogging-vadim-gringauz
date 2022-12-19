@@ -27,7 +27,7 @@ function UserMenu ({ isVisible, signOut, setShowMenu, signedUser }) {
             />
             <div className='user-info'>
               <div className='display-name'>Hello, {signedUser.displayName}</div>
-              <a href='/profile'>View Profile</a>
+              <a href={`/profile/${signedUser?.uid}`}>View Profile</a>
             </div>
           </div>
           <div className='footer'>

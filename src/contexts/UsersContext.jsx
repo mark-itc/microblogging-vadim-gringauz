@@ -24,7 +24,6 @@ function UsersContextProvider ({ children }) {
   }, [users]) // eslint-disable-line
 
   useEffect(() => {
-    console.log('signedUser', signedUser)
   }, [signedUser])
 
   const getUserFromUid = userUid => {

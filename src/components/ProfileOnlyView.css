@@ -1,0 +1,43 @@
+.ProfileOnlyView {
+    margin-top: 30px;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.ProfileOnlyView .display-name {
+    font-size: 2.5rem;
+}
+
+.ProfileOnlyView .avatar-lg {
+    position: relative;
+}
+
+.ProfileOnlyView .avatar-lg img {
+    background-color: #CCCCCC;
+    border-radius: 30px;
+    width: 200px;
+    aspect-ratio: 1/1;
+    /* object-fit: contain; */
+    object-fit: cover;
+}
+
+
+.ProfileOnlyView .email {
+    font-size: 2rem;
+    color: cadetblue;
+    text-decoration: underline;
+}
+
+.ProfileOnlyView .signed-in {
+    font-size: 1.2rem;
+    color:gray;
+}
+
+.ProfileOnlyView .created-in {
+    font-size: 1.2rem;
+    color:gray;
+}
