@@ -16,13 +16,17 @@ function ProfilePage () {
   const [profile, setProfile] = useState()
 
   useEffect(() => {
+
+  }, [])
+
+  useEffect(() => {
     if (users === 'before-loading') return
     if (!uid) {
       setProfile(getUserFromUid(signedInUserUid))
       return
     }
     setProfile(getUserFromUid(uid))
-  }, [users]) // eslint-disable-line
+  }, [users, uid]) // eslint-disable-line
 
   return (
     <div className='ProfilePage'>
@@ -32,7 +36,7 @@ function ProfilePage () {
         ) : (
           <>
             <ProfileOnlyView profile={profile} />
-            {!uid || uid === signedInUserUid ? (
+            {uid === signedInUserUid ? (
               <button onClick={() => setIsEditMode(true)}>
                 Edit Profile
               </button>
