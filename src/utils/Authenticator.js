@@ -12,7 +12,12 @@ import {
 import { getStorage, ref } from 'firebase/storage'
 import firebaseApp from './firebase-init'
 import { Timestamp } from '@firebase/firestore'
-import userStore from './userStore'
+<<<<<<< Updated upstream
+import userStore from './UserStore'
+=======
+import userStore from '../utils/UserStore.js'
+
+>>>>>>> Stashed changes
 
 class Authenticator {
   constructor () {
