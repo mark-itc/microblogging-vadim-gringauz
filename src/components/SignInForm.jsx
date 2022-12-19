@@ -19,15 +19,16 @@ function SignInForm () {
       email: email,
       password: password
     })
+    //* ERROR IS RETURNED
     if (typeof result !== Object) {
       setIsAlertOn(true)
       switch (result) {
         case 'auth/user-not-found': {
-          setAuthAlertMsg('User with this email not found')
+          setAuthAlertMsg('Wrong email or password!')
           break
         }
         case 'auth/wrong-password': {
-          setAuthAlertMsg('Wrong password!')
+          setAuthAlertMsg('Wrong email or password!')
           break
         }
         default:

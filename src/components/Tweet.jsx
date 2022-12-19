@@ -21,7 +21,7 @@ function Tweet ({ tweet, displayName, avatar = emptyAvatar }) {
         <div className='tweet-header'>
           {/* <a href={`/profile/${tweet.userUid}`}>
           </a> */}
-            <span className='user'>
+            <span className='user verified'>
               {displayName ? displayName : <>empty display name</>}
             </span>
           <span className='date'>

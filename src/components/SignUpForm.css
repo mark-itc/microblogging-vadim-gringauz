@@ -13,7 +13,7 @@
     align-items: center;
 }
 
-.SignUpForm .signup-link {
+.SignUpForm .signin-link {
     margin-top: 20px;
     display: flex;
     gap: 10px;

@@ -46,6 +46,12 @@
     max-width: 50%;
 }
 
+.Tweet .tweet-body .tweet-header .verified::after {
+    content: ✔;
+    color: blue;
+    top: 0;
+}
+
 .Tweet .tweet-body .tweet-header .date {
     color: #6C757D;
     font-size: 18px;
@@ -65,6 +71,10 @@
 }
 
 @media screen and (width <= 600px) {
+    .Tweet {
+        width: 100%;
+        border-radius: 0;
+    }
 
     .Tweet .tweet-body .tweet-header .user {
         font-size: 14px;

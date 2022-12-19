@@ -4,6 +4,7 @@
     top: 20px;
     background: rgb(21, 32, 43);
 }
+
 .text-container {
     box-sizing: border-box;
     width: 100%;
@@ -12,6 +13,8 @@
     padding: 3px;
     display: flex;
     position: relative;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 textarea {
@@ -56,6 +59,14 @@ button {
 button:hover {
     background: #064385dc;
 }
+
 button:disabled {
     background-color: gray;
+}
+
+@media screen and (width <=600px) {
+    .text-container {
+        width: 90%;
+
+    }
 }

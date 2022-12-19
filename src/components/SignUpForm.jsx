@@ -26,7 +26,15 @@ function SignUpForm () {
 
       if (typeof result !== Object) {
         setIsAlertOn(true)
-        setAuthAlertMsg(result)
+        console.log('result', result)
+        switch (result) {
+          case 'auth/email-already-in-use': {
+            setAuthAlertMsg('Email already exists')
+            break
+          }
+          default:
+            setAuthAlertMsg('Error signing up')
+        }
         setEmail('')
         setPassword('')
         setPassword2('')
@@ -39,17 +47,6 @@ function SignUpForm () {
       setPassword2('')
     }
   }
-
-  // useEffect(() => {
-  //   if (
-  //     email.length !== 0 ||
-  //     password.length !== 0 ||
-  //     password2.length !== 0
-  //   ) {
-  //     setIsAlertOn(false)
-  //     setAuthAlertMsg('')
-  //   }
-  // }, [email, password, password2])
 
   return (
     <div className='SignUpForm'>
@@ -78,6 +75,10 @@ function SignUpForm () {
         </button>
       </form>
       <Alert isOn={isAlertOn} message={authAlertMsg} />
+      <div className='signin-link'>
+        <span>Already have an account?</span>
+        <a href='/sign-in'>Sign in here</a>
+      </div>
     </div>
   )
 }

@@ -62,3 +62,9 @@
     outline: 3px lightskyblue solid;
 
 }
+
+@media screen and (width <= 600px) {
+    .Navbar .avatar-sm {
+        width: 40px; 
+    }
+}

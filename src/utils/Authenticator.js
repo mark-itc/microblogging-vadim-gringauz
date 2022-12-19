@@ -67,7 +67,7 @@ class Authenticator {
         isVerified: false
       })
     } catch (error) {
-      return error.message
+      return error.code
     }
   }
 
