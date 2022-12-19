@@ -1,11 +1,7 @@
 import React from 'react'
 import { useState, useContext } from 'react'
 import { UsersContext } from '../contexts/UsersContext'
-<<<<<<< Updated upstream
 import userStore from '../utils/UserStore'
-=======
-import userStore from '../utils/UserStore.js'
->>>>>>> Stashed changes
 import cloudStorage from '../utils/CloudStorage'
 import emptyAvatar from '../images/empty-profile.png'
 import DisplayNameInput from './DisplayNameInput'
