@@ -59,7 +59,7 @@ class UserStore {
   }
 
   async editDispalyName(docId, newDisplayName) {
-    const docRef = doc(this.db, 'users', 'fFjxjgogAH14cTQO1V9C')
+    const docRef = doc(this.db, 'users', docId)
 
     await updateDoc(docRef, {
       displayName: newDisplayName
