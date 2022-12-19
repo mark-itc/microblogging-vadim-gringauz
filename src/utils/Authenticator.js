@@ -12,7 +12,7 @@ import {
 import { getStorage, ref } from 'firebase/storage'
 import firebaseApp from './firebase-init'
 import { Timestamp } from '@firebase/firestore'
-import userStore from './UserStore'
+import userStore from './userStore'
 
 class Authenticator {
   constructor () {
