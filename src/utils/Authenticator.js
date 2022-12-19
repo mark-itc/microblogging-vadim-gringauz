@@ -97,6 +97,7 @@ class Authenticator {
     const result = await updateProfile(this.auth.currentUser, {
       displayName: newDisplayName
     })
+    return result
   }
 
   async signInWithGoogle () {

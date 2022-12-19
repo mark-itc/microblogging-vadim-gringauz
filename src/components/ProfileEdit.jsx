@@ -1,6 +1,5 @@
 import React from 'react'
-import { useState, useContext } from 'react'
-import { UsersContext } from '../contexts/UsersContext'
+import { useState } from 'react'
 import userStore from '../utils/UsersStore'
 import cloudStorage from '../utils/CloudStorage'
 import emptyAvatar from '../images/empty-profile.png'
