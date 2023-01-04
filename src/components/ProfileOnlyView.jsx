@@ -1,5 +1,5 @@
 import React from 'react'
-import emptyAvatar from '../images/empty-profile.png'
+import { Avatar } from '@mui/material'
 import './ProfileOnlyView.css'
 
 function ProfileOnlyView ({ profile }) {
@@ -7,9 +7,10 @@ function ProfileOnlyView ({ profile }) {
     <div className='ProfileOnlyView'>
       <div className='display-name'>{profile.displayName}</div>
       <div className='avatar-lg'>
-        <img
-          alt='user'
-          src={(profile?.avatar !== null && profile.avatar !== '') ? profile?.avatar : emptyAvatar}
+        <Avatar
+          alt={profile.displayName}
+          src={profile.avatar}
+          sx={{ width: 200, height: 200 }}
         />
       </div>
       <div className='email'>{profile.email}</div>

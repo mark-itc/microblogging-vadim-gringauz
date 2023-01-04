@@ -6,13 +6,13 @@ import { TweetsContextProvider } from '../contexts/TweetsContext'
 import { UsersContextProvider } from '../contexts/UsersContext'
 import { AuthContext } from '../contexts/AuthContext'
 import Navbar from '../components/Navbar'
+import DataLoader from './DataLoader'
 
 function PrivateRoute () {
   const { currentUser } = useContext(AuthContext)
   const { userData, isUserRetrieved } = currentUser
 
-  useEffect(() => {
-  }, [currentUser])
+  useEffect(() => {}, [currentUser])
 
   return (
     <>
@@ -21,8 +21,10 @@ function PrivateRoute () {
           <>
             <UsersContextProvider>
               <TweetsContextProvider>
-                <Navbar />
-                <Outlet />
+                <DataLoader>
+                  <Navbar />
+                  <Outlet />
+                </DataLoader>
               </TweetsContextProvider>
             </UsersContextProvider>
           </>

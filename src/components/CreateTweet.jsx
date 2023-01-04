@@ -1,14 +1,12 @@
 import React from 'react'
 import { useEffect, useContext, useRef, useReducer } from 'react'
 import { Timestamp } from 'firebase/firestore'
-import Alert from './Alert'
-import ClipLoader from 'react-spinners/ClipLoader'
-import CharsCounter from './CharsCounter'
+import { Box, Collapse, Alert } from '@mui/material'
 import { UsersContext } from '../contexts/UsersContext'
 import { TweetsContext } from '../contexts/TweetsContext'
 import { MAX_CHARS } from '../utils/globals'
 import tweetStore from '../utils/TweetStore'
-import './CreateTweet.css'
+import TextContainer from './TextContainer'
 
 function reducer (state, action) {
   switch (action.type) {
@@ -60,7 +58,7 @@ function CreateTweet ({ textareaHeight }) {
       userUid: signedUser.uid,
       date: Timestamp.fromDate(new Date())
     }
-    
+
     await postNew(newTweet)
     //? NOT NEEDED WITH REAL-TIME UPDATE?
     // const isPosted = await postNew(newTweet)
@@ -135,35 +133,20 @@ function CreateTweet ({ textareaHeight }) {
   }
 
   return (
-    <div className='stick-top'>
-      <form className='text-container' action='submit' onSubmit={handleSubmit}>
-        <textarea
-          autoFocus
-          name='content'
-          placeholder='What you have in mind...'
-          onChange={e => handleContentChange(e.target.value)}
-          value={state.content}
-          style={{
-            resize: 'none',
-            height: textareaHeight,
-            overflow: 'hidden'
-          }}
-          onKeyDown={handleKeyDown}
-        />
-        <div className='controls'>
-          <CharsCounter length={state.content.length} />
-          <button
-            ref={buttonRef}
-            type='submit'
-            disabled={!state.isContentValid}
-          >
-            <ClipLoader color={'white'} loading={state.isPosting} size={25} />
-            {!state.isPosting && <>Tweet</>}
-          </button>
-        </div>
-        <Alert isOn={state.isAlertOn} message={state.alertMessage} />
-      </form>
-    </div>
+    <Box sx={{ width: '100%', position: 'sticky', top: '20px', zIndex: '98' }}>
+      <TextContainer
+        handleSubmit={handleSubmit}
+        state={state}
+        handleKeyDown={handleKeyDown}
+        textareaHeight={textareaHeight}
+        handleContentChange={handleContentChange}
+        buttonRef={buttonRef}
+      />
+      <Collapse in={state.isAlertOn}>
+        <br />
+        <Alert severity='error'>{state.alertMessage}</Alert>
+      </Collapse>
+    </Box>
   )
 }
 export default CreateTweet

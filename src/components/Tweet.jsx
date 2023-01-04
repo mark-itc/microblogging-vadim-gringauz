@@ -1,40 +1,44 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
-import DateTimeDisplay from './DateTimeDisplay'
-import emptyAvatar from '../images/empty-profile.png'
-import './Tweet.css'
+import { Stack } from '@mui/material'
+import styled from 'styled-components'
+import TweetHeader from './TweetHeader'
+import TweetBody from './TweetBody'
+import TweetFooter from './TweetFooter'
 
-function Tweet ({ tweet, displayName, avatar = emptyAvatar }) {
+const TweetStyle = styled.div`
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  font-size: 0.8rem;
+  border: 1px black solid;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  width: 100%;
+  min-height: 150px;
+  padding: 5px 15px;
+
+  @media screen and (width < 600px) {
+    width: 100%;
+    border-radius: 0;
+    border: 0;
+  }
+`
+
+function Tweet ({ tweet, displayName, avatar }) {
   const { content, date } = tweet
-  const navigate = useNavigate()
 
   return (
-    <div className='Tweet'>
-      <div className='avatar'>
-        <img
-          src={avatar !== null && avatar !== '' ? avatar : emptyAvatar}
-          alt={displayName}
-          onClick={() => navigate(`/profile/${tweet.userUid}`)}
+    <TweetStyle>
+      <Stack spacing={1}>
+        <TweetHeader
+          displayName={displayName}
+          avatar={avatar}
+          tweet={tweet}
+          date={date}
         />
-      </div>
-      <div className='tweet-body'>
-        <div className='tweet-header'>
-          {/* <a href={`/profile/${tweet.userUid}`}>
-          </a> */}
-            <span className='user verified'>
-              {displayName ? displayName : <>empty display name</>}
-            </span>
-          <span className='date'>
-            {date ? (
-              <DateTimeDisplay timeStamp={date.toDate()} />
-            ) : (
-              <>empty date</>
-            )}
-          </span>
-        </div>
-        <p className='content'>{content ? content : <>empty content</>}</p>
-      </div>
-    </div>
+        <TweetBody content={content} />
+        <TweetFooter />
+      </Stack>
+    </TweetStyle>
   )
 }
 

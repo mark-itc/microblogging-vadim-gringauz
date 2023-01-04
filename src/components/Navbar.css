@@ -43,18 +43,11 @@
     text-decoration: underline;
 }
 
-.Navbar .user {
+.Navbar .avatar-sm {
     position: relative;
+    border-radius: 100%;
 }
 
-.Navbar .avatar-sm {
-    width: 30px; 
-    aspect-ratio: 1/1;
-    object-fit: contain;
-    background-color: #CCCCCC;
-    border-radius: 100%;
-    cursor: pointer;
-}
 .Navbar .avatar-sm:hover {
     outline: 3px white solid;
 }

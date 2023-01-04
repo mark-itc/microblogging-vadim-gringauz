@@ -28,15 +28,6 @@
     position: relative;
 }
 
-.ProfileEdit .avatar-lg img {
-    background-color: #CCCCCC;
-    border-radius: 30px;
-    width: 200px;
-    aspect-ratio: 1/1;
-    /* object-fit: contain; */
-    object-fit: cover;
-}
-
 .ProfileEdit .email {
     font-size: 2rem;
     color: cadetblue;

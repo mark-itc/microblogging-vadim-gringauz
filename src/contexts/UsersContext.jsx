@@ -7,7 +7,7 @@ const UsersContext = createContext()
 
 function UsersContextProvider ({ children }) {
   const [users, setUsers] = useState('before-loading')
-  const [signedUser, setSignedUser] = useState()
+  const [signedUser, setSignedUser] = useState({ isLoaded: false })
   const { currentUser } = useContext(AuthContext)
 
   useEffect(() => {
@@ -20,10 +20,11 @@ function UsersContextProvider ({ children }) {
 
   useEffect(() => {
     if (users === 'before-loading') return
-    setSignedUser(getUserFromUid(currentUser.userData.uid))
+    setSignedUser({...getUserFromUid(currentUser.userData.uid), isLoaded: true})
   }, [users]) // eslint-disable-line
 
   useEffect(() => {
+    console.log({signedUser})
   }, [signedUser])
 
   const getUserFromUid = userUid => {

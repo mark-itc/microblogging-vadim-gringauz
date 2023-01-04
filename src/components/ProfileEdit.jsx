@@ -1,8 +1,8 @@
 import React from 'react'
 import { useState } from 'react'
+import { Avatar } from '@mui/material'
 import userStore from '../utils/UsersStore'
 import cloudStorage from '../utils/CloudStorage'
-import emptyAvatar from '../images/empty-profile.png'
 import DisplayNameInput from './DisplayNameInput'
 import './ProfileEdit.css'
 
@@ -14,7 +14,7 @@ function ProfileEdit ({ profile, setIsEditMode }) {
     e.preventDefault()
     try {
       await userStore.editDispalyName(profile.docId, displayName)
-      
+
       if (avatar) {
         const url = await cloudStorage.uploadAvatar(profile.uid, avatar)
         await userStore.editAvatarURL(profile.docId, url)
@@ -53,18 +53,15 @@ function ProfileEdit ({ profile, setIsEditMode }) {
           onChange={handleAvatarChange}
         />
         <div className='avatar-lg'>
-          <img
-            alt='user'
-            src={avatar ? URL.createObjectURL(avatar) : emptyAvatar}
+          <Avatar
+            alt={displayName}
+            src={avatar ? URL.createObjectURL(avatar) : null}
+            sx={{ width: 200, height: 200 }}
           />
         </div>
         <div className='email'>{profile.email}</div>
-        <button type='submit'>
-          Save Changes
-        </button>
-        <button onClick={() => setIsEditMode(false)}>
-          Cancel
-        </button>
+        <button type='submit'>Save Changes</button>
+        <button onClick={() => setIsEditMode(false)}>Cancel</button>
       </form>
     </div>
   )

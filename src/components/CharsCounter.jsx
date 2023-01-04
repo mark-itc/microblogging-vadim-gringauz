@@ -1,10 +1,18 @@
 import React from 'react'
 import { MAX_CHARS } from '../utils/globals'
-import './CharsCounter.css'
+import styled from 'styled-components'
 
-export default function CharsCounter ({ length }) {
+const CharsCounterStyle = styled.div`
+  font-size: 0.8rem;
+  
+  .invalid-length {
+    color: red;
+  }
+`
+
+export default function CharsCounter({ length }) {
   return (
-    <div className='CharsCounter'>
+    <CharsCounterStyle>
       {length <= 140 ? (
         <span>
           {length}/{MAX_CHARS}
@@ -14,6 +22,6 @@ export default function CharsCounter ({ length }) {
           <span className='invalid-length'>{length}</span>/{MAX_CHARS}
         </span>
       )}
-    </div>
+    </CharsCounterStyle>
   )
 }

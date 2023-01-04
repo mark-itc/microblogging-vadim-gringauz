@@ -1,11 +1,10 @@
 import React from 'react'
 import { useContext, useEffect, useState, useRef, useCallback } from 'react'
-import ClipLoader from 'react-spinners/ClipLoader'
+import { CircularProgress, Box, Stack } from '@mui/material'
 import Tweet from './Tweet'
 import { TweetsContext } from '../contexts/TweetsContext'
 import { UsersContext } from '../contexts/UsersContext'
 import tweetStore from '../utils/TweetStore'
-import './TweetsList.css'
 
 function TweetsList () {
   const { tweets, setTweets, isLoading } = useContext(TweetsContext)
@@ -83,34 +82,41 @@ function TweetsList () {
   }
 
   return (
-    <div className='TweetsList' onScroll={loadMoreTweets}>
-      <div className='loader'>
-        <ClipLoader color={'white'} loading={isLoading} size={100} />
-      </div>
-      {tweets?.map((tweet, index) => {
-        const { displayName, avatar } = getUserFromUid(tweet.userUid)
-        if (tweets.length === index + 1) {
+    <Stack sx={{ marginBottom: '30px', width: '100%' }}>
+      {isLoading ? (
+        <CircularProgress />
+      ) : (
+        tweets.map((tweet, index) => {
+          const { displayName, avatar } = getUserFromUid(tweet.userUid)
+          if (tweets.length === index + 1) {
+            return (
+              <Tweet
+                key={tweet.id}
+                tweet={tweet}
+                displayName={displayName}
+                avatar={avatar}
+              />
+            )
+          }
           return (
-            <Tweet
-              key={tweet.id}
-              tweet={tweet}
-              displayName={displayName}
-              avatar={avatar}
-            />
+            <div ref={lastTweetDivRef}>
+              <Tweet
+                key={tweet.id}
+                tweet={tweet}
+                displayName={displayName}
+                avatar={avatar}
+              />
+            </div>
           )
-        }
-        return (
-          <div ref={lastTweetDivRef}>
-            <Tweet
-              key={tweet.id}
-              tweet={tweet}
-              displayName={displayName}
-              avatar={avatar}
-            />
-          </div>
-        )
-      })}
-    </div>
+        })
+      )}
+      <div>
+        No more tweets...
+        <br />
+        <br />
+        <br />
+      </div>
+    </Stack>
   )
 }
 

@@ -1,13 +1,16 @@
 import React from 'react'
-import './VersionInfo.css'
+import styled from 'styled-components'
 
-function VersionInfo () {
+const VersionInfoStyle = styled.div`
+  color: gray;
+  font-size: 0.7rem;
+`
+
+function VersionInfo() {
   return (
-    <>
-      <h5 className='VersionInfo'>
-        VG / ITC / React - Microblogging / M-6 Ver 1.1.0
-      </h5>
-    </>
+    <VersionInfoStyle>
+      VG / ITC / React - Microblogging / M-6.5 Ver 0.2.0
+    </VersionInfoStyle>
   )
 }
 

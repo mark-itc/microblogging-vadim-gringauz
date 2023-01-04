@@ -7,7 +7,7 @@ import './HomePage.css'
 
 function HomePage () {
   const [footerNavAppear, setFooterNavAppear] = useState('')
-  const [textareaHeight, setTextareaHeight] = useState('180px')
+  const [textareaHeight, setTextareaHeight] = useState(6)
 
   window.onscroll = () => {
     if (
@@ -15,14 +15,14 @@ function HomePage () {
       document.documentElement.scrollTop > 100
     ) {
       setFooterNavAppear('fixed')
-      setTextareaHeight('74px')
+      setTextareaHeight(3)
       return
     }
     if (footerNavAppear === 'fixed') {
       setFooterNavAppear('')
     }
-    if (textareaHeight !== 180) {
-      setTextareaHeight('180px')
+    if (textareaHeight !== 6) {
+      setTextareaHeight(6)
     }
   }
 
