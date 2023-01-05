@@ -1,14 +1,9 @@
 ## React.JS Project #2: <img src='./assets/logo.png' width=30px /> Microblogging App
-# Milestone :six: Ready for Review 18/12!
+# New design!!! 
 
 ## [App Deployed to Firebase!](https://itc-microblogging-85128.web.app) -> Best to view on mobile!
 
-**Code Design:** 
-
-![components](components.png)
-
-
-**UI/UX Design**: Same as in the FIGMA, but with a few addons - bottom navbar, counter for tweet-chars, size of fonts
+### Style: Material UI + Styled-Components
 
 ### *Progress:*
 - Milestone 1 - Mock up: :heavy_check_mark:
