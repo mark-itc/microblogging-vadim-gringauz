@@ -7,14 +7,15 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  /* color: white; */
   position: relative;
 }
 
 
 @media screen and (width >= 1026px) {
   .App {
-      width: 1026px;
+      /* width: 1026px; */
+      width: 100%;
   }
 }
 

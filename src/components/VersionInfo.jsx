@@ -2,14 +2,17 @@ import React from 'react'
 import styled from 'styled-components'
 
 const VersionInfoStyle = styled.div`
-  color: gray;
   font-size: 0.7rem;
+  position: fixed;
+  left: 10;
+  top: 5;
+  z-index: 99;
 `
 
 function VersionInfo() {
   return (
     <VersionInfoStyle>
-      VG / ITC / React - Microblogging / M-6.5 Ver 0.2.0
+      VG / ITC / React - Microblogging / M-6.5 Ver 0.3.0
     </VersionInfoStyle>
   )
 }

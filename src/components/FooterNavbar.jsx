@@ -1,55 +1,68 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHouse } from '@fortawesome/free-solid-svg-icons'
-import { faUser } from '@fortawesome/free-solid-svg-icons'
-import { faSliders } from '@fortawesome/free-solid-svg-icons'
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import { useState, useContext, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { BottomNavigation, BottomNavigationAction, Paper } from '@mui/material'
+import HomeIcon from '@mui/icons-material/Home'
+import PersonIcon from '@mui/icons-material/Person'
+import SettingsIcon from '@mui/icons-material/Settings'
+import SearchIcon from '@mui/icons-material/Search'
+import styled from 'styled-components'
+import { UsersContext } from '../contexts/UsersContext'
 import './FooterNavbar.css'
 
+const FooterNavbarStyle = styled.div`
+  width: inherit;
+  position: fixed;
+  bottom: -60px;
+  transition: 0.5s;
+
+  .fixed {
+    bottom: 0;
+  }
+
+  .Mui-selected {
+    color: white !important;
+  }
+
+  .MuiBottomNavigationAction-root {
+    color: rgba(255, 255, 255, 0.5);
+  }
+`
+
 function FooterNavbar ({ footerNavAppear }) {
-  const activeClassName = 'viewed'
+  const { signedUser } = useContext(UsersContext)
+
+  const navigate = useNavigate()
+
+  const [value, setValue] = useState(0)
+  // const ref = React.useRef(null);
+  // const [messages, setMessages] = React.useState(() => refreshMessages());
+
+  useEffect(() => {
+    // ref.current.ownerDocument.body.scrollTop = 0;
+    // setMessages(refreshMessages());
+
+    console.log({value})
+  }, [value]);
 
   return (
-    <div className={`start-position ${footerNavAppear}`}>
-      <nav className='FooterNavbar'>
-        <ul>
-          <li>
-            <NavLink
-              to='/'
-              className={({ isActive }) =>
-                isActive ? activeClassName : undefined
-              }
-            >
-              <FontAwesomeIcon icon={faHouse} />
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to='/profile'
-              className={({ isActive }) =>
-                isActive ? activeClassName : undefined
-              }
-            >
-              <FontAwesomeIcon icon={faUser} />
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to='/settings'
-              className={({ isActive }) =>
-                isActive ? activeClassName : undefined
-              }
-            >
-              <FontAwesomeIcon icon={faSliders} />
-            </NavLink>
-          </li>
-          <li>
-            <FontAwesomeIcon icon={faMagnifyingGlass} />
-          </li>
-        </ul>
-      </nav>
-    </div>
+    <FooterNavbarStyle className={footerNavAppear}>
+      <Paper elevation={8}>
+        <BottomNavigation
+          color='primary'
+          value={value}
+          onChange={(event, newValue) => {
+            setValue(newValue)
+          }}
+          sx={{ width: '100%', bgcolor: 'primary.main' }}
+        >
+          <BottomNavigationAction label='Home' icon={<HomeIcon />} />
+          <BottomNavigationAction label='Profile' icon={<PersonIcon />} />
+          <BottomNavigationAction label='Settings' icon={<SettingsIcon />} />
+          <BottomNavigationAction label='Search' icon={<SearchIcon />} />
+        </BottomNavigation>
+      </Paper>
+    </FooterNavbarStyle>
   )
 }
 

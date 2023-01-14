@@ -1,6 +1,7 @@
 import React from 'react'
 import { useEffect } from 'react'
 import { Navigate, Outlet } from 'react-router-dom'
+import { Box } from '@mui/material'
 import { useContext } from 'react'
 import { TweetsContextProvider } from '../contexts/TweetsContext'
 import { UsersContextProvider } from '../contexts/UsersContext'
@@ -23,7 +24,13 @@ function PrivateRoute () {
               <TweetsContextProvider>
                 <DataLoader>
                   <Navbar />
-                  <Outlet />
+                  <Box sx={{
+                    width: '100%',
+                    position: 'absolute',
+                    top: '100px'
+                  }}>
+                    <Outlet />
+                  </Box>
                 </DataLoader>
               </TweetsContextProvider>
             </UsersContextProvider>

@@ -9,15 +9,13 @@ const TweetStyle = styled.div`
   background: var(--bg-secondary);
   color: var(--text-primary);
   font-size: 0.8rem;
-  border: 1px black solid;
   border-radius: 6px;
   margin-bottom: 20px;
   width: 100%;
   min-height: 150px;
   padding: 5px 15px;
 
-  @media screen and (width < 600px) {
-    width: 100%;
+  @media screen and (width < 900px) {
     border-radius: 0;
     border: 0;
   }

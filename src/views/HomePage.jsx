@@ -1,39 +1,32 @@
 import React from 'react'
-import { useState } from 'react'
-import FooterNavbar from '../components/FooterNavbar'
+import { Container, Stack, Box } from '@mui/material'
 import CreateTweet from '../components/CreateTweet'
 import TweetsList from '../components/TweetsList'
-import './HomePage.css'
+import UserDashboard from '../components/UserDashboard'
+import SearchTweets from '../components/SearchTweets'
+
 
 function HomePage () {
-  const [footerNavAppear, setFooterNavAppear] = useState('')
-  const [textareaHeight, setTextareaHeight] = useState(6)
-
-  window.onscroll = () => {
-    if (
-      document.body.scrollTop > 100 ||
-      document.documentElement.scrollTop > 100
-    ) {
-      setFooterNavAppear('fixed')
-      setTextareaHeight(3)
-      return
-    }
-    if (footerNavAppear === 'fixed') {
-      setFooterNavAppear('')
-    }
-    if (textareaHeight !== 6) {
-      setTextareaHeight(6)
-    }
-  }
-
   return (
-    <>
-      <div className='HomePage'>
-        <CreateTweet textareaHeight={textareaHeight} />
-        <TweetsList />
-      </div>
-      <FooterNavbar footerNavAppear={footerNavAppear} />
-    </>
+    <Container>
+      <Stack
+        justifyContent={'space-between'}
+        direction={'row'}
+        spacing={{md: 2}}
+        width={'100%'}
+      >
+        <Box sx={{ display: { xs: 'none', sm: 'none', md: 'block' }, width: '200px' }}>
+          <UserDashboard />
+        </Box>
+        <Stack spacing={0} width={{xs: '100%', sm: '100%', md: '600px'}} >
+          <CreateTweet />
+          <TweetsList />
+        </Stack>
+        <Box sx={{ display: { xs: 'none', sm: 'none', md: 'block' }, width: '200px' }}>
+          <SearchTweets />
+        </Box>
+      </Stack>
+    </Container>
   )
 }
 

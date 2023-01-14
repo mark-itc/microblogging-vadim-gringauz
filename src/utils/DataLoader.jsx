@@ -1,10 +1,10 @@
 import React from 'react'
 import { useContext } from 'react'
-import { CircularProgress } from '@mui/material'
+import { CircularProgress, Stack } from '@mui/material'
 import Alert from '@mui/material/Alert'
 import { UsersContext } from '../contexts/UsersContext'
 
-function DataLoader ({ children }) {
+function DataLoader({ children }) {
   const { signedUser } = useContext(UsersContext)
   //! COMPONENT VERIFIES ALL USERS DATA AND SIGNED-IN USER DATA ARE LOADED FROM SERVER
   //! signedUser.isLoaded = true ONLY IF AND AFTER users IS LOADED
@@ -19,7 +19,9 @@ function DataLoader ({ children }) {
           </Alert>
         )
       ) : (
-        <CircularProgress />
+        <Stack sx={{ width: '100vw', height: '100vh' }} alignItems={'center'} justifyContent={'center'} >
+          <CircularProgress />
+        </Stack>
       )}
     </>
   )

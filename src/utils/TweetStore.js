@@ -12,12 +12,14 @@ import {
   limit,
   getCountFromServer,
   startAt,
+  where,
+  getDoc
 } from 'firebase/firestore'
 
 class TweetStore {
   constructor () {
-    const db = getFirestore(firebaseApp)
-    this.tweetsCollection = collection(db, 'tweets')
+    this.db = getFirestore(firebaseApp)
+    this.tweetsCollection = collection(this.db, 'tweets')
   }
 
   async getTweetsRealTime (setTweets, getCurrentLimit, setIsReachedLimit) {
@@ -29,7 +31,7 @@ class TweetStore {
     )
     const unsubscribe = onSnapshot(q, querySnapshot => {
       const { docs } = querySnapshot
-      const fetchedTweets = docs.map(doc => doc.data())
+      const fetchedTweets = docs.map(doc => ({ id: doc.id, ...doc.data() }))
       setTweets(fetchedTweets)
     })
     return unsubscribe
@@ -58,8 +60,22 @@ class TweetStore {
     )
     const tweetsSnapshot = await getDocs(next)
     const { docs } = tweetsSnapshot
-    const fetchedTweets = docs.map(doc => doc.data())
+    const fetchedTweets = docs.map(doc => ({ id: doc.id, ...doc.data() }))
     return fetchedTweets
+  }
+
+  async getTweetById (id) {
+    const docRef = doc(this.db, 'tweets', id)
+    const docSnap = await getDoc(docRef)
+
+    if (docSnap.exists()) {
+      console.log('Document data:', docSnap.data())
+    } else {
+      // doc.data() will be undefined in this case
+      console.log('No such document!')
+    }
+
+    return docSnap.data()
   }
 
   async postNew (tweet) {

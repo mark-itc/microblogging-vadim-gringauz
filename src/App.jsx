@@ -4,6 +4,7 @@ import PrivateRoute from './utils/PrivateRoute'
 import ProfilePage from './views/ProfilePage'
 import SignInPage from './views/SignInPage'
 import SignUpPage from './views/SignUpPage'
+import TweetPage from './views/TweetPage'
 import ErrorPage from './views/ErrorPage'
 import HomePage from './views/HomePage'
 import './App.css'
@@ -29,6 +30,10 @@ function App () {
         {
           path: '/profile/:uid',
           element: <ProfilePage />
+        },
+        {
+          path: '/tweet/:id',
+          element: <TweetPage />
         },
         {
           path: '/settings',

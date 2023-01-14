@@ -4,7 +4,7 @@ const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css2?family=Prosto+One&display=swap'); 
 
   :root {
-    --bg-primary: azure;
+    --bg-primary: #DCDCDC;
     --bg-secondary: white;
     --text-primary: black;
     --text-secondary: rgba(9, 9, 75, 0.89);

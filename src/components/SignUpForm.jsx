@@ -1,86 +1,171 @@
-import React from 'react'
+import * as React from 'react'
 import { useState } from 'react'
-import authenticator from '../utils/Authenticator'
-import EmailInput from './EmailInput'
-import PasswordInput from './PasswordInput'
-import DisplayNameInput from './DisplayNameInput'
-import Alert from './Alert'
-import './SignUpForm.css'
+import {
+    InputAdornment,
+    IconButton
+} from '@mui/material';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import Link from '@mui/material/Link';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Visibility from '@mui/icons-material/Visibility'
+import VisibilityOff from '@mui/icons-material/VisibilityOff'
 
-function SignUpForm () {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [password2, setPassword2] = useState('')
-  const [displayName, setDisplayName] = useState('')
-  const [authAlertMsg, setAuthAlertMsg] = useState('')
-  const [isAlertOn, setIsAlertOn] = useState(false)
+const theme = createTheme();
 
-  const handleSubmit = async e => {
-    e.preventDefault()
-    if (password === password2) {
-      const result = await authenticator.createNewUser({
-        email: email,
-        password: password,
-        displayName: displayName
-      })
+function SignUpForm() {
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [passwordRepeat, setPasswordRepeat] = useState('')
+    const [displayName, setDisplayName] = useState('')
+    const [alertMessage, setAlertMessage] = useState('')
+    const [isAlertOn, setIsAlertOn] = useState(false)
+    const [showPassword, setShowPassword] = useState(false)
 
-      if (typeof result !== Object) {
-        setIsAlertOn(true)
-        console.log('result', result)
-        switch (result) {
-          case 'auth/email-already-in-use': {
-            setAuthAlertMsg('Email already exists')
-            break
-          }
-          default:
-            setAuthAlertMsg('Error signing up')
-        }
-        setEmail('')
-        setPassword('')
-        setPassword2('')
-        setDisplayName('')
-      }
-    } else {
-      setIsAlertOn(true)
-      setAuthAlertMsg('Passwords are not the same')
-      setPassword('')
-      setPassword2('')
+    const handleClickShowPassword = () => setShowPassword(show => !show)
+
+    const handleMouseDownPassword = event => {
+        event.preventDefault()
     }
-  }
 
-  return (
-    <div className='SignUpForm'>
-      <form action='' onSubmit={handleSubmit}>
-        <h4>Sign up</h4>
-        <EmailInput email={email} setEmail={setEmail} />
-        <PasswordInput password={password} setPassword={setPassword} />
-        <PasswordInput
-          customLabel='Confirm password'
-          password={password2}
-          setPassword={setPassword2}
-        />
-        <DisplayNameInput
-          displayName={displayName}
-          setDisplayName={setDisplayName}
-        />
-        <button
-          type='submit'
-          disabled={
-            email.replaceAll(' ', '').length === 0 ||
-            password.replaceAll(' ', '').length === 0 ||
-            password2.replaceAll(' ', '').length === 0
-          }
-        >
-          Sign up
-        </button>
-      </form>
-      <Alert isOn={isAlertOn} message={authAlertMsg} />
-      <div className='signin-link'>
-        <span>Already have an account?</span>
-        <a href='/sign-in'>Sign in here</a>
-      </div>
-    </div>
-  )
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const data = new FormData(event.currentTarget);
+        console.log({
+            email: data.get('email'),
+            password: data.get('password'),
+        });
+    };
+
+    return (
+        <ThemeProvider theme={theme}>
+            <Container component="main" maxWidth="xs">
+                <CssBaseline />
+                <Box
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                    }}
+                >
+                    <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+                        <LockOutlinedIcon />
+                    </Avatar>
+                    <Typography component="h1" variant="h5">
+                        Sign up
+                    </Typography>
+                    <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12}>
+                                <TextField
+                                    value={email}
+                                    onChange={e => setEmail(e.target.value)} required
+                                    fullWidth
+                                    id="email"
+                                    label="Email Address"
+                                    name="email"
+                                    autoComplete="email"
+                                    autoFocus
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    autoComplete="given-name"
+                                    name="firstName"
+                                    fullWidth
+                                    id="firstName"
+                                    label="First Name"
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    fullWidth
+                                    id="lastName"
+                                    label="Last Name"
+                                    name="lastName"
+                                    autoComplete="family-name"
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    value={displayName}
+                                    autoComplete="given-name"
+                                    name="displayName"
+                                    fullWidth
+                                    id="displayName"
+                                    label="Display Name"
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    value={password}
+                                    onChange={e => setPassword(e.target.value)}
+                                    required
+                                    fullWidth
+                                    name="password"
+                                    label="Password"
+                                    type={showPassword ? 'text' : 'password'}
+                                    id="password"
+                                    autoComplete="new-password"
+                                    InputProps={{
+                                        endAdornment: (
+                                            <InputAdornment position="end">
+                                                <IconButton
+                                                    onClick={handleClickShowPassword}
+                                                    onMouseDown={handleMouseDownPassword}
+                                                    edge="end"
+                                                >
+                                                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                                                </IconButton>
+                                            </InputAdornment>
+                                        ),
+                                    }}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    value={passwordRepeat}
+                                    onChange={e => setPasswordRepeat(e.target.value)}
+                                    required
+                                    fullWidth
+                                    name="passwordRepeat"
+                                    label="Verify Password"
+                                    type={showPassword ? 'text' : 'password'}
+                                    id="passwordRepeat"
+                                    autoComplete="new-password"
+                                />
+                            </Grid>
+                        </Grid>
+                        <Button
+                            type="submit"
+                            disabled={
+                                email.replaceAll(' ', '').length === 0 ||
+                                password.replaceAll(' ', '').length === 0 ||
+                                passwordRepeat.replaceAll(' ', '').length === 0
+                            }
+                            fullWidth
+                            variant="contained"
+                            sx={{ mt: 3, mb: 2 }}
+                        >
+                            Sign Up
+                        </Button>
+                        <Link href='/sign-in' variant="body2">
+                            Already have an account? Sign in
+                        </Link>
+                    </Box>
+                </Box>
+            </Container>
+        </ThemeProvider>
+    );
 }
 
 export default SignUpForm

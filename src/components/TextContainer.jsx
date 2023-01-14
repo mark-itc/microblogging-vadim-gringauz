@@ -7,10 +7,9 @@ const TextContainerStyle = styled.form`
   box-sizing: border-box;
   width: 100%;
   border: 2px solid #cccccc;
-  border-radius: 6px;
-  padding: 3px;
+  border-radius: 20px;
+  padding: 10px;
   display: flex;
-  position: relative;
   margin-right: auto;
   margin-left: auto;
   background-color: whitesmoke;
@@ -32,7 +31,6 @@ const TextContainerStyle = styled.form`
     line-height: 22px;
     border: 0;
     outline: none;
-    border-radius: 6px;
     resize: 'none';
     overflow: 'hidden';
     transition: 0.5s;
@@ -57,7 +55,7 @@ function TextContainer (props) {
         placeholder='What you have in mind...'
         onChange={e => handleContentChange(e.target.value)}
         value={state.content}
-        minRows={textareaHeight}
+        minRows={6}
         style={{
           resize: 'none',
           overflow: 'hidden'

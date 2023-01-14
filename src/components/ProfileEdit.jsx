@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import { Avatar } from '@mui/material'
+import { Collapse, Alert, Stack } from '@mui/material'
 import userStore from '../utils/UsersStore'
 import cloudStorage from '../utils/CloudStorage'
 import DisplayNameInput from './DisplayNameInput'
@@ -9,6 +10,9 @@ import './ProfileEdit.css'
 function ProfileEdit ({ profile, setIsEditMode }) {
   const [displayName, setDisplayName] = useState(profile?.displayName)
   const [avatar, setAvatar] = useState()
+  const [isAlertOn, setIsAlertOn] = useState(false)
+  const [alertMessage, setAlertMessage] = useState()
+
 
   const saveChanges = async e => {
     e.preventDefault()
@@ -16,13 +20,22 @@ function ProfileEdit ({ profile, setIsEditMode }) {
       await userStore.editDispalyName(profile.docId, displayName)
 
       if (avatar) {
-        const url = await cloudStorage.uploadAvatar(profile.uid, avatar)
-        await userStore.editAvatarURL(profile.docId, url)
+        const result = await cloudStorage.uploadAvatar(profile.uid, avatar)
+        if (result.status === 'success') {
+          const { url } = result
+          await userStore.editAvatarURL(profile.docId, url)
+          return
+        }
+        if (result.status === 'fail') {
+          console.log('fail!!')
+          setAlertMessage('failed to load new avatar')
+          setIsAlertOn(true)
+        }
       } else {
       }
       setIsEditMode(false)
     } catch (error) {
-      console.log('error', error.message)
+      console.log(error)
     }
   }
 
@@ -34,6 +47,9 @@ function ProfileEdit ({ profile, setIsEditMode }) {
 
   return (
     <div className='ProfileEdit'>
+      <Collapse in={isAlertOn}>
+        <Alert severity='error'>{alertMessage}</Alert>
+      </Collapse>
       <div className='title'>Edit Your Profile</div>
       <form action='' onSubmit={saveChanges}>
         <div className='edit-mode'>

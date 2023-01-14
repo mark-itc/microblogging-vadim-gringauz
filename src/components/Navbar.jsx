@@ -2,32 +2,49 @@ import React from 'react'
 import { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { NavLink } from 'react-router-dom'
-import { Avatar } from '@mui/material'
+import {
+  Container,
+  Avatar,
+  AppBar,
+  Box,
+  Toolbar,
+  IconButton,
+  Typography,
+  Menu,
+  Tooltip,
+  MenuItem,
+  InputBase
+} from '@mui/material'
+import MenuIcon from '@mui/icons-material/Menu'
+import SearchIcon from '@mui/icons-material/Search'
+import styled from 'styled-components'
 import { UsersContext } from '../contexts/UsersContext'
 import authenticator from '../utils/Authenticator'
-import Search from './SearchBar'
 import UserMenu from './UserMenu'
 import Logo from './Logo'
-import './Navbar.css'
-import CursorPointer from '../styled-components/CursorPointer'
 
-import AppBar from '@mui/material/AppBar'
-import Box from '@mui/material/Box'
-import Toolbar from '@mui/material/Toolbar'
-import IconButton from '@mui/material/IconButton'
-import Typography from '@mui/material/Typography'
-import Menu from '@mui/material/Menu'
-import MenuIcon from '@mui/icons-material/Menu'
-import Container from '@mui/material/Container'
-import Button from '@mui/material/Button'
-import Tooltip from '@mui/material/Tooltip'
-import MenuItem from '@mui/material/MenuItem'
+const NavBarStyle = styled.div`
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 98;
+  a {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.5);
+  }
 
-const pages = ['Home', 'Profile', 'Settings']
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
+  a:hover {
+    color: black;
+    text-decoration: underline;
+  }
+
+  .active {
+    color: white;
+  }
+`
 
 function Navbar () {
-  const activeClassName = 'viewed'
+  const activeClassName = 'active'
   const { signedUser } = useContext(UsersContext)
   const [showMenu, setShowMenu] = useState(false)
 
@@ -56,9 +73,9 @@ function Navbar () {
   }
 
   return (
-    <>
-      <AppBar position='static'>
-        <Container maxWidth='xl'>
+    <NavBarStyle>
+      <AppBar sx={{ paddingTop: '15px' }}>
+        <Container maxWidth='lg'>
           <Toolbar disableGutters>
             <Typography
               variant='h6'
@@ -76,9 +93,7 @@ function Navbar () {
               }}
             >
               <Logo size={40} />
-              VG-Tweets
             </Typography>
-
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
               <IconButton
                 size='large'
@@ -105,22 +120,31 @@ function Navbar () {
                   display: { xs: 'block', md: 'none' }
                 }}
               >
-                <MenuItem key='home' onClick={e => {
-                  handleCloseNavMenu()
-                  navigate('/')
-                  }}>
+                <MenuItem
+                  key='home'
+                  onClick={e => {
+                    handleCloseNavMenu()
+                    navigate('/')
+                  }}
+                >
                   <Typography textAlign='center'>HOME</Typography>
                 </MenuItem>
-                <MenuItem key='profile' onClick={e => {
-                  handleCloseNavMenu()
-                  navigate(`/profile/${signedUser?.uid}`)
-                  }}>
+                <MenuItem
+                  key='profile'
+                  onClick={e => {
+                    handleCloseNavMenu()
+                    navigate(`/profile/${signedUser?.uid}`)
+                  }}
+                >
                   <Typography textAlign='center'>PROFILE</Typography>
                 </MenuItem>
-                <MenuItem key='settings' onClick={e => {
-                  handleCloseNavMenu()
-                  navigate('/settings')
-                  }}>
+                <MenuItem
+                  key='settings'
+                  onClick={e => {
+                    handleCloseNavMenu()
+                    navigate('/settings')
+                  }}
+                >
                   <Typography textAlign='center'>SETTINGS</Typography>
                 </MenuItem>
               </Menu>
@@ -176,100 +200,45 @@ function Navbar () {
                 SETTINGS
               </NavLink>
             </Box>
-
+            <InputBase
+              // sx={{ ml: 1, flex: 1 }}
+              placeholder='Search Tweets...'
+              autoComplete
+              sx={{
+                display: { xs: 'none', md: 'flex' },
+                ml: 1,
+                flex: 1,
+                backgroundColor: 'rgba(255, 255, 255, 0.5)',
+                borderRadius: '10px',
+                padding: '5px'
+              }}
+            />
+            <IconButton type='button'>
+              <SearchIcon />
+            </IconButton>
             <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title='Open settings'>
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt='Remy Sharp' src='/static/images/avatar/2.jpg' />
+              <Tooltip title={signedUser.displayName}>
+                <IconButton
+                  onClick={() => setShowMenu(!showMenu)}
+                  sx={{ p: 0 }}
+                >
+                  <Avatar
+                    alt={signedUser.displayName}
+                    src={signedUser.avatar}
+                  />
                 </IconButton>
               </Tooltip>
-              <Menu
-                sx={{ mt: '45px' }}
-                id='menu-appbar'
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right'
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right'
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-              >
-                {/* {settings.map(setting => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign='center'>{setting}</Typography>
-                  </MenuItem>
-                ))} */}
-                <UserMenu
-                  isVisible={true}
-                  // isVisible={showMenu}
-                  signOut={signOut}
-                  setShowMenu={setShowMenu}
-                  signedUser={signedUser}
-                />{' '}
-              </Menu>
             </Box>
           </Toolbar>
         </Container>
+        <UserMenu
+          isVisible={showMenu}
+          signOut={signOut}
+          setShowMenu={setShowMenu}
+          signedUser={signedUser}
+        />
       </AppBar>
-      <nav className='Navbar'>
-        <ul>
-          <li>
-            <NavLink
-              to='/'
-              className={({ isActive }) =>
-                isActive ? activeClassName : undefined
-              }
-            >
-              Home
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to={`/profile/${signedUser?.uid}`}
-              className={({ isActive }) =>
-                isActive ? activeClassName : undefined
-              }
-            >
-              Profile
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to='/settings'
-              className={({ isActive }) =>
-                isActive ? activeClassName : undefined
-              }
-            >
-              Settings
-            </NavLink>
-          </li>
-          <li className='align-left'>
-            <Search />
-          </li>
-        </ul>
-        <div className='avatar-sm'>
-          <CursorPointer>
-            <Avatar
-              alt={signedUser.displayName}
-              src={signedUser.avatar}
-              // sx={window.screen.width > 600 ? { width: 30, height: 30 } : { width: 80, height: 80 }}
-              onClick={() => setShowMenu(!showMenu)}
-            />
-          </CursorPointer>
-          <UserMenu
-            isVisible={showMenu}
-            signOut={signOut}
-            setShowMenu={setShowMenu}
-            signedUser={signedUser}
-          />
-        </div>
-      </nav>
-    </>
+    </NavBarStyle>
   )
 }
 

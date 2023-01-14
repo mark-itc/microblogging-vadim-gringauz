@@ -9,7 +9,6 @@ function TweetsContextProvider ({ children }) {
 
   useEffect(() => {
     if (tweets.length > 0) setIsLoading(false)
-    
   }, [tweets])
 
   return (

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useEffect, useContext, useRef, useReducer } from 'react'
 import { Timestamp } from 'firebase/firestore'
-import { Box, Collapse, Alert } from '@mui/material'
+import { Collapse, Alert, Stack } from '@mui/material'
 import { UsersContext } from '../contexts/UsersContext'
 import { TweetsContext } from '../contexts/TweetsContext'
 import { MAX_CHARS } from '../utils/globals'
@@ -33,7 +33,6 @@ function reducer (state, action) {
 
 function CreateTweet ({ textareaHeight }) {
   const { setTweets } = useContext(TweetsContext)
-  // const { currentUser } = useContext(AuthContext)  //! DEL?
   const { signedUser } = useContext(UsersContext)
   const buttonRef = useRef(null)
 
@@ -133,20 +132,20 @@ function CreateTweet ({ textareaHeight }) {
   }
 
   return (
-    <Box sx={{ width: '100%', position: 'sticky', top: '20px', zIndex: '98' }}>
-      <TextContainer
-        handleSubmit={handleSubmit}
-        state={state}
-        handleKeyDown={handleKeyDown}
-        textareaHeight={textareaHeight}
-        handleContentChange={handleContentChange}
-        buttonRef={buttonRef}
-      />
+    <Stack>
+        <TextContainer
+          handleSubmit={handleSubmit}
+          state={state}
+          handleKeyDown={handleKeyDown}
+          textareaHeight={textareaHeight}
+          handleContentChange={handleContentChange}
+          buttonRef={buttonRef}
+        />
       <Collapse in={state.isAlertOn}>
         <br />
         <Alert severity='error'>{state.alertMessage}</Alert>
       </Collapse>
-    </Box>
+    </Stack>
   )
 }
 export default CreateTweet

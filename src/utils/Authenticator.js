@@ -89,10 +89,6 @@ class Authenticator {
     }
   }
 
-  isUserDetailsValid (details) {
-    return true
-  }
-
   async updateUserProfile ({ newDisplayName = null }) {
     const result = await updateProfile(this.auth.currentUser, {
       displayName: newDisplayName

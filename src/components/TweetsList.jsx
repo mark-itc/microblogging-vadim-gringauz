@@ -82,7 +82,7 @@ function TweetsList () {
   }
 
   return (
-    <Stack sx={{ marginBottom: '30px', width: '100%' }}>
+    <Stack sx={{ marginBottom: '30px', width: '100%', top: '50px', position: 'relative' }} >
       {isLoading ? (
         <CircularProgress />
       ) : (

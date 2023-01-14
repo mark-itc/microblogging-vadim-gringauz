@@ -1,42 +1,45 @@
 import React from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons'
-import './UserMenu.css'
-import defaultAvatar from '../images/empty-profile.png'
+import {
+  Typography,
+  Button,
+  Drawer,
+  Divider,
+  Stack,
+  Link,
+  Box,
+  Avatar
+} from '@mui/material'
+import LogoutIcon from '@mui/icons-material/Logout'
+
 
 function UserMenu ({ isVisible, signOut, setShowMenu, signedUser }) {
   return (
-    <div className='UserMenu'>
-      {isVisible && (
-        <>
-          <div
-            className='outside-of-menu'
-            onClick={() => setShowMenu(false)}
-          ></div>
-          <div className='header'>
-            <button onClick={signOut}>
-              <span>Sign out</span>
-              <FontAwesomeIcon icon={faArrowRightFromBracket} />
-            </button>
-          </div>
-          <div className='body'>
-            <img
-              className='avatar'
-              alt={signedUser.displayName}
-              src={signedUser.avatar ? signedUser.avatar : defaultAvatar}
-            />
-            <div className='user-info'>
-              <div className='display-name'>Hello, {signedUser.displayName}</div>
-              <a href={`/profile/${signedUser?.uid}`}>View Profile</a>
-            </div>
-          </div>
-          <div className='footer'>
-            <div className='email'>{signedUser.email}</div>
-            {/* <button> Sign in with a different account</button> */}
-          </div>
-        </>
-      )}
-    </div>
+    <Drawer anchor='right' open={isVisible} onClose={() => setShowMenu(false)} >
+      <Stack spacing={5} alignItems='center' sx={{ width: { xs:'250px', sm: '250px', md: '400px'} }} >
+        <Button
+          onClick={signOut}
+          variant='contained'
+          endIcon={<LogoutIcon />}
+          sx={{ borderRadius: '0', width: '100%', fontSize: '1.5rem', height: '80px' }}
+          color='secondary'
+        >
+          Sign out
+        </Button>
+        <Typography variant='h5'>Hello, {signedUser.displayName}</Typography>
+        <Avatar
+          alt={signedUser.displayName}
+          src={signedUser.avatar}
+          sx={{ width: 180, height: 180 }}
+        />
+        <Link href={`/profile/${signedUser?.uid}`}>View Profile</Link>
+        {/* <Stack direction='row' spacing={1} sx={{ width: `${drawerWidth}px` }}>
+          <Stack spacing={3}></Stack>
+        </Stack> */}
+        <Divider variant='fullWidth' flexItem />
+        <div>{signedUser.email}</div>
+        <Divider variant='fullWidth' flexItem />
+      </Stack>
+    </Drawer>
   )
 }
 

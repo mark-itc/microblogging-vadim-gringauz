@@ -12,9 +12,10 @@ class CloudStorage {
       const imageRef = ref(storage, `${uid}/${newAvatarFile.name}`)
       const result = await uploadBytes(imageRef, newAvatarFile)
       const url = await getDownloadURL(result.ref)
-      return url
+      return { status: 'success', url }
     } catch (error) {
       console.log(error.message)
+      return { status: 'fail', error}
     }
   }
 }
