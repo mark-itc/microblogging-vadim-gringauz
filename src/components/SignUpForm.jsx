@@ -8,8 +8,8 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
+// import FormControlLabel from '@mui/material/FormControlLabel';
+// import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -27,8 +27,8 @@ function SignUpForm() {
     const [password, setPassword] = useState('')
     const [passwordRepeat, setPasswordRepeat] = useState('')
     const [displayName, setDisplayName] = useState('')
-    const [alertMessage, setAlertMessage] = useState('')
-    const [isAlertOn, setIsAlertOn] = useState(false)
+    // const [alertMessage, setAlertMessage] = useState('')
+    // const [isAlertOn, setIsAlertOn] = useState(false)
     const [showPassword, setShowPassword] = useState(false)
 
     const handleClickShowPassword = () => setShowPassword(show => !show)

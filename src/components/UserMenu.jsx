@@ -6,7 +6,6 @@ import {
   Divider,
   Stack,
   Link,
-  Box,
   Avatar
 } from '@mui/material'
 import LogoutIcon from '@mui/icons-material/Logout'

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useContext, useEffect, useState, useRef, useCallback } from 'react'
-import { CircularProgress, Box, Stack } from '@mui/material'
+import { CircularProgress, Stack } from '@mui/material'
 import Tweet from './Tweet'
 import { TweetsContext } from '../contexts/TweetsContext'
 import { UsersContext } from '../contexts/UsersContext'

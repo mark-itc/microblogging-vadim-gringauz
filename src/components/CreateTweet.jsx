@@ -32,7 +32,7 @@ function reducer (state, action) {
 }
 
 function CreateTweet ({ textareaHeight }) {
-  const [openSnackbar, setOpenSnackbar] = useState(true)
+  const [openSnackbar, setOpenSnackbar] = useState(false)
   const { setTweets } = useContext(TweetsContext)
   const { signedUser } = useContext(UsersContext)
   const buttonRef = useRef(null)

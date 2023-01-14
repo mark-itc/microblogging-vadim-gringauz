@@ -34,8 +34,8 @@ function SignInForm() {
   const [alertMessage, setalertMessage] = useState('')
   const [isAlertOn, setIsAlertOn] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
-  const [passwordError, setPasswordError] = useState(false)
-  const [emailError, setEmailError] = useState(false)
+  const [passwordError, setPasswordError] = useState(false) // eslint-disable-line
+  const [emailError, setEmailError] = useState(false) // eslint-disable-line
 
   const handleClickShowPassword = () => setShowPassword(show => !show)
 
@@ -60,7 +60,7 @@ function SignInForm() {
       switch (result) {
         case 'auth/user-not-found': {
         }
-        case 'auth/wrong-password': {
+        case 'auth/wrong-password': { // eslint-disable-line
           setalertMessage('Wrong email or password!')
           break
         }

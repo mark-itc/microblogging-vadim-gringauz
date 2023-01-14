@@ -42,7 +42,6 @@ function TextContainer (props) {
     handleSubmit,
     state,
     handleKeyDown,
-    textareaHeight,
     handleContentChange,
     buttonRef
   } = props
