@@ -26,7 +26,7 @@ function SignUpForm() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [passwordRepeat, setPasswordRepeat] = useState('')
-    const [displayName, setDisplayName] = useState('')
+    const [displayName, setDisplayName] = useState('') // eslint-disable-line
     // const [alertMessage, setAlertMessage] = useState('')
     // const [isAlertOn, setIsAlertOn] = useState(false)
     const [showPassword, setShowPassword] = useState(false)
