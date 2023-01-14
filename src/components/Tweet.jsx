@@ -7,8 +7,10 @@ import TweetFooter from './TweetFooter'
 
 const TweetStyle = styled.div`
   && {
-    background: var(--bg-secondary);
-    color: var(--text-primary);
+    /* background: var(--bg-secondary); */
+    background: white;
+    /* color: var(--text-primary); */
+    color: black;
     font-size: 0.8rem;
     border-radius: 6px;
     margin-bottom: 20px;
