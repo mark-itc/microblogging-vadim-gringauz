@@ -1,7 +1,7 @@
 import React from 'react'
-import { useEffect, useContext, useRef, useReducer } from 'react'
+import { useEffect, useContext, useRef, useReducer, useState } from 'react'
 import { Timestamp } from 'firebase/firestore'
-import { Collapse, Alert, Stack } from '@mui/material'
+import { Collapse, Alert, Stack, Snackbar } from '@mui/material'
 import { UsersContext } from '../contexts/UsersContext'
 import { TweetsContext } from '../contexts/TweetsContext'
 import { MAX_CHARS } from '../utils/globals'
@@ -32,6 +32,7 @@ function reducer (state, action) {
 }
 
 function CreateTweet ({ textareaHeight }) {
+  const [openSnackbar, setOpenSnackbar] = useState(true)
   const { setTweets } = useContext(TweetsContext)
   const { signedUser } = useContext(UsersContext)
   const buttonRef = useRef(null)
@@ -118,6 +119,7 @@ function CreateTweet ({ textareaHeight }) {
     e.preventDefault()
     addNewTweet(state.content)
     dispatch({ type: 'clear-content' })
+    setOpenSnackbar(true)
   }
 
   //* 'ENTER' -> SEND TWEET, 'CTRL' + 'ENTER' -> BREAK LINE
@@ -133,14 +135,19 @@ function CreateTweet ({ textareaHeight }) {
 
   return (
     <Stack>
-        <TextContainer
-          handleSubmit={handleSubmit}
-          state={state}
-          handleKeyDown={handleKeyDown}
-          textareaHeight={textareaHeight}
-          handleContentChange={handleContentChange}
-          buttonRef={buttonRef}
-        />
+      <Snackbar open={openSnackbar } autoHideDuration={1000} onClose={() => setOpenSnackbar(false)} >
+        <Alert severity='success' sx={{ width: '100%' }}>
+          Tweet was sent successfully!
+        </Alert>
+      </Snackbar>
+      <TextContainer
+        handleSubmit={handleSubmit}
+        state={state}
+        handleKeyDown={handleKeyDown}
+        textareaHeight={textareaHeight}
+        handleContentChange={handleContentChange}
+        buttonRef={buttonRef}
+      />
       <Collapse in={state.isAlertOn}>
         <br />
         <Alert severity='error'>{state.alertMessage}</Alert>

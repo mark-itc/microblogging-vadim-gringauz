@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import { Avatar } from '@mui/material'
-import { Collapse, Alert, Stack } from '@mui/material'
+import { Collapse, Alert } from '@mui/material'
 import userStore from '../utils/UsersStore'
 import cloudStorage from '../utils/CloudStorage'
 import DisplayNameInput from './DisplayNameInput'

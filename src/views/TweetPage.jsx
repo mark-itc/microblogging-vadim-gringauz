@@ -1,9 +1,10 @@
 import React from 'react'
-import { useContext, useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { Container, CircularProgress } from '@mui/material'
-import { TweetsContext } from '../contexts/TweetsContext'
-import { UsersContext } from '../contexts/UsersContext'
+// import { useContext } from 'react'
+// import { TweetsContext } from '../contexts/TweetsContext'
+// import { UsersContext } from '../contexts/UsersContext'
 import tweetStore from '../utils/TweetStore'
 import Tweet from '../components/Tweet'
 
@@ -27,7 +28,7 @@ function TweetPage () {
 
   useEffect(() => {
     getTweetFromStorage()
-  }, [])
+  }, []) // eslint-disable-line
 
   return (
     <Container>

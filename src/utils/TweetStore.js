@@ -12,7 +12,6 @@ import {
   limit,
   getCountFromServer,
   startAt,
-  where,
   getDoc
 } from 'firebase/firestore'
 
