@@ -6,14 +6,16 @@ import TweetBody from './TweetBody'
 import TweetFooter from './TweetFooter'
 
 const TweetStyle = styled.div`
-  background: var(--bg-secondary);
-  color: var(--text-primary);
-  font-size: 0.8rem;
-  border-radius: 6px;
-  margin-bottom: 20px;
-  width: 100%;
-  min-height: 150px;
-  padding: 5px 15px;
+  && {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    font-size: 0.8rem;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    width: 100%;
+    min-height: 150px;
+    padding: 5px 15px;
+  }
 
   @media screen and (width < 900px) {
     border-radius: 0;

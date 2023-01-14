@@ -8,10 +8,10 @@ import VersionInfo from './components/VersionInfo'
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <AuthContextProvider>
-    {/* <React.StrictMode> */}
+    <React.StrictMode>
       <GlobalStyle />
       <VersionInfo />
       <App />
-    {/* </React.StrictMode> */}
+    </React.StrictMode>
   </AuthContextProvider>
 )
