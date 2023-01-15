@@ -32,7 +32,6 @@ function TweetPage () {
 
   return (
     <Container>
-      <div>{id}</div>
       {loading ? (
         <Tweet
           key={id}

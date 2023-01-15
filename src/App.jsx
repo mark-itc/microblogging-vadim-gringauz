@@ -1,4 +1,5 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import GoogleFontLoader from 'react-google-font'
 import SettingsPage from './views/SettingsPage'
 import PrivateRoute from './utils/PrivateRoute'
 import ProfilePage from './views/ProfilePage'
@@ -17,7 +18,7 @@ function App () {
       children: [
         {
           path: '/',
-          element: <HomePage />,
+          element: <HomePage />
         },
         {
           path: '/home',
@@ -48,12 +49,20 @@ function App () {
     {
       path: '/sign-up',
       element: <SignUpPage />
-    },
+    }
   ])
 
   return (
     <div className='App'>
-        <RouterProvider router={router} />
+      <RouterProvider router={router} />
+      <GoogleFontLoader
+        fonts={[
+          {
+            font: 'Montserrat',
+            weights: [400, '400i', 500, 600, 700, 800]
+          }
+        ]}
+      />
     </div>
   )
 }

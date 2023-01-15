@@ -1,8 +1,6 @@
 import { createGlobalStyle } from 'styled-components'
 
 const GlobalStyle = createGlobalStyle`
-  // @import url('https://fonts.googleapis.com/css2?family=Prosto+One&display=swap'); 
-
   :root {
     --bg-primary: #DCDCDC;
     --bg-secondary: white;
@@ -14,7 +12,7 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     margin: 0;
     font-family: 'Montserrat', sans-serif;
-    font-size: 20px;
+    font-size: 22px;
     /* color: var(--text-primary); */
   }
 
