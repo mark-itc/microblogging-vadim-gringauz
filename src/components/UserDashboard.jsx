@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import { Stack, Avatar, Typography, Divider } from '@mui/material'
 import { useContext } from 'react'
 import { UsersContext } from '../contexts/UsersContext'
-import { faL } from '@fortawesome/free-solid-svg-icons'
 
 
 
