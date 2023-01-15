@@ -1,7 +1,7 @@
 import { createGlobalStyle } from 'styled-components'
 
 const GlobalStyle = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css2?family=Prosto+One&display=swap'); 
+  // @import url('https://fonts.googleapis.com/css2?family=Prosto+One&display=swap'); 
 
   :root {
     --bg-primary: #DCDCDC;
