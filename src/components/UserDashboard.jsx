@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { Stack, Avatar, Typography, Divider } from '@mui/material'
 import { useContext } from 'react'
 import { UsersContext } from '../contexts/UsersContext'
+import { faL } from '@fortawesome/free-solid-svg-icons'
 
 
 
@@ -28,7 +29,7 @@ function UserDashboard () {
         <Typography fontSize={'1.2rem'} fontWeight={'bold'} color={'primary'}>
           {signedUser.displayName}
         </Typography>
-        <Typography fontSize={'0.8rem'} fontStyle={'italic'}>
+        <Typography fontSize={'0.7rem'} fontStyle={'italic'}>
           {signedUser.email}
         </Typography>
         <Divider variant='fullWidth' flexItem />

@@ -12,7 +12,7 @@ const VersionInfoStyle = styled.div`
 function VersionInfo() {
   return (
     <VersionInfoStyle>
-      VG / ITC / React - Microblogging / M-6.5 Ver 0.3.0
+      VG / ITC / React - Microblogging / M-6.5 Ver 0.4.0
     </VersionInfoStyle>
   )
 }

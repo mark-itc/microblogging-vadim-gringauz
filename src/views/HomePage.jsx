@@ -8,7 +8,7 @@ import SearchTweets from '../components/SearchTweets'
 
 function HomePage () {
   return (
-    <Container>
+    <Container disableGutters >
       <Stack
         justifyContent={'space-between'}
         direction={'row'}
@@ -18,7 +18,7 @@ function HomePage () {
         <Box sx={{ display: { xs: 'none', sm: 'none', md: 'block' }, width: '200px' }}>
           <UserDashboard />
         </Box>
-        <Stack spacing={0} width={{xs: '100%', sm: '100%', md: '600px'}} >
+        <Stack spacing={0} width={{ xs: '100%', md: '600px' }} >
           <CreateTweet />
           <TweetsList />
         </Stack>
